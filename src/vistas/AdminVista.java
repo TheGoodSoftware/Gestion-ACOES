@@ -11,8 +11,7 @@ public class AdminVista extends javax.swing.JFrame {
     /**
      * Creates new form AdminWindow
      */
-    public AdminVista(Usuario usuario) {
-    	this.usuario = usuario;
+    public AdminVista() {
         initComponents();
     }
 
@@ -351,16 +350,7 @@ public class AdminVista extends javax.swing.JFrame {
                     .addComponent(jLayeredPane4))
                 .addContainerGap())
         );
-        if(usuario.getRole().getNombre().equalsIgnoreCase("Agente")) {
-        	
-        }else if(usuario.getRole().getNombre().equalsIgnoreCase("ResponsableAcademico")) {
-        	
-        }else if(usuario.getRole().getNombre().equalsIgnoreCase("ResponsableEconomico")) {
-        	
-        }else if(usuario.getRole().getNombre().equalsIgnoreCase("Socio")) {
-        	
-        }
-        
+          
         pack();
     }// </editor-fold>                        
 
@@ -420,7 +410,7 @@ public class AdminVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }               
     
-    private void generacionInformeOff() {
+    public void agenteOff() {
     	jButton1.setDisabledIcon(jButton1.getIcon());
         jButton2.setDisabledIcon(jButton2.getIcon());
         jButton3.setDisabledIcon(jButton3.getIcon());
@@ -431,26 +421,35 @@ public class AdminVista extends javax.swing.JFrame {
     	jButton4.setEnabled(false);
     }
     
-    private void gestionEconomicaOff() {
-    	jButton5.setDisabledIcon(jButton5.getIcon());
-        jButton6.setDisabledIcon(jButton6.getIcon());
-        jButton7.setDisabledIcon(jButton7.getIcon());
-        jButton8.setDisabledIcon(jButton8.getIcon());
-    	jButton5.setEnabled(false);
-    	jButton6.setEnabled(false);
-    	jButton7.setEnabled(false);
-    	jButton8.setEnabled(false);
+    public void economicoOff() {
+    	jButton1.setDisabledIcon(jButton1.getIcon());
+        jButton3.setDisabledIcon(jButton3.getIcon());
+        jButton4.setDisabledIcon(jButton4.getIcon());
+        jButton9.setDisabledIcon(jButton9.getIcon());
+    	jButton10.setDisabledIcon(jButton10.getIcon());
+
+    	jButton1.setEnabled(false);
+    	jButton3.setEnabled(false);
+    	jButton4.setEnabled(false);
+    	jButton9.setEnabled(false);
+    	jButton10.setEnabled(false);
 
     }
     
-    private void gestionAcademicaOff() {
+    public void academicoOff() {
+    	jButton2.setDisabledIcon(jButton2.getIcon());
+        jButton3.setDisabledIcon(jButton3.getIcon());
+        jButton4.setDisabledIcon(jButton4.getIcon());
     	jButton9.setDisabledIcon(jButton9.getIcon());
         jButton10.setDisabledIcon(jButton10.getIcon());
+        jButton2.setEnabled(false);
+    	jButton3.setEnabled(false);
+    	jButton4.setEnabled(false);
         jButton9.setEnabled(false);
         jButton10.setEnabled(false);
     }
     
-    private void gestionUsuariosOff() {
+    private void socioOff() {
     	jButton11.setDisabledIcon(jButton11.getIcon());
         jButton12.setDisabledIcon(jButton12.getIcon());
         jButton13.setDisabledIcon(jButton13.getIcon());
@@ -464,7 +463,6 @@ public class AdminVista extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify  
-    private Usuario usuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
