@@ -350,7 +350,6 @@ public class AdminVista extends javax.swing.JFrame {
                     .addComponent(jLayeredPane4))
                 .addContainerGap())
         );
-          
         pack();
     }// </editor-fold>                        
 
@@ -419,7 +418,8 @@ public class AdminVista extends javax.swing.JFrame {
         jButton7.setDisabledIcon(jButton7.getIcon());
         jButton8.setDisabledIcon(jButton8.getIcon());
     	jButton9.setDisabledIcon(jButton9.getIcon());
-    	jButton1.setEnabled(false);
+    	jButton10.setDisabledIcon(jButton10.getIcon());
+
     	jButton2.setEnabled(false);
     	jButton3.setEnabled(false);
     	jButton4.setEnabled(false);
@@ -428,6 +428,7 @@ public class AdminVista extends javax.swing.JFrame {
     	jButton7.setEnabled(false);
     	jButton8.setEnabled(false);
     	jButton9.setEnabled(false);
+    	jButton10.setEnabled(false);
     }
     
     public void economicoOff() {
@@ -477,7 +478,6 @@ public class AdminVista extends javax.swing.JFrame {
         jButton13.setDisabledIcon(jButton13.getIcon());
         jButton14.setDisabledIcon(jButton14.getIcon());
         jButton15.setDisabledIcon(jButton15.getIcon());
-    	jButton1.setEnabled(false);
     	jButton2.setEnabled(false);
     	jButton3.setEnabled(false);
     	jButton4.setEnabled(false);
