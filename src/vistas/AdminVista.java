@@ -1,5 +1,7 @@
 package vistas;
 
+import modelos.Usuario;
+
 /**
  *
  * @author cherra
@@ -9,7 +11,8 @@ public class AdminVista extends javax.swing.JFrame {
     /**
      * Creates new form AdminWindow
      */
-    public AdminVista() {
+    public AdminVista(Usuario usuario) {
+    	this.usuario = usuario;
         initComponents();
     }
 
@@ -21,7 +24,7 @@ public class AdminVista extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
+    	
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -348,7 +351,16 @@ public class AdminVista extends javax.swing.JFrame {
                     .addComponent(jLayeredPane4))
                 .addContainerGap())
         );
-
+        if(usuario.getRole().getNombre().equalsIgnoreCase("Agente")) {
+        	
+        }else if(usuario.getRole().getNombre().equalsIgnoreCase("ResponsableAcademico")) {
+        	
+        }else if(usuario.getRole().getNombre().equalsIgnoreCase("ResponsableEconomico")) {
+        	
+        }else if(usuario.getRole().getNombre().equalsIgnoreCase("Socio")) {
+        	
+        }
+        
         pack();
     }// </editor-fold>                        
 
@@ -409,57 +421,50 @@ public class AdminVista extends javax.swing.JFrame {
     }               
     
     private void generacionInformeOff() {
-    	
+    	jButton1.setDisabledIcon(jButton1.getIcon());
+        jButton2.setDisabledIcon(jButton2.getIcon());
+        jButton3.setDisabledIcon(jButton3.getIcon());
+        jButton4.setDisabledIcon(jButton4.getIcon());
+    	jButton1.setEnabled(false);
+    	jButton2.setEnabled(false);
+    	jButton3.setEnabled(false);
+    	jButton4.setEnabled(false);
     }
     
     private void gestionEconomicaOff() {
-    	
+    	jButton5.setDisabledIcon(jButton5.getIcon());
+        jButton6.setDisabledIcon(jButton6.getIcon());
+        jButton7.setDisabledIcon(jButton7.getIcon());
+        jButton8.setDisabledIcon(jButton8.getIcon());
+    	jButton5.setEnabled(false);
+    	jButton6.setEnabled(false);
+    	jButton7.setEnabled(false);
+    	jButton8.setEnabled(false);
+
     }
     
     private void gestionAcademicaOff() {
-    	
+    	jButton9.setDisabledIcon(jButton9.getIcon());
+        jButton10.setDisabledIcon(jButton10.getIcon());
+        jButton9.setEnabled(false);
+        jButton10.setEnabled(false);
     }
     
     private void gestionUsuariosOff() {
-    	
+    	jButton11.setDisabledIcon(jButton11.getIcon());
+        jButton12.setDisabledIcon(jButton12.getIcon());
+        jButton13.setDisabledIcon(jButton13.getIcon());
+        jButton14.setDisabledIcon(jButton14.getIcon());
+    	jButton11.setEnabled(false);
+    	jButton12.setEnabled(false);
+    	jButton13.setEnabled(false);
+    	jButton14.setEnabled(false);
+        jButton15.setEnabled(false);
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminVista().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify  
+    private Usuario usuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;

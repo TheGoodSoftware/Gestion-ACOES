@@ -1,5 +1,7 @@
 package modelos;
 
+import java.util.List;
+
 public class Rol {
 
     private String nombre, pais, descripcion;
@@ -21,5 +23,11 @@ public class Rol {
 
     public String getPais() {
         return pais;
+    }
+    
+    public static List<String> getNombreRoles(){
+    	//TODO
+		return null;
+    	
     }
 }
