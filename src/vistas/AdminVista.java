@@ -411,14 +411,23 @@ public class AdminVista extends javax.swing.JFrame {
     }               
     
     public void agenteOff() {
-    	jButton1.setDisabledIcon(jButton1.getIcon());
         jButton2.setDisabledIcon(jButton2.getIcon());
         jButton3.setDisabledIcon(jButton3.getIcon());
         jButton4.setDisabledIcon(jButton4.getIcon());
+    	jButton5.setDisabledIcon(jButton5.getIcon());
+        jButton6.setDisabledIcon(jButton6.getIcon());
+        jButton7.setDisabledIcon(jButton7.getIcon());
+        jButton8.setDisabledIcon(jButton8.getIcon());
+    	jButton9.setDisabledIcon(jButton9.getIcon());
     	jButton1.setEnabled(false);
     	jButton2.setEnabled(false);
     	jButton3.setEnabled(false);
     	jButton4.setEnabled(false);
+        jButton5.setEnabled(false);
+    	jButton6.setEnabled(false);
+    	jButton7.setEnabled(false);
+    	jButton8.setEnabled(false);
+    	jButton9.setEnabled(false);
     }
     
     public void economicoOff() {
@@ -440,20 +449,44 @@ public class AdminVista extends javax.swing.JFrame {
     	jButton2.setDisabledIcon(jButton2.getIcon());
         jButton3.setDisabledIcon(jButton3.getIcon());
         jButton4.setDisabledIcon(jButton4.getIcon());
-    	jButton9.setDisabledIcon(jButton9.getIcon());
-        jButton10.setDisabledIcon(jButton10.getIcon());
+    	jButton5.setDisabledIcon(jButton5.getIcon());
+        jButton6.setDisabledIcon(jButton6.getIcon());
+    	jButton7.setDisabledIcon(jButton7.getIcon());
+        jButton8.setDisabledIcon(jButton8.getIcon());
         jButton2.setEnabled(false);
     	jButton3.setEnabled(false);
     	jButton4.setEnabled(false);
-        jButton9.setEnabled(false);
-        jButton10.setEnabled(false);
+        jButton5.setEnabled(false);
+        jButton6.setEnabled(false);
+        jButton7.setEnabled(false);
+        jButton8.setEnabled(false);
     }
     
     private void socioOff() {
-    	jButton11.setDisabledIcon(jButton11.getIcon());
+        jButton2.setDisabledIcon(jButton2.getIcon());
+        jButton3.setDisabledIcon(jButton3.getIcon());
+        jButton4.setDisabledIcon(jButton4.getIcon());
+    	jButton5.setDisabledIcon(jButton5.getIcon());
+        jButton6.setDisabledIcon(jButton6.getIcon());
+        jButton7.setDisabledIcon(jButton7.getIcon());
+        jButton8.setDisabledIcon(jButton8.getIcon());
+    	jButton9.setDisabledIcon(jButton9.getIcon());
+        jButton10.setDisabledIcon(jButton10.getIcon());
+        jButton11.setDisabledIcon(jButton11.getIcon());
         jButton12.setDisabledIcon(jButton12.getIcon());
         jButton13.setDisabledIcon(jButton13.getIcon());
         jButton14.setDisabledIcon(jButton14.getIcon());
+        jButton15.setDisabledIcon(jButton15.getIcon());
+    	jButton1.setEnabled(false);
+    	jButton2.setEnabled(false);
+    	jButton3.setEnabled(false);
+    	jButton4.setEnabled(false);
+        jButton5.setEnabled(false);
+    	jButton6.setEnabled(false);
+    	jButton7.setEnabled(false);
+    	jButton8.setEnabled(false);
+    	jButton9.setEnabled(false);
+        jButton10.setEnabled(false);
     	jButton11.setEnabled(false);
     	jButton12.setEnabled(false);
     	jButton13.setEnabled(false);
