@@ -406,7 +406,23 @@ public class AdminVista extends javax.swing.JFrame {
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }                                         
+    }               
+    
+    private void generacionInformeOff() {
+    	
+    }
+    
+    private void gestionEconomicaOff() {
+    	
+    }
+    
+    private void gestionAcademicaOff() {
+    	
+    }
+    
+    private void gestionUsuariosOff() {
+    	
+    }
 
     /**
      * @param args the command line arguments

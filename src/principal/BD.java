@@ -7,20 +7,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import modelos.*;
 
 public class BD {
 
 	
 	
     private final String CONNECTION_URL = "jdbc:mysql://localhost:3306/gestionacoes";
-    private final String CONNECTION_USER = "ACOES";
+    private final String CONNECTION_Usuario = "ACOES";
     private final String CONNECTION_PASSWD = "GESTIONACOES";
     private Connection con;
 	
 	public BD()
 	{
 		 try {
-	            con = DriverManager.getConnection(CONNECTION_URL, CONNECTION_USER, CONNECTION_PASSWD);
+	            con = DriverManager.getConnection(CONNECTION_URL, CONNECTION_Usuario, CONNECTION_PASSWD);
 	        } catch (SQLException e) {
 	            System.err.println("ERROR. Trying to create database connection");
 	        }
@@ -132,5 +133,41 @@ public class BD {
 			throw new Error("Error en el UPDATE: " + up+ ". " + ex.getMessage());
 		}
 	}
+	 public ArrayList<Usuario> getSocios()
+	    {
+	        ArrayList<Usuario> socios = new ArrayList<>();
+	        try {
+	            Statement statement = con.createStatement();
+	            ResultSet rs = statement.executeQuery("SELECT * FROM USUARIO U JOIN ROL R ON U.rol = R.nombre");
+	            while(rs.next()) {
+	                socios.add(new Usuario(
+	                        rs.getString("nombre"),
+	                        rs.getString("apellidos"),
+	                        rs.getString("direccion"),
+	                        rs.getString("pueblo"),
+	                        rs.getString("e_mail"),
+	                        new Rol(
+	                                rs.getString("nombre"),
+	                                rs.getString("pais"),
+	                                rs.getString("descripcion")
+	                        )));
+	            }
+	        } catch (SQLException e) {
+	            System.err.println("ERROR. Trying to get 'socios' from database");
+	        }
+	        return socios;
+	    }
 
+	    //public Usuario getSocio(String e_mail, String passwd)
+	    //check passwd.equals(rs.getString("passwd"))
+	    //otherwise don't create Usuario entity, throw an error
+
+	    public void endConnection()
+	    {
+	        try {
+	            con.close();
+	        } catch (SQLException e) {
+	            System.err.println("ERROR. Trying to close database connection");
+	        }
+	    }
 }
