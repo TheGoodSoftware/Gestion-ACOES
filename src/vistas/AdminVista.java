@@ -449,7 +449,7 @@ public class AdminVista extends javax.swing.JFrame {
         jButton10.setEnabled(false);
     }
     
-    private void socioOff() {
+    public void socioOff() {
     	jButton11.setDisabledIcon(jButton11.getIcon());
         jButton12.setDisabledIcon(jButton12.getIcon());
         jButton13.setDisabledIcon(jButton13.getIcon());
