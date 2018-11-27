@@ -2,8 +2,10 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 
 import modelos.LoginModelo;
+import modelos.Nino;
 import modelos.Rol;
 import modelos.Usuario;
 import vistas.AdminVista;
@@ -20,7 +22,6 @@ public class LoginControlador implements ActionListener {
 	}
 	
 	public void iniciarVista() {
-		
 		vistaLogin.setVisible(true);
 	}
 	
@@ -31,16 +32,16 @@ public class LoginControlador implements ActionListener {
 			//cambia al panel de administrador
 			if(modelo.autenticar(vistaLogin.getUsuario(), vistaLogin.getPassword(), vistaLogin)) {
 				//crea el usuario (hasta tener bbdd)
-				Rol rol = new Rol("Agente", "Honduras", "Descripcion");
-			    Usuario usuario = new Usuario("nombre","apellidos","direccion","pueblo","e_mail",rol);
-			    
-			    AdminVista vistaAdmin = new AdminVista();
-			    AdminControlador ctrAdmin = new AdminControlador(vistaAdmin, usuario);
+				Rol rol = new Rol("Socio", "Honduras", "Descripcion");
+				Map<String, Integer> notasApadrinado = new TreeMap<>();
+				notasApadrinado.put("1Primaria", 8);
+				notasApadrinado.put("2Primaria", 7);
+				ArrayList<Nino> apadrinados = new ArrayList<>();
+				apadrinados.add(new Nino("Juan", "Perez", "AVDA 18", "Bogota", 17, notasApadrinado));
+			    Usuario usuario = new Usuario("nombre","apellidos","direccion","pueblo","e_mail",apadrinados, rol);
+			    AdminControlador ctrAdmin = new AdminControlador(usuario);
 			    vistaLogin.setVisible(false);
 			    ctrAdmin.iniciarVista();
-			    
-			    
-				
 			}
 		}
 		

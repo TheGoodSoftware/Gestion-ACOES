@@ -12,8 +12,6 @@ public class App {
 		
 		vista.controlador(ctr);
 		ctr.iniciarVista();
-	
-		
 	}
 
 }

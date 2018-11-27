@@ -11,8 +11,6 @@ import modelos.*;
 
 public class BD {
 
-	
-	
     private final String CONNECTION_URL = "jdbc:mysql://localhost:3306/gestionacoes";
     private final String CONNECTION_Usuario = "ACOES";
     private final String CONNECTION_PASSWD = "GESTIONACOES";
@@ -133,6 +131,7 @@ public class BD {
 			throw new Error("Error en el UPDATE: " + up+ ". " + ex.getMessage());
 		}
 	}
+	/*
 	 public ArrayList<Usuario> getSocios()
 	    {
 	        ArrayList<Usuario> socios = new ArrayList<>();
@@ -157,11 +156,7 @@ public class BD {
 	        }
 	        return socios;
 	    }
-
-	    //public Usuario getSocio(String e_mail, String passwd)
-	    //check passwd.equals(rs.getString("passwd"))
-	    //otherwise don't create Usuario entity, throw an error
-
+*/
 	    public void endConnection()
 	    {
 	        try {

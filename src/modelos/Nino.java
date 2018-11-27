@@ -1,13 +1,12 @@
 package modelos;
-
-import java.util.ArrayList;
+import java.util.Map;
 
 public class Nino extends Persona {
 
     private int edad;
-    private ArrayList<Integer> notas;
+    private Map<String, Integer> notas;
 
-    public Nino(String nombre, String apellido, String direccion, String pueblo, int edad, ArrayList<Integer> notas)
+    public Nino(String nombre, String apellido, String direccion, String pueblo, int edad, Map<String, Integer> notas)
     {
         super(nombre, apellido, direccion, pueblo);
         this.edad = edad;
@@ -18,7 +17,7 @@ public class Nino extends Persona {
         return edad;
     }
 
-    public ArrayList<Integer> getNotas() {
+    public Map<String, Integer> getNotas() {
         return notas;
     }
 }

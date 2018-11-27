@@ -1,6 +1,14 @@
 package vistas;
 import modelos.*;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Set;
+
 public class SocioVista extends javax.swing.JFrame {
 
     private Usuario socio;
@@ -24,27 +32,26 @@ public class SocioVista extends javax.swing.JFrame {
         panelApadrinados = new javax.swing.JPanel();
         textFieldFiltraApadrinados = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listaApadrinados = new javax.swing.JList<>();
         verticalSeparator = new javax.swing.JSeparator();
         panelApadrinado = new javax.swing.JPanel();
         labelNombreApadrinado = new javax.swing.JLabel();
         labelEdadApadrinado = new javax.swing.JLabel();
         labelCalificacionApadrinado = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaCalificacionesApadrinados = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         labelUsuario.setText("Usuario: " + socio.getNombre() + " (" + socio.getRole().getNombre() + ")");
 
         textFieldFiltraApadrinados.setToolTipText("Filtra por nombre");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {};
+        listaApadrinados.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = socio.getApadrinados().stream().map((nino -> nino.getNombre() + " " + nino.getApellidos())).toArray(String[]::new);
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listaApadrinados);
 
         javax.swing.GroupLayout panelApadrinadosLayout = new javax.swing.GroupLayout(panelApadrinados);
         panelApadrinados.setLayout(panelApadrinadosLayout);
@@ -73,18 +80,19 @@ public class SocioVista extends javax.swing.JFrame {
 
         labelCalificacionApadrinado.setText("Calificaciones");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCalificacionesApadrinados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
             },
             new String [] {
                 "Curso", "Calificacion"
             }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        ) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
+        jScrollPane2.setViewportView(tablaCalificacionesApadrinados);
 
         javax.swing.GroupLayout panelApadrinadoLayout = new javax.swing.GroupLayout(panelApadrinado);
         panelApadrinado.setLayout(panelApadrinadoLayout);
@@ -143,15 +151,35 @@ public class SocioVista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        listaApadrinados.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    Nino seleccionado = socio.getApadrinados().get(e.getLastIndex());
+                    labelNombreApadrinado.setText("Nombre: " + seleccionado.getNombre() + " " + seleccionado.getApellidos());
+                    labelEdadApadrinado.setText("Edad: " + " " + seleccionado.getEdad());
+                    DefaultTableModel model = (DefaultTableModel) tablaCalificacionesApadrinados.getModel();
+                    for (int i = 0; i < model.getRowCount(); i++)
+                        model.removeRow(i);
+
+                    Set<String> cursos = seleccionado.getNotas().keySet();
+                    for (String curso : cursos) {
+                        Object[] row = {curso, seleccionado.getNotas().get(curso)};
+                        model.addRow(row);
+                    }
+                }
+            }
+        });
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator horizontalSeparator;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> listaApadrinados;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaCalificacionesApadrinados;
     private javax.swing.JLabel labelCalificacionApadrinado;
     private javax.swing.JLabel labelEdadApadrinado;
     private javax.swing.JLabel labelNombreApadrinado;
