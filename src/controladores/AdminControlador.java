@@ -3,6 +3,7 @@ package controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import modelos.ApadrinarModelo;
 import modelos.Usuario;
 import vistas.*;
 
@@ -31,6 +32,7 @@ public class AdminControlador implements ActionListener {
             } else if (usuario.getRole().getNombre().equalsIgnoreCase("Agente")) {
                 vistaAdmin.agenteOff();
             }
+            vistaAdmin.controlador(this);
             vistaAdmin.setVisible(true);
         }
     }
@@ -38,7 +40,16 @@ public class AdminControlador implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-
+       switch(e.getActionCommand()) {
+       case "APADRINAR":
+    	   ApadrinarVista vistaApadrinar = new ApadrinarVista();
+    	   ApadrinarModelo modeloApadrinar = new ApadrinarModelo();
+    	   ApadrinarControlador ctr = new ApadrinarControlador(vistaApadrinar, modeloApadrinar);
+    	   ctr.iniciarVista();
+    	   vistaAdmin.setVisible(false);
+    	   vistaApadrinar.setVisible(true);
+    	   
+    	   break;
+       }
     }
 }

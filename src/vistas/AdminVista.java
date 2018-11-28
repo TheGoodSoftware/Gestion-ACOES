@@ -1,5 +1,6 @@
 package vistas;
 
+import controladores.AdminControlador;
 import modelos.Usuario;
 
 /**
@@ -273,7 +274,7 @@ public class AdminVista extends javax.swing.JFrame {
             }
         });
 
-        jButton15.setText("Consultar datos de apadrinamiento");
+        jButton15.setText("Apadrinar/Desapadrinar");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton15ActionPerformed(evt);
@@ -407,7 +408,12 @@ public class AdminVista extends javax.swing.JFrame {
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
-    }               
+    }      
+
+    public void controlador(AdminControlador ctr) {
+    	jButton15.addActionListener(ctr);
+    	jButton15.setActionCommand("APADRINAR");
+    }
     
     public void agenteOff() {
         jButton2.setDisabledIcon(jButton2.getIcon());

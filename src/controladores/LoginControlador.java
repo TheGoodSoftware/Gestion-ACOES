@@ -27,12 +27,12 @@ public class LoginControlador implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("IN")) {
+		if(e.getActionCommand().equals("INICIAR_SESION")) {
 			vistaLogin.borrarMensajeErrorAutenticacion();
 			//cambia al panel de administrador
 			if(modelo.autenticar(vistaLogin.getUsuario(), vistaLogin.getPassword(), vistaLogin)) {
 				//crea el usuario (hasta tener bbdd)
-				Rol rol = new Rol("Socio", "Honduras", "Descripcion");
+				Rol rol = new Rol("Admin", "Honduras", "Descripcion");
 				Map<String, Integer> notasApadrinado = new TreeMap<>();
 				notasApadrinado.put("1Primaria", 8);
 				notasApadrinado.put("2Primaria", 7);
@@ -40,6 +40,7 @@ public class LoginControlador implements ActionListener {
 				apadrinados.add(new Nino("Juan", "Perez", "AVDA 18", "Bogota", 17, notasApadrinado));
 			    Usuario usuario = new Usuario("nombre","apellidos","direccion","pueblo","e_mail",apadrinados, rol);
 			    AdminControlador ctrAdmin = new AdminControlador(usuario);
+			    
 			    vistaLogin.setVisible(false);
 			    ctrAdmin.iniciarVista();
 			}

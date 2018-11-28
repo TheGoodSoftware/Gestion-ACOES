@@ -196,6 +196,6 @@ public class LoginVista extends javax.swing.JFrame {
     
     public void controlador(ActionListener ctr) {
     	botonIniciarSesion.addActionListener(ctr);
-    	botonIniciarSesion.setActionCommand("IN");
+    	botonIniciarSesion.setActionCommand("INICIAR_SESION");
     }
 }
