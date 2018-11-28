@@ -1,9 +1,14 @@
 package vistas;
 import modelos.*;
 
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -46,11 +51,12 @@ public class SocioVista extends javax.swing.JFrame {
         labelUsuario.setText("Usuario: " + socio.getNombre() + " (" + socio.getRole().getNombre() + ")");
 
         textFieldFiltraApadrinados.setToolTipText("Filtra por nombre");
-        listaApadrinados.setModel(new javax.swing.AbstractListModel<String>() {
+        DefaultListModel listaApadrinadosModel = new javax.swing.DefaultListModel<String>() {
             String[] strings = socio.getApadrinados().stream().map((nino -> nino.getNombre() + " " + nino.getApellidos())).toArray(String[]::new);
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
-        });
+        };
+        listaApadrinados.setModel(listaApadrinadosModel);
         jScrollPane1.setViewportView(listaApadrinados);
 
         javax.swing.GroupLayout panelApadrinadosLayout = new javax.swing.GroupLayout(panelApadrinados);
@@ -151,10 +157,18 @@ public class SocioVista extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        textFieldFiltraApadrinados.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                String[] apadrinados = socio.getApadrinados().stream().map(nino -> nino.getNombre() + " " + nino.getApellidos()).toArray(String[]::new);
+                listaApadrinados.setListData(Arrays.stream(apadrinados).filter(nino -> nino.startsWith(textFieldFiltraApadrinados.getText())).toArray(String[]::new));
+            }
+        });
+
         listaApadrinados.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
+                if (e.getValueIsAdjusting()) {
                     Nino seleccionado = socio.getApadrinados().get(e.getLastIndex());
                     labelNombreApadrinado.setText("Nombre: " + seleccionado.getNombre() + " " + seleccionado.getApellidos());
                     labelEdadApadrinado.setText("Edad: " + " " + seleccionado.getEdad());
