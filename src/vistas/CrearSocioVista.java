@@ -1,4 +1,7 @@
 package vistas;
+
+import controladores.CrearSocioControlador;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -148,6 +151,10 @@ public class CrearSocioVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
+    
+    public void Controlador(CrearSocioControlador ctr) {
+    	
+    }
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
     }                                           

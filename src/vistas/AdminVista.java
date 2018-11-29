@@ -293,6 +293,8 @@ public class AdminVista extends javax.swing.JFrame {
     	consultarApadrinamiento.setActionCommand("APADRINAR");
     	vistaPadrino.addActionListener(ctr);
     	vistaPadrino.setActionCommand("VISTA_SOCIO");
+    	 gestionarSocios.addActionListener(ctr);
+    	gestionarSocios.setActionCommand("GESTION_SOCIOS");
     }
 
     public void agenteOff() {

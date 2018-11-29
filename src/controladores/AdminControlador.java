@@ -41,7 +41,7 @@ public class AdminControlador implements ActionListener {
     	   ApadrinarControlador ctr = new ApadrinarControlador(vistaApadrinar, modeloApadrinar);
     	   ctr.iniciarVista();
     	   vistaAdmin.setVisible(false);
-    	   vistaApadrinar.setVisible(true);
+    	   
     	   
     	   break;
     	case "VISTA_SOCIO":
@@ -60,6 +60,13 @@ public class AdminControlador implements ActionListener {
             vistaAdmin.setVisible(false);
     	    vistaSocio.setVisible(true);
     	    break;
+    	case "GESTION_SOCIOS":
+    		AdministrarSociosModelo adminSocioModelo = new AdministrarSociosModelo();
+    		AdministrarSociosVista adminSocioVista = new AdministrarSociosVista();
+    		AdministrarSociosControlador adminSocioCtr = new AdministrarSociosControlador(adminSocioVista, adminSocioModelo);
+    		vistaAdmin.setVisible(false);
+    		adminSocioCtr.iniciarVista();
+    		break;
        }
     }
 }
