@@ -46,26 +46,25 @@ public class CrearSocioVista extends javax.swing.JFrame {
         creatBoton = new javax.swing.JButton();
         listaRoles = new javax.swing.JComboBox<>();
         atrasBoton = new javax.swing.JButton();
-
+        asociacionCampo = new javax.swing.JTextField();
+        asociacionEtiqueta = new javax.swing.JLabel();
+        asociacionEtiqueta.setText("Asociacion");
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nombre");
         setName("nombre"); // NOI18N
         
         contrasenaCampo.setText("");
-        /*
-        campoNombre.setText("campoNombre");
+        
     
         
         nombreEtiqueta.setText("Nombre");
 
         apellidosEtiqueta.setText("Apellidos");
 
-        apellidosCampo.setText("apellidosCampo");
 
         correoEtiqueta.setText("Correo electrónico");
 
-        correoCampo.setText("correoCampo");
-        */
+        
         correoCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 correoCampoActionPerformed(evt);
@@ -107,6 +106,8 @@ public class CrearSocioVista extends javax.swing.JFrame {
                             .addComponent(apellidosCampo, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoNombre, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(contrasenaCampo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(asociacionEtiqueta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(asociacionCampo, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(listaRoles, javax.swing.GroupLayout.Alignment.LEADING, 0, 247, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -141,6 +142,10 @@ public class CrearSocioVista extends javax.swing.JFrame {
                 .addComponent(contrasenaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rolEtiqueta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(asociacionCampo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(asociacionEtiqueta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(listaRoles, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -240,10 +245,12 @@ public class CrearSocioVista extends javax.swing.JFrame {
     private javax.swing.JLabel correoEtiqueta;
     private javax.swing.JLabel contrasenaEtiqueta;
     private javax.swing.JLabel rolEtiqueta;
+    private javax.swing.JLabel asociacionEtiqueta;
     private javax.swing.JTextField campoNombre;
     private javax.swing.JTextField apellidosCampo;
     private javax.swing.JTextField correoCampo;
     private javax.swing.JPasswordField contrasenaCampo;
+    private javax.swing.JTextField asociacionCampo;
     // End of variables declaration                   
 }
 

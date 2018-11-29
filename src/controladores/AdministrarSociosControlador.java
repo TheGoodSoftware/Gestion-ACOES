@@ -31,6 +31,7 @@ public class AdministrarSociosControlador implements ActionListener{
 	        CrearSocioControlador creaSocioCtr = new CrearSocioControlador(creaSocioVista, creaSocioModelo);
 	        creaSocioVista.Controlador(creaSocioCtr);
 	        vistaAdmin.setVisible(false);
+	        System.out.println("hola");
 	        creaSocioCtr.iniciarVista();
 		}else if(e.getActionCommand().equals("MODIFICAR_SOCIO")) {
 			CrearSocioModelo creaSocioModelo = new CrearSocioModelo();
