@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 import modelos.*;
 
 public class BD {
@@ -131,38 +134,93 @@ public class BD {
 			throw new Error("Error en el UPDATE: " + up+ ". " + ex.getMessage());
 		}
 	}
-	/*
-	 public ArrayList<Usuario> getSocios()
-	    {
-	        ArrayList<Usuario> socios = new ArrayList<>();
-	        try {
-	            Statement statement = con.createStatement();
-	            ResultSet rs = statement.executeQuery("SELECT * FROM USUARIO U JOIN ROL R ON U.rol = R.nombre");
-	            while(rs.next()) {
-	                socios.add(new Usuario(
-	                        rs.getString("nombre"),
-	                        rs.getString("apellidos"),
-	                        rs.getString("direccion"),
-	                        rs.getString("pueblo"),
-	                        rs.getString("e_mail"),
-	                        new Rol(
-	                                rs.getString("nombre"),
-	                                rs.getString("pais"),
-	                                rs.getString("descripcion")
-	                        )));
-	            }
-	        } catch (SQLException e) {
-	            System.err.println("ERROR. Trying to get 'socios' from database");
-	        }
-	        return socios;
-	    }
-*/
-	    public void endConnection()
-	    {
-	        try {
-	            con.close();
-	        } catch (SQLException e) {
-	            System.err.println("ERROR. Trying to close database connection");
-	        }
-	    }
+
+	public Usuario getSocio(String e_mail) {
+		try
+		{
+			Usuario u = null;
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO JOIN PERSONA ON USUARIO.idUsuario = PERSONA.idPersona");
+			if(result.next()) {
+				u = new Usuario(
+						result.getString("Nombre"),
+						result.getString("Apellidos"),
+						result.getString("Direccion"),
+						result.getString("Pueblo"),
+						e_mail,
+						getApadrinados(e_mail),
+						getRol(e_mail)
+				);
+			}
+			result.close();
+			stmt.close();
+			return u;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to getSocio -> " + ex.getMessage());
+		}
+	}
+
+	public Rol getRol(String e_mail) {
+		try
+		{
+			Rol r = null;
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO JOIN ROL ON USUARIO.ROL_idRol = ROL.idRol");
+			if(result.next()) {
+				r = new Rol(
+						result.getString("Nombre"),
+						result.getString("Pais"),
+						result.getString("Descripcion")
+				);
+			}
+			stmt.close();
+			return r;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Apadrinados");
+		}
+	}
+
+	public ArrayList<Nino> getApadrinados(String e_mail) {
+		try
+		{
+			Statement stmt = con.createStatement();
+			ArrayList<Nino> apadrinados = new ArrayList<>();
+			ResultSet result = stmt.executeQuery("SELECT * FROM APADRINAR JOIN NINO ON APADRINAR.NINO_idNen = NINO.idNen JOIN PERSONA ON NINO.idNen = PERSONA.idPersona");
+
+			Map<String, Integer> notas = new TreeMap<>();
+			notas.put("1Primaria", 8);
+			notas.put("2Primaria", 9);
+
+			while(result.next()) {
+				apadrinados.add(new Nino(
+						result.getString("Nombre"),
+						result.getString("Apellidos"),
+						result.getString("Direccion"),
+						result.getString("Pueblo"),
+						result.getInt("Edad"),
+						notas
+				));
+			}
+			stmt.close();
+
+			return apadrinados;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Apadrinados");
+		}
+	}
+
+	public void endConnection()
+	{
+		try {
+			con.close();
+		} catch (SQLException e) {
+			System.err.println("ERROR. Trying to close database connection");
+		}
+	}
 }
