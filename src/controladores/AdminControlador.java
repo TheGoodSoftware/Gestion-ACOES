@@ -45,6 +45,8 @@ public class AdminControlador implements ActionListener {
     	   
     	   break;
     	case "VISTA_SOCIO":
+<<<<<<< HEAD
+=======
     	    if(usuario.getE_mail().equalsIgnoreCase("admin@correo.es"))
             {
                 Rol rol = new Rol("Admin", "Honduras", "Descripcion");
@@ -57,6 +59,7 @@ public class AdminControlador implements ActionListener {
                 vistaSocio = new SocioVista(usuario);
             } else
                 vistaSocio = new SocioVista(usuario);
+>>>>>>> 7638b7b2c6458cf4dad9a107e4fc23c1ff6279d2
             vistaAdmin.setVisible(false);
     	    vistaSocio.setVisible(true);
     	    break;
