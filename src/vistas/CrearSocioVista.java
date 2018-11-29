@@ -47,14 +47,12 @@ public class CrearSocioVista extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nombre");
         setName("nombre"); // NOI18N
-
+        
+        contrasenaCampo.setText("");
+        /*
         campoNombre.setText("campoNombre");
-        campoNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNombreActionPerformed(evt);
-            }
-        });
-
+    
+        
         nombreEtiqueta.setText("Nombre");
 
         apellidosEtiqueta.setText("Apellidos");
@@ -64,6 +62,7 @@ public class CrearSocioVista extends javax.swing.JFrame {
         correoEtiqueta.setText("Correo electrónico");
 
         correoCampo.setText("correoCampo");
+        */
         correoCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 correoCampoActionPerformed(evt);
@@ -72,13 +71,13 @@ public class CrearSocioVista extends javax.swing.JFrame {
 
         contrasenaEtiqueta.setText("Contraseña");
 
-        contrasenaCampo.setText("contrasenaCampo");
+       
 
         rolEtiqueta.setText("Rol");
 
         creatBoton.setText("Añadir");
 
-        listaRoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+       // listaRoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         atrasBoton.setText("Atrás");
         atrasBoton.addActionListener(new java.awt.event.ActionListener() {
@@ -154,11 +153,14 @@ public class CrearSocioVista extends javax.swing.JFrame {
 
     
     public void Controlador(CrearSocioControlador ctr) {
-    	
+    	creatBoton.addActionListener(ctr);
+    	creatBoton.setActionCommand("ANADIR");
     }
     public void Controlador(ModificarSocioControlador ctr) {
     	
     }
+    
+    
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
     }                                           

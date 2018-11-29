@@ -52,6 +52,7 @@ public class AdminControlador implements ActionListener {
     		AdministrarSociosVista adminSocioVista = new AdministrarSociosVista();
     		AdministrarSociosControlador adminSocioCtr = new AdministrarSociosControlador(adminSocioVista, adminSocioModelo);
     		vistaAdmin.setVisible(false);
+    		adminSocioVista.controlador(adminSocioCtr);
     		adminSocioCtr.iniciarVista();
     		break;
        }

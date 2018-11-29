@@ -106,11 +106,14 @@ public class AdministrarSociosVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void controlador(ActionListener ctr) {                                         
+    public void controlador(ActionListener ctr) {                                         
         // TODO add your handling code here:
+    	crearBoton.addActionListener(ctr);
     	crearBoton.setActionCommand("CREAR_SOCIO");
     	modificarBoton.setActionCommand("MODIFICAR_SOCIO");
+    	modificarBoton.addActionListener(ctr);
     	eliminarBoton.setActionCommand("ELIMINAR_SOCIO");
+    	eliminarBoton.addActionListener(ctr);
     }                                        
 
     /**
