@@ -58,25 +58,10 @@ public class AdminVista extends javax.swing.JFrame {
         jLabel1.setText("Generación de informes");
 
         informeAcademico.setText("Informe académico");
-        informeAcademico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                informeAcademicoActionPerformed(evt);
-            }
-        });
 
         informeEconomico.setText("Informe económico");
-        informeEconomico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                informeEconomicoActionPerformed(evt);
-            }
-        });
 
         informeCambios.setText("Informe de cambios en la aplicación");
-        informeCambios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                informeCambiosActionPerformed(evt);
-            }
-        });
 
         infoNino.setText("Ficha de información de un niño");
 
@@ -122,34 +107,12 @@ public class AdminVista extends javax.swing.JFrame {
         gestionEconomicaPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         insertarIngreso.setText("Insertar ingreso/s");
-        insertarIngreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertarIngresoActionPerformed(evt);
-            }
-        });
-
         jLabel3.setText("Gestión económica");
 
         insertarGasto.setText("Insertar gasto/s");
-        insertarGasto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertarGastoActionPerformed(evt);
-            }
-        });
-
         modificarIngreso.setText("Modificar ingreso/s");
-        modificarIngreso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarIngresoActionPerformed(evt);
-            }
-        });
 
         modificarGasto.setText("Modificar gasto/s");
-        modificarGasto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarGastoActionPerformed(evt);
-            }
-        });
 
         gestionEconomicaPanel.setLayer(insertarIngreso, javax.swing.JLayeredPane.DEFAULT_LAYER);
         gestionEconomicaPanel.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -200,19 +163,8 @@ public class AdminVista extends javax.swing.JFrame {
         jLabel4.setText("Gestión académica");
 
         insertarExpediente.setText("Insertar datos en expediente");
-        insertarExpediente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                insertarExpedienteActionPerformed(evt);
-            }
-        });
 
         modificarExpediente.setText("Modificar datos en expediente");
-        modificarExpediente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarExpedienteActionPerformed(evt);
-            }
-        });
-
         gestionEducativaPanel.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         gestionEducativaPanel.setLayer(insertarExpediente, javax.swing.JLayeredPane.DEFAULT_LAYER);
         gestionEducativaPanel.setLayer(modificarExpediente, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -248,48 +200,16 @@ public class AdminVista extends javax.swing.JFrame {
         jLabel5.setText("Gestión de usuarios");
 
         fechaEnvio.setText("Insertar fecha de envío de mensajería");
-        fechaEnvio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechaEnvioActionPerformed(evt);
-            }
-        });
 
         fechaRecepcion.setText("Insertar fecha de recepción de mensajería");
-        fechaRecepcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fechaRecepcionActionPerformed(evt);
-            }
-        });
 
         gestionarNino.setText("Gestionar niños/as");
-        gestionarNino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gestionarNinoActionPerformed(evt);
-            }
-        });
 
         gestionarSocios.setText("Gestionar socios/as");
-        gestionarSocios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gestionarSociosActionPerformed(evt);
-            }
-        });
 
         consultarApadrinamiento.setText("Apadrinar/Desapadrinar");
-        consultarApadrinamiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                consultarApadrinamientoActionPerformed(evt);
-            }
 
-
-        });
         vistaPadrino.setText("Vista padrino");
-        vistaPadrino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vistaPadrinoActionPerformed(evt);
-
-            }
-        });
 
         gestionUsuariosPanel.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         gestionUsuariosPanel.setLayer(fechaEnvio, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -368,68 +288,11 @@ public class AdminVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>
 
-    private void informeAcademicoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void informeEconomicoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void informeCambiosActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void insertarIngresoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void insertarGastoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void modificarIngresoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void modificarGastoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void insertarExpedienteActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void modificarExpedienteActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fechaEnvioActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void fechaRecepcionActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void gestionarNinoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void gestionarSociosActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void consultarApadrinamientoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-    private void vistaPadrinoActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
-
     public void controlador(controladores.AdminControlador ctr) {
     	consultarApadrinamiento.addActionListener(ctr);
     	consultarApadrinamiento.setActionCommand("APADRINAR");
+    	vistaPadrino.addActionListener(ctr);
+    	vistaPadrino.setActionCommand("VISTA_SOCIO");
     }
 
     public void agenteOff() {

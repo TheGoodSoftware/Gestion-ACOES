@@ -2,10 +2,9 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import modelos.ApadrinarModelo;
-import modelos.Usuario;
 import vistas.*;
+import modelos.*;
+import java.util.*;
 
 public class AdminControlador implements ActionListener {
 
@@ -50,6 +49,21 @@ public class AdminControlador implements ActionListener {
     	   vistaApadrinar.setVisible(true);
     	   
     	   break;
+    	case "VISTA_SOCIO":
+    	    if(usuario.getE_mail().equals("usuario@correo.es"))
+            {
+                Rol rol = new Rol("Admin", "Honduras", "Descripcion");
+                Map<String, Integer> notasApadrinado = new TreeMap<>();
+                notasApadrinado.put("1Primaria", 8);
+                notasApadrinado.put("2Primaria", 7);
+                ArrayList<Nino> apadrinados = new ArrayList<>();
+                apadrinados.add(new Nino("Juan", "Perez", "AVDA 18", "Bogota", 17, notasApadrinado));
+                Usuario usuario = new Usuario("nombre","apellidos","direccion","pueblo","e_mail",apadrinados, rol);
+                vistaSocio = new SocioVista(usuario);
+            } else
+                vistaSocio = new SocioVista(usuario);
+            vistaAdmin.setVisible(false);
+    	    vistaSocio.setVisible(true);
        }
     }
 }

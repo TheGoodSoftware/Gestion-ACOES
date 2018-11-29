@@ -564,7 +564,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`PROYECTO` (`tipoProy`, `refPais`, `Descripcion`, `Localizacion`, `Acabado`) VALUES ('CCJ', 'Honduras', 'CCJ Alberto Shret', 'Chikret', 1);
+INSERT INTO `mydb`.`PROYECTO` (`tipoProy`, `refPais`, `Descripcion`, `Localizacion`, `Acabado`) VALUES ('
+', 'Honduras', 'CCJ Alberto Shret', 'Chikret', 1);
 INSERT INTO `mydb`.`PROYECTO` (`tipoProy`, `refPais`, `Descripcion`, `Localizacion`, `Acabado`) VALUES ('CasaPopulorum', 'Honduras', 'CP Bonifracio Shish', 'Karat', 0);
 
 COMMIT;
