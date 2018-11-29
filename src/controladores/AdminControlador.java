@@ -41,26 +41,10 @@ public class AdminControlador implements ActionListener {
     	   ApadrinarControlador ctr = new ApadrinarControlador(vistaApadrinar, modeloApadrinar);
     	   ctr.iniciarVista();
     	   vistaAdmin.setVisible(false);
-    	   
-    	   
     	   break;
     	case "VISTA_SOCIO":
-<<<<<<< HEAD
-=======
-    	    if(usuario.getE_mail().equalsIgnoreCase("admin@correo.es"))
-            {
-                Rol rol = new Rol("Admin", "Honduras", "Descripcion");
-                Map<String, Integer> notasApadrinado = new TreeMap<>();
-                notasApadrinado.put("1Primaria", 8);
-                notasApadrinado.put("2Primaria", 7);
-                ArrayList<Nino> apadrinados = new ArrayList<>();
-                apadrinados.add(new Nino("Juan", "Perez", "AVDA 18", "Bogota", 17, notasApadrinado));
-                usuario = new Usuario("nombre","apellidos","direccion","pueblo","e_mail",apadrinados, rol);
-                vistaSocio = new SocioVista(usuario);
-            } else
-                vistaSocio = new SocioVista(usuario);
->>>>>>> 7638b7b2c6458cf4dad9a107e4fc23c1ff6279d2
             vistaAdmin.setVisible(false);
+    	    vistaSocio = new SocioVista(usuario);
     	    vistaSocio.setVisible(true);
     	    break;
     	case "GESTION_SOCIOS":

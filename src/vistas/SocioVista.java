@@ -169,12 +169,11 @@ public class SocioVista extends javax.swing.JFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (e.getValueIsAdjusting()) {
-                    Nino seleccionado = socio.getApadrinados().get(e.getLastIndex());
+                    Nino seleccionado = socio.getApadrinados().get(listaApadrinados.getSelectedIndex());
                     labelNombreApadrinado.setText("Nombre: " + seleccionado.getNombre() + " " + seleccionado.getApellidos());
                     labelEdadApadrinado.setText("Edad: " + " " + seleccionado.getEdad());
                     DefaultTableModel model = (DefaultTableModel) tablaCalificacionesApadrinados.getModel();
-                    for (int i = 0; i < model.getRowCount(); i++)
-                        model.removeRow(i);
+                    model.setRowCount(0);
 
                     Set<String> cursos = seleccionado.getNotas().keySet();
                     for (String curso : cursos) {

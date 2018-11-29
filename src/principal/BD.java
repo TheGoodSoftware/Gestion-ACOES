@@ -5,10 +5,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 import modelos.*;
 
@@ -167,7 +164,7 @@ public class BD {
 		{
 			Rol r = null;
 			Statement stmt = con.createStatement();
-			ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO JOIN ROL ON USUARIO.ROL_idRol = ROL.idRol");
+			ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO JOIN ROL ON USUARIO.ROL_idRol = ROL.idRol WHERE Correo = '" + e_mail + "'");
 			if(result.next()) {
 				r = new Rol(
 						result.getString("Nombre"),
@@ -189,11 +186,12 @@ public class BD {
 		{
 			Statement stmt = con.createStatement();
 			ArrayList<Nino> apadrinados = new ArrayList<>();
-			ResultSet result = stmt.executeQuery("SELECT * FROM APADRINAR JOIN NINO ON APADRINAR.NINO_idNen = NINO.idNen JOIN PERSONA ON NINO.idNen = PERSONA.idPersona");
+			ResultSet result = stmt.executeQuery("SELECT * FROM APADRINAR JOIN NINO ON APADRINAR.NINO_idNen = NINO.idNen JOIN USUARIO ON APADRINAR.USUARIO_idUsuario = USUARIO.idUsuario JOIN PERSONA P on NINO.idNen = P.idPersona WHERE Correo = '" + e_mail + "'");
 
 			Map<String, Integer> notas = new TreeMap<>();
-			notas.put("1Primaria", 8);
-			notas.put("2Primaria", 9);
+			Random rnd = new Random();
+			notas.put("1Primaria", rnd.nextInt(10) + 1);
+			notas.put("2Primaria", rnd.nextInt(10) + 1);
 
 			while(result.next()) {
 				apadrinados.add(new Nino(
@@ -211,7 +209,7 @@ public class BD {
 		}
 		catch (SQLException ex)
 		{
-			throw new Error("ERROR. Trying to get Apadrinados");
+			throw new Error("ERROR. Trying to get Apadrinados -> " + ex.getMessage());
 		}
 	}
 
