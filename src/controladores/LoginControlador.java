@@ -10,6 +10,7 @@ import modelos.Rol;
 import modelos.Usuario;
 import vistas.AdminVista;
 import vistas.LoginVista;
+import vistas.SocioVista;
 
 public class LoginControlador implements ActionListener {
 	
@@ -32,10 +33,14 @@ public class LoginControlador implements ActionListener {
 			//cambia al panel de administrador
 			Usuario loggedUser = modelo.autenticar(vistaLogin.getUsuario(), vistaLogin.getPassword(), vistaLogin);
 			if(loggedUser != null) {
-			    AdminControlador ctrAdmin = new AdminControlador(loggedUser);
-			    
-			    vistaLogin.setVisible(false);
-			    ctrAdmin.iniciarVista();
+				if(loggedUser.getRole().getNombre().equals('SOCIO')) {
+					AdminControlador ctrAdmin = new AdminControlador(loggedUser);
+					vistaLogin.setVisible(false);
+					ctrAdmin.iniciarVista();
+				} else {
+					SocioVista vistaSocio = new SocioVista(loggedUser);
+					vistaSocio.setVisible(true);
+				}
 			}
 		}
 		

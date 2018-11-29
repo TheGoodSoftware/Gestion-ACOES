@@ -19,21 +19,16 @@ public class AdminControlador implements ActionListener {
     }
 
     public void iniciarVista() {
-        if (usuario.getRole().getNombre().equalsIgnoreCase("Socio")) {
-            vistaSocio = new SocioVista(usuario);
-            vistaSocio.setVisible(true);
-        } else {
-            vistaAdmin = new AdminVista();
-            if (usuario.getRole().getNombre().equalsIgnoreCase("ResponsableAcademico")) {
-                vistaAdmin.academicoOff();
-            } else if (usuario.getRole().getNombre().equalsIgnoreCase("ResponsableEconomico")) {
-                vistaAdmin.economicoOff();
-            } else if (usuario.getRole().getNombre().equalsIgnoreCase("Agente")) {
-                vistaAdmin.agenteOff();
-            }
-            vistaAdmin.controlador(this);
-            vistaAdmin.setVisible(true);
+        vistaAdmin = new AdminVista();
+        if (usuario.getRole().getNombre().equalsIgnoreCase("ResponsableAcademico")) {
+            vistaAdmin.academicoOff();
+        } else if (usuario.getRole().getNombre().equalsIgnoreCase("ResponsableEconomico")) {
+            vistaAdmin.economicoOff();
+        } else if (usuario.getRole().getNombre().equalsIgnoreCase("Agente")) {
+            vistaAdmin.agenteOff();
         }
+        vistaAdmin.controlador(this);
+        vistaAdmin.setVisible(true);
     }
 
 
@@ -50,7 +45,7 @@ public class AdminControlador implements ActionListener {
     	   
     	   break;
     	case "VISTA_SOCIO":
-    	    if(usuario.getE_mail().equals("usuario@correo.es"))
+    	    if(usuario.getE_mail().equalsIgnoreCase("admin@correo.es"))
             {
                 Rol rol = new Rol("Admin", "Honduras", "Descripcion");
                 Map<String, Integer> notasApadrinado = new TreeMap<>();
