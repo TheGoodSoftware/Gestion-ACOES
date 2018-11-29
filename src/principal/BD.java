@@ -11,7 +11,7 @@ import modelos.*;
 
 public class BD {
 
-    private final String CONNECTION_URL = "jdbc:mysql://localhost:3306/gestionacoes";
+    private final String CONNECTION_URL = "jdbc:mysql://localhost:3306/mydb";
     private final String CONNECTION_Usuario = "ACOES";
     private final String CONNECTION_PASSWD = "GESTIONACOES";
     private Connection con;
@@ -21,7 +21,7 @@ public class BD {
 		 try {
 	            con = DriverManager.getConnection(CONNECTION_URL, CONNECTION_Usuario, CONNECTION_PASSWD);
 	        } catch (SQLException e) {
-	            System.err.println("ERROR. Trying to create database connection");
+	            System.err.println("ERROR. Trying to create database connection" + e.getMessage());
 	        }
 	}
 	

@@ -31,16 +31,26 @@ public class LoginControlador implements ActionListener {
 		if(e.getActionCommand().equals("INICIAR_SESION")) {
 			vistaLogin.borrarMensajeErrorAutenticacion();
 			//cambia al panel de administrador
-			Usuario loggedUser = modelo.autenticar(vistaLogin.getUsuario(), vistaLogin.getPassword(), vistaLogin);
+			Usuario loggedUser = modelo.autenticar(vistaLogin.getUsuario(), vistaLogin.getPassword());
 			if(loggedUser != null) {
-				if(loggedUser.getRole().getNombre().equals('SOCIO')) {
+				if(!loggedUser.getRole().getNombre().equalsIgnoreCase("SOCIO")) {
 					AdminControlador ctrAdmin = new AdminControlador(loggedUser);
 					vistaLogin.setVisible(false);
 					ctrAdmin.iniciarVista();
 				} else {
+	                Rol rol = new Rol("Admin", "Honduras", "Descripcion");
+	                Map<String, Integer> notasApadrinado = new TreeMap<>();
+	                notasApadrinado.put("1Primaria", 8);
+	                notasApadrinado.put("2Primaria", 7);
+	                ArrayList<Nino> apadrinados = new ArrayList<>();
+	                apadrinados.add(new Nino("Juan", "Perez", "AVDA 18", "Bogota", 17, notasApadrinado));
+	                loggedUser = new Usuario("nombre","apellidos","direccion","pueblo","e_mail",apadrinados, rol);
 					SocioVista vistaSocio = new SocioVista(loggedUser);
 					vistaSocio.setVisible(true);
 				}
+			}
+			else {
+				vistaLogin.mensajeErrorAutenticacion();
 			}
 		}
 		

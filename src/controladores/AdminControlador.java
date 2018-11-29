@@ -53,12 +53,13 @@ public class AdminControlador implements ActionListener {
                 notasApadrinado.put("2Primaria", 7);
                 ArrayList<Nino> apadrinados = new ArrayList<>();
                 apadrinados.add(new Nino("Juan", "Perez", "AVDA 18", "Bogota", 17, notasApadrinado));
-                Usuario usuario = new Usuario("nombre","apellidos","direccion","pueblo","e_mail",apadrinados, rol);
+                usuario = new Usuario("nombre","apellidos","direccion","pueblo","e_mail",apadrinados, rol);
                 vistaSocio = new SocioVista(usuario);
             } else
                 vistaSocio = new SocioVista(usuario);
             vistaAdmin.setVisible(false);
     	    vistaSocio.setVisible(true);
+    	    break;
        }
     }
 }
