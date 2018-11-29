@@ -1,6 +1,7 @@
 package vistas;
 
 import controladores.CrearSocioControlador;
+import controladores.ModificarSocioControlador;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -153,6 +154,9 @@ public class CrearSocioVista extends javax.swing.JFrame {
 
     
     public void Controlador(CrearSocioControlador ctr) {
+    	
+    }
+    public void Controlador(ModificarSocioControlador ctr) {
     	
     }
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {                                            

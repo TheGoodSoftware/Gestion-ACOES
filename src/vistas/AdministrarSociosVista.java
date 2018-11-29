@@ -1,5 +1,9 @@
 package vistas;
 
+import java.awt.event.ActionListener;
+
+import controladores.AdministrarSociosControlador;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -64,11 +68,6 @@ public class AdministrarSociosVista extends javax.swing.JFrame {
         modificarBoton.setText("Modificar");
 
         eliminarBoton.setText("Eliminar");
-        eliminarBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
         
         atrasBoton.setText("Atrás");
 
@@ -107,8 +106,11 @@ public class AdministrarSociosVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void controlador(ActionListener ctr) {                                         
         // TODO add your handling code here:
+    	crearBoton.setActionCommand("CREAR_SOCIO");
+    	modificarBoton.setActionCommand("MODIFICAR_SOCIO");
+    	eliminarBoton.setActionCommand("ELIMINAR_SOCIO");
     }                                        
 
     /**
@@ -151,10 +153,10 @@ public class AdministrarSociosVista extends javax.swing.JFrame {
     private javax.swing.JButton modificarBoton;
     private javax.swing.JButton eliminarBoton;
     private javax.swing.JButton atrasBoton;
-
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tabla;
     private javax.swing.JTextArea jTextArea1;
+    private AdministrarSociosControlador controlador;
     // End of variables declaration                   
 }
