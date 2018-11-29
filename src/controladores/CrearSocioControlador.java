@@ -20,8 +20,12 @@ public class CrearSocioControlador implements ActionListener{
 		vista.setVisible(true);
 	}
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-				
+	public void actionPerformed(ActionEvent e) {
+	if(e.getActionCommand().equals("ANADIR")) {
+		
+	}else if(e.getActionCommand().equals("ATRAS")) {
+		
+	}
 	}
 
 }
