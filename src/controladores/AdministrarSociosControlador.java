@@ -3,23 +3,23 @@ package controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import modelos.AdminSociosModelo;
+import modelos.AdministrarSociosModelo;
 import modelos.CrearSocioModelo;
-import vistas.AdminSociosVista;
+import vistas.AdministrarSociosVista;
 import vistas.CrearSocioVista;
 
 public class AdministrarSociosControlador implements ActionListener{
 	
-	private AdminSociosVista vistaAdministrarSocios;
-	private AdminSociosModelo modelo;
+	private AdministrarSociosVista vistaAdmin;
+	private AdministrarSociosModelo modelo;
 	
-	public AdministrarSociosControlador(AdminSociosVista vista, AdminSociosModelo modelo) {
-		this.vistaAdministrarSocios = vista;
+	public AdministrarSociosControlador(AdministrarSociosVista vista, AdministrarSociosModelo modelo) {
+		this.vistaAdmin = vista;
 		this.modelo = modelo;
 	}
 	
 	public void iniciarVista() {
-		vistaAdministrarSocios.setVisible(true);
+		vistaAdmin.setVisible(true);
 	}
 	
 	@Override

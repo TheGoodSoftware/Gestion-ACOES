@@ -1,7 +1,7 @@
 package principal;
 import controladores.LoginControlador;
 import modelos.LoginModelo;
-import vistas.AdminSociosVista;
+import vistas.AdministrarSociosVista;
 import vistas.AdminVista;
 import vistas.LoginVista;
 
