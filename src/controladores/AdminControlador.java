@@ -45,18 +45,6 @@ public class AdminControlador implements ActionListener {
     	   
     	   break;
     	case "VISTA_SOCIO":
-    	    if(usuario.getE_mail().equalsIgnoreCase("admin@correo.es"))
-            {
-                Rol rol = new Rol("Admin", "Honduras", "Descripcion");
-                Map<String, Integer> notasApadrinado = new TreeMap<>();
-                notasApadrinado.put("1Primaria", 8);
-                notasApadrinado.put("2Primaria", 7);
-                ArrayList<Nino> apadrinados = new ArrayList<>();
-                apadrinados.add(new Nino("Juan", "Perez", "AVDA 18", "Bogota", 17, notasApadrinado));
-                Usuario usuario = new Usuario("nombre","apellidos","direccion","pueblo","e_mail",apadrinados, rol);
-                vistaSocio = new SocioVista(usuario);
-            } else
-                vistaSocio = new SocioVista(usuario);
             vistaAdmin.setVisible(false);
     	    vistaSocio.setVisible(true);
        }
