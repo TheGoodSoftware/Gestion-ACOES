@@ -1,6 +1,7 @@
 package principal;
 import controladores.LoginControlador;
 import modelos.LoginModelo;
+import vistas.AdministrarSociosVista;
 import vistas.AdminVista;
 import vistas.LoginVista;
 
@@ -13,7 +14,7 @@ public class App {
 		
 		vista.controlador(ctr);
 		ctr.iniciarVista();
-		
+
 	}
 
 }
