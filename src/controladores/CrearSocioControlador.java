@@ -11,7 +11,7 @@ public class CrearSocioControlador implements ActionListener{
 	private CrearSocioModelo modelo;
 	
 	
-	public void CrearSocioControlador(CrearSocioVista vista, CrearSocioModelo modelo) {
+	public CrearSocioControlador(CrearSocioVista vista, CrearSocioModelo modelo) {
 		this.vista = vista;
 		this.modelo = modelo;
 	}

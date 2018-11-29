@@ -31,7 +31,6 @@ public class AdministrarSociosControlador implements ActionListener{
 	        creaSocioVista.Controlador(creaSocioCtr);
 	        vistaAdmin.setVisible(false);
 	        creaSocioCtr.iniciarVista();
-	        break;
 		}else if(e.getActionCommand().equals("MODIFICAR_SOCIO")) {
 			
 		} else if(e.getActionCommand().equals("ELIMINAR_SOCIO")) {
