@@ -233,7 +233,7 @@ public class BD {
 		}
 		catch (SQLException ex)
 		{
-			throw new Error("ERROR. Trying to get Apadrinados -> " + ex.getMessage());
+			throw new Error("ERROR. Trying to get Roles -> " + ex.getMessage());
 		}
 	}
 	
