@@ -24,42 +24,7 @@ public class BD {
 	            System.err.println("ERROR. Trying to create database connection" + e.getMessage());
 	        }
 	}
-	
 
-	
-	protected void finalize () 
-	{
-		try
-		{
-			if (con!=null)  con.close();
-		}
-		catch (SQLException ex)
-		{
-			throw new Error("Error al Cerrar la Conexión." + ex.getMessage());
-		}
-    }
-	
-	public Object SelectEscalar(String sel)
-	{
-		ResultSet rset;
-		Object res = null;
-		try
-		{
-			Statement stmt = con.createStatement();
-			rset = stmt.executeQuery(sel);
-			rset.next();
-			res = rset.getObject(1);
-			rset.close();
-			stmt.close();
-		}
-		catch (SQLException ex)
-		{
-			throw new Error("Error en el SELECT: " + sel + ". " + ex.getMessage());
-		}		
-		
-		return res;
-	}
-	
 	public List<Object[]> Select(String sel)
 	{
 		ResultSet rset;
@@ -85,52 +50,23 @@ public class BD {
 		catch (SQLException ex)
 		{
 			throw new Error("Error en el SELECT: " + sel+ ". " + ex.getMessage());
-		}		
-		
+		}
+
 		return lista;
 	}
+
 	
-	public void Insert(String ins)
+	protected void finalize () 
 	{
 		try
 		{
-			Statement stmt = con.createStatement();
-			stmt.execute(ins);
-			stmt.close();
+			if (con!=null)  con.close();
 		}
 		catch (SQLException ex)
 		{
-			throw new Error("Error en el INSERT: " + ins+ ". " + ex.getMessage());
+			throw new Error("Error al Cerrar la Conexión." + ex.getMessage());
 		}
-	}
-
-	public void Delete(String del)
-	{
-		try
-		{
-			Statement stmt = con.createStatement();
-			stmt.execute(del);
-			stmt.close();
-		}
-		catch (SQLException ex)
-		{
-			throw new Error("Error en el DELETE: " + del+ ". " + ex.getMessage());
-		}
-	}
-
-	public void Update(String up)
-	{
-		try
-		{
-			Statement stmt = con.createStatement();
-			stmt.execute(up);
-			stmt.close();
-		}
-		catch (SQLException ex)
-		{
-			throw new Error("Error en el UPDATE: " + up+ ". " + ex.getMessage());
-		}
-	}
+    }
 
 	public Usuario getSocio(String e_mail) {
 		try
@@ -230,6 +166,72 @@ public class BD {
 			stmt.close();
 
 			return roles;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Apadrinados -> " + ex.getMessage());
+		}
+	}
+
+	public void insertarUsuarioBaseDeDatos(Usuario u, String password) {
+		try {
+			Statement stmt = con.createStatement();
+			stmt.execute("INSERT INTO USUARIO(Contrasenya, Correo, ROL_idRol) VALUES ('"
+			+ password + "','" + u.getE_mail() + "'," + getRolIdDesdeNombre(u.getRole().getNombre()) + ")");
+			stmt.execute("INSERT INTO PERSONA(Nombre, Apellidos) VALUES ('"
+					+ u.getNombre() + "','" + u.getApellidos() + "')");
+		} catch (SQLException ex) {
+			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
+		}
+	}
+
+	public void modificarUsuarioBaseDeDatos(Usuario u, String password) {
+		try {
+			Statement stmt = con.createStatement();
+			stmt.execute("UPDATE USUARIO JOIN PERSONA ON USUARIO.idPersona=PERSONA.idPersona SET Contrasenya='" + password + "', Correo='" + u.getE_mail()  + "', ROL_idRol=" + getRolIdDesdeNombre(u.getRole().getNombre()) + "" +
+					", Nombre='" + u.getNombre() + "', Apellidos='" + u.getApellidos() + "') WHERE Correo='" + u.getE_mail() + "'");
+		} catch (SQLException ex) {
+			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
+		}
+	}
+
+	public int getRolIdDesdeNombre(String nombreRol) {
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM ROL WHERE Nombre = '" + nombreRol + "'");
+			if(result.next()) {
+				return result.getInt("idRol");
+			}
+			stmt.close();
+			return -1;
+		} catch (SQLException ex) {
+			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
+		}
+	}
+
+	public ArrayList<Usuario> getAllUsuarios() {
+		try
+		{
+			Statement stmt = con.createStatement();
+			ArrayList<Usuario> usuarios = new ArrayList<>();
+			ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO JOIN PERSONA ON USUARIO.idUsuario = PERSONA.idPersona");
+
+			while(result.next()) {
+				usuarios.add(
+						new Usuario(
+							result.getString("Nombre"),
+							result.getString("Apellidos"),
+							"",
+							"",
+							result.getString("Correo"),
+								new ArrayList<>(),
+								getRol(result.getString("Correo"))
+						)
+				);
+			}
+			stmt.close();
+
+			return usuarios;
 		}
 		catch (SQLException ex)
 		{
