@@ -32,7 +32,6 @@ public class LoginControlador implements ActionListener {
 			vistaLogin.borrarMensajeErrorAutenticacion();
 			//cambia al panel de administrador
 			Usuario loggedUser = modelo.autenticar(vistaLogin.getUsuario(), vistaLogin.getPassword());
-			System.out.println(loggedUser.getRole().getNombre());
 			if(loggedUser != null) {
 				if(!loggedUser.getRole().getNombre().equalsIgnoreCase("SOCIO")) {
 					AdminControlador ctrAdmin = new AdminControlador(loggedUser);
