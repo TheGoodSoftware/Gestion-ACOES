@@ -1,7 +1,10 @@
 package vistas;
 
+import java.util.List;
+
 import controladores.CrearSocioControlador;
 import controladores.ModificarSocioControlador;
+import modelos.Rol;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -160,6 +163,26 @@ public class CrearSocioVista extends javax.swing.JFrame {
     	
     }
     
+    public String getNombre() {
+    	return campoNombre.getText();
+    }
+    public String getApellidos() {
+    	return apellidosCampo.getText();
+    }
+    public String getCorreo() {
+    	return correoCampo.getText();
+    }
+    public String getContrasenya() {
+    	return new String(this.contrasenaCampo.getPassword());
+    }
+    public Rol getRol() {
+    	return null;
+    }
+    public void insertarRoles(List<Rol> lista) {
+    	for(Rol r : lista) {
+    		this.listaRoles.addItem(r.getNombre());
+    	}
+    }
     
     private void campoNombreActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:

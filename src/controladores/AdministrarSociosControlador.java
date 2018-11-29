@@ -24,9 +24,8 @@ public class AdministrarSociosControlador implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-System.out.println("hola");
 		if(e.getActionCommand().equals("CREAR_SOCIO")) {
-			//System.out.println("hola");
+			
 			CrearSocioModelo creaSocioModelo = new CrearSocioModelo();
 	        CrearSocioVista creaSocioVista = new CrearSocioVista();
 	        CrearSocioControlador creaSocioCtr = new CrearSocioControlador(creaSocioVista, creaSocioModelo);
