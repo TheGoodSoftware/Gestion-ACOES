@@ -213,6 +213,30 @@ public class BD {
 		}
 	}
 
+	public ArrayList<Rol> getAllRoles() {
+		try
+		{
+			Statement stmt = con.createStatement();
+			ArrayList<Rol> roles = new ArrayList<>();
+			ResultSet result = stmt.executeQuery("SELECT * FROM ROL");
+
+			while(result.next()) {
+				roles.add(new Rol(
+						result.getString("Nombre"),
+						result.getString("Pais"),
+						result.getString("Descripcion")
+						));
+			}
+			stmt.close();
+
+			return roles;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Apadrinados -> " + ex.getMessage());
+		}
+	}
+	
 	public void endConnection()
 	{
 		try {
