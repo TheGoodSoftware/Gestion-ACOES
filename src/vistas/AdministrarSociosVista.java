@@ -2,10 +2,12 @@ package vistas;
 
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
 import controladores.AdministrarSociosControlador;
+import modelos.Rol;
 import modelos.Usuario;
 import principal.BD;
 
@@ -131,6 +133,27 @@ public class AdministrarSociosVista extends javax.swing.JFrame {
     		
     		model.removeRow(tupla);
     	}
+    }
+    public String getNombreSeleccionado() {
+    	int tupla = tabla.getSelectedRow();
+    	return (String)tabla.getValueAt(tupla, 0);
+    	
+    }
+    public String getApellidosSeleccionado() {
+    	int tupla = tabla.getSelectedRow();
+    	return (String)tabla.getValueAt(tupla, 1);
+    	
+    }
+    public String getCorreoSeleccionado() {
+    	int tupla = tabla.getSelectedRow();
+    	return (String)tabla.getValueAt(tupla, 2);
+    	
+    }
+    public String getRolSeleccionado(List<Rol> listaRoles) {
+    	int tupla = tabla.getSelectedRow();
+    	return (String)tabla.getValueAt(tupla, 3);
+    	
+		
     }
 
     /**

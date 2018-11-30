@@ -190,9 +190,9 @@ public class BD {
 		try {
 			Statement stmt = con.createStatement();
 			stmt.execute("UPDATE USUARIO JOIN PERSONA ON USUARIO.idPersona=PERSONA.idPersona SET Contrasenya='" + password + "', Correo='" + u.getE_mail()  + "', ROL_idRol=" + getRolIdDesdeNombre(u.getRole().getNombre()) + "" +
-					", Nombre='" + u.getNombre() + "', Apellidos='" + u.getApellidos() + "') WHERE Correo='" + u.getE_mail() + "'");
+					", Nombre='" + u.getNombre() + "', Apellidos='" + u.getApellidos() + "') WHERE Correo='" + u.getE_mail() + "';");
 		} catch (SQLException ex) {
-			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
+			throw new Error("ERROR. Trying to update Usuario into database -> " + ex.getMessage());
 		}
 	}
 

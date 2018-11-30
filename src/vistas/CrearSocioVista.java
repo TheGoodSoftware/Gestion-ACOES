@@ -1,5 +1,6 @@
 package vistas;
 
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import controladores.CrearSocioControlador;
@@ -163,12 +164,20 @@ public class CrearSocioVista extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     
-    public void Controlador(CrearSocioControlador ctr) {
+    public void Controlador(ActionListener ctr) {
     	creatBoton.addActionListener(ctr);
     	creatBoton.setActionCommand("ANADIR");
     }
+    /*
     public void Controlador(ModificarSocioControlador ctr) {
-    	
+    	creatBoton.addActionListener(ctr);
+    	creatBoton.setActionCommand("ANADIR");
+    }
+    */
+    public void setParametros(String nombre, String apellidos, String correo) {
+    	this.campoNombre.setText(nombre);
+    	this.apellidosCampo.setText(apellidos);
+    	this.correoCampo.setText(correo);
     }
     
     public String getNombre() {

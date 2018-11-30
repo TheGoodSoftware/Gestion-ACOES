@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import modelos.AdministrarSociosModelo;
 import modelos.CrearSocioModelo;
+import principal.BD;
 import vistas.AdministrarSociosVista;
 import vistas.CrearSocioVista;
 
@@ -36,7 +37,8 @@ public class AdministrarSociosControlador implements ActionListener{
 		}else if(e.getActionCommand().equals("MODIFICAR_SOCIO")) {
 			CrearSocioModelo creaSocioModelo = new CrearSocioModelo();
 	        CrearSocioVista creaSocioVista = new CrearSocioVista();
-	        ModificarSocioControlador creaSocioCtr = new ModificarSocioControlador(creaSocioVista, creaSocioModelo);
+	        BD bd = new BD();
+	        ModificarSocioControlador creaSocioCtr = new ModificarSocioControlador(creaSocioVista, creaSocioModelo, vistaAdmin.getNombreSeleccionado(), vistaAdmin.getApellidosSeleccionado(), vistaAdmin.getCorreoSeleccionado(), vistaAdmin.getRolSeleccionado(bd.getAllRoles()));
 	        creaSocioVista.Controlador(creaSocioCtr);
 	        vistaAdmin.setVisible(false);
 	        creaSocioCtr.iniciarVista();
