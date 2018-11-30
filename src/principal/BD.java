@@ -195,6 +195,16 @@ public class BD {
 		}
 	}
 
+	public void eliminarUsuarioBaseDeDatos(String e_mail) {
+		try {
+			Statement stmt = con.createStatement();
+			stmt.execute("DROP PERSONA FROM DATABASE WHERE PERSONA.idPersona=(SELECT idUsuario FROM USUARIO WHERE Correo='"+e_mail+"')");
+			stmt.execute("DROP USUARIO FROM DATABASE WHERE Correo='"+e_mail+"'");
+		} catch (SQLException ex) {
+			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
+		}
+	}
+
 	public int getRolIdDesdeNombre(String nombreRol) {
 		try {
 			Statement stmt = con.createStatement();
