@@ -176,10 +176,11 @@ public class BD {
 	public void insertarUsuarioBaseDeDatos(Usuario u, String password) {
 		try {
 			Statement stmt = con.createStatement();
-			stmt.execute("INSERT INTO USUARIO(Contrasenya, Correo, ROL_idRol) VALUES ('"
-			+ password + "','" + u.getE_mail() + "'," + getRolIdDesdeNombre(u.getRole().getNombre()) + ")");
+			
 			stmt.execute("INSERT INTO PERSONA(Nombre, Apellidos) VALUES ('"
 					+ u.getNombre() + "','" + u.getApellidos() + "')");
+			stmt.execute("INSERT INTO USUARIO(Contrasenya, Correo, ROL_idRol) VALUES ('"
+					+ password + "','" + u.getE_mail() + "'," + getRolIdDesdeNombre(u.getRole().getNombre()) + ")");
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
 		}
@@ -190,16 +191,6 @@ public class BD {
 			Statement stmt = con.createStatement();
 			stmt.execute("UPDATE USUARIO JOIN PERSONA ON USUARIO.idPersona=PERSONA.idPersona SET Contrasenya='" + password + "', Correo='" + u.getE_mail()  + "', ROL_idRol=" + getRolIdDesdeNombre(u.getRole().getNombre()) + "" +
 					", Nombre='" + u.getNombre() + "', Apellidos='" + u.getApellidos() + "') WHERE Correo='" + u.getE_mail() + "'");
-		} catch (SQLException ex) {
-			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
-		}
-	}
-
-	public void eliminarUsuarioBaseDeDatos(String e_mail) {
-		try {
-			Statement stmt = con.createStatement();
-			stmt.execute("DROP PERSONA FROM DATABASE WHERE PERSONA.idPersona=(SELECT idUsuario FROM USUARIO WHERE Correo='"+e_mail+"')");
-			stmt.execute("DROP USUARIO FROM DATABASE WHERE Correo='"+e_mail+"'");
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
 		}

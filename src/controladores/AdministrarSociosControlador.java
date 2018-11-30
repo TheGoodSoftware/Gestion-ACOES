@@ -31,7 +31,7 @@ public class AdministrarSociosControlador implements ActionListener{
 	        CrearSocioControlador creaSocioCtr = new CrearSocioControlador(creaSocioVista, creaSocioModelo);
 	        creaSocioVista.Controlador(creaSocioCtr);
 	        vistaAdmin.setVisible(false);
-	        System.out.println("hola");
+	       
 	        creaSocioCtr.iniciarVista();
 		}else if(e.getActionCommand().equals("MODIFICAR_SOCIO")) {
 			CrearSocioModelo creaSocioModelo = new CrearSocioModelo();
@@ -41,7 +41,7 @@ public class AdministrarSociosControlador implements ActionListener{
 	        vistaAdmin.setVisible(false);
 	        creaSocioCtr.iniciarVista();
 		} else if(e.getActionCommand().equals("ELIMINAR_SOCIO")) {
-			
+			vistaAdmin.eliminarUsuarioSeleccionado();
 		}
 	}
 

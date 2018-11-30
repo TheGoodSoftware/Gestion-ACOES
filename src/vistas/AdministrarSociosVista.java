@@ -3,6 +3,8 @@ package vistas;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
+
 import controladores.AdministrarSociosControlador;
 import modelos.Usuario;
 import principal.BD;
@@ -113,11 +115,23 @@ public class AdministrarSociosVista extends javax.swing.JFrame {
 
     public void controlador(ActionListener ctr) {
     	crearBoton.setActionCommand("CREAR_SOCIO");
+    	crearBoton.addActionListener(ctr);
     	modificarBoton.setActionCommand("MODIFICAR_SOCIO");
     	modificarBoton.addActionListener(ctr);
     	eliminarBoton.setActionCommand("ELIMINAR_SOCIO");
     	eliminarBoton.addActionListener(ctr);
-    }                                        
+    }
+    
+    public void eliminarUsuarioSeleccionado() {
+    	DefaultTableModel model =
+    			  (DefaultTableModel)tabla.getModel();
+    	int tupla = tabla.getSelectedRow();
+    	
+    	if(tupla!=-1) {
+    		
+    		model.removeRow(tupla);
+    	}
+    }
 
     /**
      * @param args the command line arguments
