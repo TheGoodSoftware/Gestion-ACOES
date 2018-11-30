@@ -48,21 +48,24 @@ public class CrearSocioVista extends javax.swing.JFrame {
         atrasBoton = new javax.swing.JButton();
         asociacionCampo = new javax.swing.JTextField();
         asociacionEtiqueta = new javax.swing.JLabel();
-        asociacionEtiqueta.setText("Asociacion");
+        asociacionEtiqueta.setText("Rol *");
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nombre");
         setName("nombre"); // NOI18N
         
         contrasenaCampo.setText("");
         
+        //cambiar
+        
+        
     
         
-        nombreEtiqueta.setText("Nombre");
+        nombreEtiqueta.setText("Nombre *");
 
-        apellidosEtiqueta.setText("Apellidos");
+        apellidosEtiqueta.setText("Apellidos *");
 
 
-        correoEtiqueta.setText("Correo electrónico");
+        correoEtiqueta.setText("Correo electrónico *");
 
         
         correoCampo.addActionListener(new java.awt.event.ActionListener() {
@@ -71,11 +74,11 @@ public class CrearSocioVista extends javax.swing.JFrame {
             }
         });
 
-        contrasenaEtiqueta.setText("Contraseña");
+        contrasenaEtiqueta.setText("Contraseña *");
 
        
 
-        rolEtiqueta.setText("Rol");
+        rolEtiqueta.setText("Asociación");
 
         creatBoton.setText("Añadir");
 
@@ -180,7 +183,13 @@ public class CrearSocioVista extends javax.swing.JFrame {
     public String getContrasenya() {
     	return new String(this.contrasenaCampo.getPassword());
     }
-    public Rol getRol() {
+    public Rol getRol(List<Rol> lista) {
+    	String nombreRol = (String)listaRoles.getSelectedItem();
+    	for(Rol r : lista) {
+    		if(r.getNombre().equals(nombreRol)) {
+    			return r;
+    		}
+    	}
     	return null;
     }
     public void insertarRoles(List<Rol> lista) {
