@@ -1,5 +1,6 @@
 package vistas;
 
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import controladores.CrearSocioControlador;
@@ -48,21 +49,24 @@ public class CrearSocioVista extends javax.swing.JFrame {
         atrasBoton = new javax.swing.JButton();
         asociacionCampo = new javax.swing.JTextField();
         asociacionEtiqueta = new javax.swing.JLabel();
-        asociacionEtiqueta.setText("Asociacion");
+        asociacionEtiqueta.setText("Rol *");
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nombre");
         setName("nombre"); // NOI18N
         
         contrasenaCampo.setText("");
         
+        //cambiar
+        
+        
     
         
-        nombreEtiqueta.setText("Nombre");
+        nombreEtiqueta.setText("Nombre *");
 
-        apellidosEtiqueta.setText("Apellidos");
+        apellidosEtiqueta.setText("Apellidos *");
 
 
-        correoEtiqueta.setText("Correo electrónico");
+        correoEtiqueta.setText("Correo electrónico *");
 
         
         correoCampo.addActionListener(new java.awt.event.ActionListener() {
@@ -71,11 +75,11 @@ public class CrearSocioVista extends javax.swing.JFrame {
             }
         });
 
-        contrasenaEtiqueta.setText("Contraseña");
+        contrasenaEtiqueta.setText("Contraseña *");
 
        
 
-        rolEtiqueta.setText("Rol");
+        rolEtiqueta.setText("Asociación");
 
         creatBoton.setText("Añadir");
 
@@ -160,12 +164,20 @@ public class CrearSocioVista extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     
-    public void Controlador(CrearSocioControlador ctr) {
+    public void Controlador(ActionListener ctr) {
     	creatBoton.addActionListener(ctr);
     	creatBoton.setActionCommand("ANADIR");
     }
+    /*
     public void Controlador(ModificarSocioControlador ctr) {
-    	
+    	creatBoton.addActionListener(ctr);
+    	creatBoton.setActionCommand("ANADIR");
+    }
+    */
+    public void setParametros(String nombre, String apellidos, String correo) {
+    	this.campoNombre.setText(nombre);
+    	this.apellidosCampo.setText(apellidos);
+    	this.correoCampo.setText(correo);
     }
     
     public String getNombre() {
@@ -180,7 +192,13 @@ public class CrearSocioVista extends javax.swing.JFrame {
     public String getContrasenya() {
     	return new String(this.contrasenaCampo.getPassword());
     }
-    public Rol getRol() {
+    public Rol getRol(List<Rol> lista) {
+    	String nombreRol = (String)listaRoles.getSelectedItem();
+    	for(Rol r : lista) {
+    		if(r.getNombre().equals(nombreRol)) {
+    			return r;
+    		}
+    	}
     	return null;
     }
     public void insertarRoles(List<Rol> lista) {

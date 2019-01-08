@@ -1,8 +1,15 @@
 package vistas;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
 
 import controladores.AdministrarSociosControlador;
+import modelos.Rol;
+import modelos.Usuario;
+import principal.BD;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -46,17 +53,19 @@ public class AdministrarSociosVista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        BD bd = new BD();
+        ArrayList<Usuario> usuarios = bd.getAllUsuarios();
+        Object[][] tableContent = new Object[50][4];
+        for(int i = 0; i < usuarios.size(); i++)
+        {
+            tableContent[i][0] = usuarios.get(i).getNombre();
+            tableContent[i][1] = usuarios.get(i).getApellidos();
+            tableContent[i][2] = usuarios.get(i).getE_mail();
+            tableContent[i][3] = usuarios.get(i).getRole().getNombre();
+        }
+
         tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
+            tableContent,
             new String [] {
                 "Nombre", "Apellidos", "Correo", "Rol"
             }
@@ -106,18 +115,46 @@ public class AdministrarSociosVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>                        
 
-<<<<<<< HEAD
-    public void controlador(ActionListener ctr) {    
-=======
     public void controlador(ActionListener ctr) {
-    	crearBoton.addActionListener(ctr);
->>>>>>> de32f33a52e1ee087a72dfa6981366555f106600
     	crearBoton.setActionCommand("CREAR_SOCIO");
+    	crearBoton.addActionListener(ctr);
     	modificarBoton.setActionCommand("MODIFICAR_SOCIO");
     	modificarBoton.addActionListener(ctr);
     	eliminarBoton.setActionCommand("ELIMINAR_SOCIO");
     	eliminarBoton.addActionListener(ctr);
-    }                                        
+    }
+    
+    public void eliminarUsuarioSeleccionado() {
+    	DefaultTableModel model =
+    			  (DefaultTableModel)tabla.getModel();
+    	int tupla = tabla.getSelectedRow();
+    	
+    	if(tupla!=-1) {
+    		
+    		model.removeRow(tupla);
+    	}
+    }
+    public String getNombreSeleccionado() {
+    	int tupla = tabla.getSelectedRow();
+    	return (String)tabla.getValueAt(tupla, 0);
+    	
+    }
+    public String getApellidosSeleccionado() {
+    	int tupla = tabla.getSelectedRow();
+    	return (String)tabla.getValueAt(tupla, 1);
+    	
+    }
+    public String getCorreoSeleccionado() {
+    	int tupla = tabla.getSelectedRow();
+    	return (String)tabla.getValueAt(tupla, 2);
+    	
+    }
+    public String getRolSeleccionado(List<Rol> listaRoles) {
+    	int tupla = tabla.getSelectedRow();
+    	return (String)tabla.getValueAt(tupla, 3);
+    	
+		
+    }
 
     /**
      * @param args the command line arguments

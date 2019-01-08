@@ -16,6 +16,7 @@ public class LoginModelo {
 			Object[] tupla = bd.Select("SELECT * FROM USUARIO U JOIN ROL R ON U.ROL_idRol = R.idRol WHERE U.Correo='" + email + "';").get(0);
 			if (tupla[1].equals(password)) {
 				usuario = bd.getSocio(email);
+				
 			} else
 				System.err.println("Contrasena no valida");
 		} catch(Exception e) {
