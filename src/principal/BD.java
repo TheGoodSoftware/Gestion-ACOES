@@ -73,7 +73,7 @@ public class BD {
 		{
 			Usuario u = null;
 			Statement stmt = con.createStatement();
-			ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO JOIN PERSONA ON USUARIO.idUsuario = PERSONA.idPersona");
+			ResultSet result = stmt.executeQuery("SELECT * FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona");
 			if(result.next()) {
 				u = new Usuario(
 						result.getString("Nombre"),
@@ -100,7 +100,7 @@ public class BD {
 		{
 			Rol r = null;
 			Statement stmt = con.createStatement();
-			ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO JOIN ROL ON USUARIO.ROL_idRol = ROL.idRol WHERE Correo = '" + e_mail + "'");
+			ResultSet result = stmt.executeQuery("SELECT * FROM usuario JOIN rol ON usuario.rol_idRol = rol.idRol WHERE Correo = '" + e_mail + "'");
 			if(result.next()) {
 				r = new Rol(
 						result.getString("Nombre"),
@@ -122,7 +122,7 @@ public class BD {
 		{
 			Statement stmt = con.createStatement();
 			ArrayList<Nino> apadrinados = new ArrayList<>();
-			ResultSet result = stmt.executeQuery("SELECT * FROM APADRINAR JOIN NINO ON APADRINAR.NINO_idNen = NINO.idNen JOIN USUARIO ON APADRINAR.USUARIO_idUsuario = USUARIO.idUsuario JOIN PERSONA P on NINO.idNen = P.idPersona WHERE Correo = '" + e_mail + "'");
+			ResultSet result = stmt.executeQuery("SELECT * FROM apadrinar JOIN nino ON apadrinar.nino_idNen = nino.idNen JOIN usuario ON apadrinar.usuario_idUsuario = usuario.idUsuario JOIN persona P on nino.idNen = P.idPersona WHERE Correo = '" + e_mail + "'");
 
 			Map<String, Integer> notas = new TreeMap<>();
 			Random rnd = new Random();
@@ -154,7 +154,7 @@ public class BD {
 		{
 			Statement stmt = con.createStatement();
 			ArrayList<Rol> roles = new ArrayList<>();
-			ResultSet result = stmt.executeQuery("SELECT * FROM ROL");
+			ResultSet result = stmt.executeQuery("SELECT * FROM rol");
 
 			while(result.next()) {
 				roles.add(new Rol(
@@ -177,9 +177,9 @@ public class BD {
 		try {
 			Statement stmt = con.createStatement();
 			
-			stmt.execute("INSERT INTO PERSONA(Nombre, Apellidos) VALUES ('"
+			stmt.execute("INSERT INTO persona(Nombre, Apellidos) VALUES ('"
 					+ u.getNombre() + "','" + u.getApellidos() + "')");
-			stmt.execute("INSERT INTO USUARIO(Contrasenya, Correo, ROL_idRol) VALUES ('"
+			stmt.execute("INSERT INTO usuario(Contrasenya, Correo, rol_idRol) VALUES ('"
 					+ password + "','" + u.getE_mail() + "'," + getRolIdDesdeNombre(u.getRole().getNombre()) + ")");
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
@@ -189,7 +189,7 @@ public class BD {
 	public void modificarUsuarioBaseDeDatos(Usuario u, String password) {
 		try {
 			Statement stmt = con.createStatement();
-			stmt.execute("UPDATE USUARIO JOIN PERSONA ON USUARIO.idPersona=PERSONA.idPersona SET Contrasenya='" + password + "', Correo='" + u.getE_mail()  + "', ROL_idRol=" + getRolIdDesdeNombre(u.getRole().getNombre()) + "" +
+			stmt.execute("UPDATE usuario JOIN persona ON usuario.idPersona=persona.idPersona SET Contrasenya='" + password + "', Correo='" + u.getE_mail()  + "', rol_idRol=" + getRolIdDesdeNombre(u.getRole().getNombre()) + "" +
 					", Nombre='" + u.getNombre() + "', Apellidos='" + u.getApellidos() + "') WHERE Correo='" + u.getE_mail() + "';");
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to update Usuario into database -> " + ex.getMessage());
@@ -199,7 +199,7 @@ public class BD {
 	public int getRolIdDesdeNombre(String nombreRol) {
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet result = stmt.executeQuery("SELECT * FROM ROL WHERE Nombre = '" + nombreRol + "'");
+			ResultSet result = stmt.executeQuery("SELECT * FROM rol WHERE Nombre = '" + nombreRol + "'");
 			if(result.next()) {
 				return result.getInt("idRol");
 			}
@@ -215,7 +215,7 @@ public class BD {
 		{
 			Statement stmt = con.createStatement();
 			ArrayList<Usuario> usuarios = new ArrayList<>();
-			ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO JOIN PERSONA ON USUARIO.idUsuario = PERSONA.idPersona");
+			ResultSet result = stmt.executeQuery("SELECT * FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona");
 
 			while(result.next()) {
 				usuarios.add(
