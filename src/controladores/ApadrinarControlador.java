@@ -12,6 +12,11 @@ public class ApadrinarControlador implements ActionListener {
 	
 	private ApadrinarVista vistaApadrinar;
 	private ApadrinarModelo modelo;
+	// Como hay que confirmar si ya se ha seleccionado antes apadrinar o desapadrinar
+	// he decidido guardar en la variable state el evento que ha sido pulsado antes
+	// otra opción es que si se ha pulsado por ejemplo el botón apadrinar se deshabilite el botón desapadrinar
+	// o se cambie a denegar apadrinamiento por ejemplo
+	private String state;
 	
 	public ApadrinarControlador(ApadrinarVista vista, ApadrinarModelo modelo) {
 		this.vistaApadrinar = vista;
@@ -25,8 +30,21 @@ public class ApadrinarControlador implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		String evento = e.getActionCommand();
+		switch(evento) {
+			case "APADRINAR" :;
+			break;
+			case "DESAPADRINAR" :;
+			break;
+			case "FILTRARNINO" :;
+			break;
+			case "FILTRARSOCIO" :;
+			break;
+			case "ATRAS" :;
+			break;
+			default :;
+			break;
+		}
 	}
 
 }

@@ -1,5 +1,11 @@
 package vistas;
 
+import java.awt.Color;
+import java.util.List;
+
+import javax.swing.JList;
+import javax.swing.ListModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -157,7 +163,51 @@ public class ApadrinarVista extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     public void controlador(controladores.ApadrinarControlador ctr) {
-    	
+    	botonApadrinar.addActionListener(ctr);
+    	botonApadrinar.setActionCommand("APADRINAR");
+    	botonDesapadrinar.addActionListener(ctr);
+    	botonDesapadrinar.setActionCommand("DESAPADRINAR");
+    	campoBusquedaNino.addActionListener(ctr);
+    	campoBusquedaNino.setActionCommand("FILTRARNINO");
+    	campoBusquedaSocio.addActionListener(ctr);
+    	campoBusquedaNino.setActionCommand("FILTRARSOCIO");
+    	botonAtras.addActionListener(ctr);
+    	botonAtras.setActionCommand("ATRAS");
+    }
+    
+    public void actualizarNino(String[] ninos) {
+    	listaNinos = new JList<String>(ninos);
+    	// Duda de si hay que actualizar la lista
+    }
+    
+    public void actualizarSocio(String[] socios) {
+    	listaSocios = new JList<String>(socios);
+    }
+    
+    public String getNinoSeleccionado() {
+    	return listaSocios.getSelectedValue();
+    }
+    
+    public String getSocioSeleccionado() {
+    	return listaNinos.getSelectedValue();
+    }
+    
+    public void setMensajeExito(String msj) {
+    	textoMensaje.setText(msj);
+    	textoMensaje.setForeground(Color.GREEN);
+    }
+    
+    public void setMensajeError(String msj) {
+    	textoMensaje.setText(msj);
+    	textoMensaje.setForeground(Color.RED);
+    }
+    // No estoy seguro de si pasarle el mensaje o no
+    public void actualizarBotonApadrinar(String msj) {
+    	botonApadrinar.setText(msj);
+    }
+    
+    public void actualizarBotonDesapadrinar(String msj) {
+    	botonDesapadrinar.setText(msj);
     }
 
     /**
