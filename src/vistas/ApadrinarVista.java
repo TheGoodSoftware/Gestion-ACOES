@@ -184,12 +184,16 @@ public class ApadrinarVista extends javax.swing.JFrame {
     	listaSocios = new JList<String>(socios);
     }
     
-    public String getNinoSeleccionado() {
-    	return listaSocios.getSelectedValue();
+    public int getNinoSeleccionado() {
+    	String nino = listaNinos.getSelectedValue();
+    	String[] partes = nino.split(" ");
+    	return Integer.parseInt(partes[0]);
     }
     
-    public String getSocioSeleccionado() {
-    	return listaNinos.getSelectedValue();
+    public int getSocioSeleccionado() {
+    	String socio = listaSocios.getSelectedValue();
+    	String[] partes = socio.split(" ");
+    	return Integer.parseInt(partes[0]);
     }
     
     public void setMensajeExito(String msj) {
@@ -201,13 +205,50 @@ public class ApadrinarVista extends javax.swing.JFrame {
     	textoMensaje.setText(msj);
     	textoMensaje.setForeground(Color.RED);
     }
-    // No estoy seguro de si pasarle el mensaje o no
     public void actualizarBotonApadrinar(String msj) {
     	botonApadrinar.setText(msj);
     }
     
     public void actualizarBotonDesapadrinar(String msj) {
     	botonDesapadrinar.setText(msj);
+    }
+    
+    public void deshabilitarApadrinar() {
+    	botonApadrinar.setEnabled(false);
+    }
+    
+    public void deshabilitarDesapadrinar() {
+    	botonDesapadrinar.setEnabled(false);
+    }
+    
+    public void habilitarApadrinar() {
+    	botonApadrinar.setEnabled(true);
+    }
+    
+    public void habilitarDesapadrinar() {
+    	botonDesapadrinar.setEnabled(true);
+    
+    }
+    
+    public void deshabilitarCamposTexto() {
+    	campoBusquedaNino.setEnabled(false);
+    	campoBusquedaSocio.setEnabled(false);
+    	campoBusquedaNino.setEditable(false);
+    	campoBusquedaSocio.setEditable(false);
+    }
+    public void habilitarCamposTexto() {
+    	campoBusquedaNino.setEnabled(true);
+    	campoBusquedaSocio.setEnabled(true);
+    	campoBusquedaNino.setEditable(true);
+    	campoBusquedaSocio.setEditable(true);
+    }
+    
+    public String getFiltroSocio() {
+    	return campoBusquedaSocio.getText();
+    }
+    
+    public String getFiltroNino() {
+    	return campoBusquedaNino.getText();
     }
 
     /**

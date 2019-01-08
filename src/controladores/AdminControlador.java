@@ -38,7 +38,7 @@ public class AdminControlador implements ActionListener {
        case "APADRINAR":
     	   ApadrinarVista vistaApadrinar = new ApadrinarVista();
     	   ApadrinarModelo modeloApadrinar = new ApadrinarModelo();
-    	   ApadrinarControlador ctr = new ApadrinarControlador(vistaApadrinar, modeloApadrinar);
+    	   ApadrinarControlador ctr = new ApadrinarControlador(vistaApadrinar, modeloApadrinar, this.usuario);
     	   ctr.iniciarVista();
     	   vistaAdmin.setVisible(false);
     	   break;
