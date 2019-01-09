@@ -1,6 +1,7 @@
 package vistas;
 
 import java.awt.Color;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.JList;
@@ -47,6 +48,8 @@ public class ApadrinarVista extends javax.swing.JFrame {
         campoBusquedaNino = new javax.swing.JTextField();
         campoBusquedaSocio = new javax.swing.JTextField();
         botonAtras = new javax.swing.JButton();
+        botonMostrarApadrinados = new javax.swing.JButton();
+        botonMostrarPadrinos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +77,9 @@ public class ApadrinarVista extends javax.swing.JFrame {
         
 
         botonDesapadrinar.setText("Desapadrinar");
+        
+        botonMostrarApadrinados.setText("Mostrar apadrinados");
+        botonMostrarPadrinos.setText("Mostrar padrinos");
 
 
         textoMensaje.setText("");
@@ -102,7 +108,9 @@ public class ApadrinarVista extends javax.swing.JFrame {
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(botonApadrinar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonDesapadrinar, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                            .addComponent(botonDesapadrinar, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                            .addComponent(botonMostrarApadrinados, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                            .addComponent(botonMostrarPadrinos, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -152,8 +160,12 @@ public class ApadrinarVista extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(92, 92, 92)
                                 .addComponent(botonApadrinar)
-                                .addGap(39, 39, 39)
-                                .addComponent(botonDesapadrinar)))
+                                .addGap(20, 20, 20)
+                                .addComponent(botonDesapadrinar)
+                                .addGap(20,20,20)
+                                .addComponent(botonMostrarApadrinados)
+                                .addGap(20,20,20)
+                                .addComponent(botonMostrarPadrinos)))
                         .addGap(12, 12, 12)
                         .addComponent(textoMensaje)))
                 .addGap(39, 39, 39))
@@ -173,6 +185,10 @@ public class ApadrinarVista extends javax.swing.JFrame {
     	campoBusquedaSocio.setActionCommand("FILTRARSOCIO");
     	botonAtras.addActionListener(ctr);
     	botonAtras.setActionCommand("ATRAS");
+    	botonMostrarApadrinados.addActionListener(ctr);
+    	botonMostrarApadrinados.setActionCommand("MOSTRARAPADRINADOS");
+    	botonMostrarPadrinos.addActionListener(ctr);
+    	botonMostrarPadrinos.setActionCommand("MOSTRARPADRINOS");
     }
     
     public void actualizarNino(String[] ninos) {
@@ -228,6 +244,16 @@ public class ApadrinarVista extends javax.swing.JFrame {
     public void habilitarDesapadrinar() {
     	botonDesapadrinar.setEnabled(true);
     
+    }
+    
+    public void deshabilitarMostrar() {
+    	botonMostrarApadrinados.setEnabled(false);
+    	botonMostrarPadrinos.setEnabled(false);
+    }
+    
+    public void habilitarMostrar() {
+    	botonMostrarApadrinados.setEnabled(true);
+    	botonMostrarPadrinos.setEnabled(true);
     }
     
     public void deshabilitarCamposTexto() {
@@ -290,6 +316,8 @@ public class ApadrinarVista extends javax.swing.JFrame {
     private javax.swing.JButton botonApadrinar;
     private javax.swing.JButton botonDesapadrinar;
     private javax.swing.JButton botonAtras;
+    private javax.swing.JButton botonMostrarApadrinados;
+    private javax.swing.JButton botonMostrarPadrinos;
     private javax.swing.JLabel textoSocios;
     private javax.swing.JLabel textoNinos;
     private javax.swing.JLabel textoGestionApadrinamientos;

@@ -122,4 +122,56 @@ public class ApadrinarModelo {
 		}
 		return null;
 	}
+
+	public String[] getApadrinados(int socioSeleccionado) {
+		List<Integer> apadrinados = Apadrinar.getApadrinados(socioSeleccionado);
+		List<String> resultado = new ArrayList<String>();
+		BD miBD = new BD();
+		StringBuilder sb = new StringBuilder();
+		for(Integer apadrinado : apadrinados) {
+			//chapucilla, arreglar
+			boolean encontrado = false;
+			int contador=0;
+			String cadena = "";
+				while(!encontrado) {
+					if(ninos[contador].contains(apadrinado.toString())) {
+						cadena = ninos[contador];
+						encontrado = true;
+					}
+					contador++;
+				}
+		/*		Nino u = miBD.getNino(apadrinado);
+				sb.append(apadrinado);
+				sb.append(" ");
+				sb.append(u.getNombreCompleto());
+				*/
+				sb.append(cadena);
+				resultado.add(sb.toString());
+				sb = new StringBuilder();
+		}
+
+		return resultado.toArray(new String[resultado.size()]);
+	}
+
+	public String[] getPadrinos(int ninoSeleccionado) {
+		List<Integer> padrinos = Apadrinar.getPadrinos(ninoSeleccionado);
+		List<String> resultado = new ArrayList<String>();
+		BD miBD = new BD();
+		StringBuilder sb = new StringBuilder();
+		try {
+		for(Integer padrino : padrinos) {
+			
+				Usuario u = miBD.getSocio(padrino);
+				sb.append(padrino);
+				sb.append(" ");
+				sb.append(u.getNombreCompleto());
+				resultado.add(sb.toString());
+				sb = new StringBuilder();
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return resultado.toArray(new String[resultado.size()]);
+		
+	}
 }

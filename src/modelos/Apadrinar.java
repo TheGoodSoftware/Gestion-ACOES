@@ -1,5 +1,6 @@
 package modelos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import principal.BD;
@@ -39,6 +40,25 @@ public class Apadrinar {
 		BD miBD = new BD();
 		return miBD.getApadrinamientos();
 	}
+	public static List<Integer> getPadrinos(int nino)
+	{
+		List<Integer> lista = new ArrayList<Integer>();
+		for(Apadrinar apa : getApadrinamientos()) {
+			if(apa.getNino()==nino && apa.getEstado()) {
+				lista.add(apa.getPadrino());
+			}
+		}
+		return lista;
+	}
+	
+	public static List<Integer> getApadrinados(int socio){
+		List<Integer> lista = new ArrayList<Integer>();
+		for(Apadrinar apa : getApadrinamientos()) {
+			if(apa.getPadrino()==socio && apa.getEstado()) {
+				lista.add(apa.getNino());
+			}
+		}
+		return lista;	}
 
 
 }
