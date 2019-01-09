@@ -1,5 +1,11 @@
 package vistas;
 
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Random;
+
+import controladores.GestionNinosControlador;
+import modelos.Nino;
 
 public class GestionNinosVista extends javax.swing.JFrame {
 
@@ -62,7 +68,7 @@ public class GestionNinosVista extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Fecha Nac.", "Sexo ", "Identidad", "CCJ", "Colegio", "Becado"
+                "Nombre", "Edad", "Sexo ", "Identidad", "CCJ", "Colegio", "Becado"
             }
         ) {
             Class[] types = new Class [] {
@@ -225,20 +231,20 @@ public class GestionNinosVista extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(gestionSociosNinos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionNinosVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(gestionSociosNinos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionNinosVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(gestionSociosNinos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionNinosVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(gestionSociosNinos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestionNinosVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new gestionSociosNinos().setVisible(true);
+                new GestionNinosVista().setVisible(true);
             }
         });
     }
@@ -266,5 +272,35 @@ public class GestionNinosVista extends javax.swing.JFrame {
     private javax.swing.JTextField sexoCampo;
     private javax.swing.JLabel sexoTitulo;
     private javax.swing.JScrollPane tablaNinos;
+    
     // End of variables declaration                   
+	public void controlador(ActionListener ctr) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void cargarTabla(List<Nino> allNinos) {
+		Object[][] tableContent = new Object[200][7];
+		String[] identidadArtificial = {"256782189A","224782419B", "236782349B", "257122419D", "25678GD19F", "26782419R" };
+		String[] respuesta = {"Sí","No"};
+		String[] colegios = {"Loreto", "Santa Fe"};
+		Random rnd = new Random();
+		for(int i = 0; i< allNinos.size();i++) {
+			tableContent[i][0] = allNinos.get(i).getNombre()+" "+allNinos.get(i).getApellidos();
+			tableContent[i][1] = allNinos.get(i).getEdad();
+			tableContent[i][2] = "V"; //CAMBIAR CUANDO SE MODIFIQUE BBDD
+			tableContent[i][3] = identidadArtificial[i];
+			tableContent[i][4] = respuesta[rnd.nextInt(2)];
+			tableContent[i][5] = colegios[rnd.nextInt(2)];
+			tableContent[i][6] = respuesta[rnd.nextInt(2)];
+		}
+		
+		jTable1.setModel(new javax.swing.table.DefaultTableModel(
+				tableContent,
+				new String[] {
+					"Nombre", "Edad", "Sexo ", "Identidad", "CCJ", "Colegio", "Becado"	
+				}
+				));
+		
+	}
 }

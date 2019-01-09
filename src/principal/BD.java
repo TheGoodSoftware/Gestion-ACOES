@@ -106,7 +106,28 @@ public class BD {
 			return getSocio(e_mail);
 	}
 	
+	public List<Nino> getAllNinos() throws SQLException{
+		List<Nino> ninios = new ArrayList<>();
+		Statement stmt = con.createStatement();
+		ResultSet result = stmt.executeQuery("SELECT * FROM nino JOIN persona ON nino.idNen = persona.idPersona");
+		Map<String, Integer> notas = new TreeMap<>();
+		while(result.next()) {
+			ninios.add(new Nino(
+					result.getInt("idNen"),
+					result.getString("Nombre"),
+					result.getString("Apellidos"),
+					result.getString("Direccion"),
+					result.getString("Pueblo"),
+					result.getInt("Edad"),
+					notas
+			));
+		}
+		
+		return ninios;
+	}
+	
 	public Nino getNino(int id) throws SQLException{
+		try {
 		Nino nino = null;
 		Statement stmt = con.createStatement();
 		ResultSet result = stmt.executeQuery("SELECT * FROM nino JOIN persona ON nino.idNen = persona.idPersona where idNen = "+id);
@@ -121,6 +142,11 @@ public class BD {
 				notas
 		);
 		return nino;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Ninos + -> Msg: "+ex);
+		}
 	}
 	
 	

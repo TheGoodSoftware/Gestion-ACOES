@@ -11,21 +11,18 @@ import vistas.CrearSocioVista;
 public class ModificarSocioControlador implements ActionListener{
 	private CrearSocioVista vista;
 	private CrearSocioModelo modelo;
-	
 	private String nombre;
 	private String apellidos;
 	private String correo;
 	private String rol;
-	private int id;
 	
-	public ModificarSocioControlador(CrearSocioVista vista, CrearSocioModelo modelo,int id, String nombre, String apellidos, String correo, String rol) {
+	public ModificarSocioControlador(CrearSocioVista vista, CrearSocioModelo modelo, String nombre, String apellidos, String correo, String rol) {
 		this.vista = vista;
 		this.modelo = modelo;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
 		this.rol = rol;
-		this.id = id;
 	}
 	
 	public void iniciarVista() {
@@ -56,8 +53,9 @@ public class ModificarSocioControlador implements ActionListener{
 				
 			}
 			else {
+				System.out.println("hol");
 				//consulta
-				bd.modificarUsuarioBaseDeDatos(new Usuario(this.id, vista.getNombre(), vista.getApellidos(), "","",vista.getCorreo(), null, vista.getRol(bd.getAllRoles())),vista.getContrasenya());
+				bd.modificarUsuarioBaseDeDatos(new Usuario(vista.getNombre(), vista.getApellidos(), "","",vista.getCorreo(), null, vista.getRol(bd.getAllRoles())),vista.getContrasenya());
 			}
 			
 		}else if(e.getActionCommand().equals("ATRAS")) {

@@ -2,6 +2,8 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+
 import vistas.*;
 import modelos.*;
 import principal.BD;
@@ -73,6 +75,18 @@ public class AdminControlador implements ActionListener {
     		}
     		GestionEconomicaVista economiaVista = new GestionEconomicaVista(valores);
     		economiaVista.setVisible(true);
+    		break;
+    	case "GESTION_NINOS":
+    		GestionNinosControlador gesNinosCtr = new GestionNinosControlador();
+    		vistaAdmin.setVisible(false);
+		try {
+			gesNinosCtr.iniciarVista();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			//e1.printStackTrace();
+		}
+    		break;
+    		
        }
     }
 }
