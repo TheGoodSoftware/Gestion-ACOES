@@ -214,6 +214,7 @@ public class GestionNinosVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                        
 
+<<<<<<< HEAD
     /**
      * @param args the command line arguments
      */
@@ -249,6 +250,8 @@ public class GestionNinosVista extends javax.swing.JFrame {
         });
     }
 
+=======
+>>>>>>> cb4b871467fa61d5d4f2699d0b50aa2b6e0511e1
     // Variables declaration - do not modify                     
     private javax.swing.JButton actualizarBoton;
     private javax.swing.JButton atrasBoton;
