@@ -74,9 +74,10 @@ public class BD {
 		{
 			Usuario u = null;
 			Statement stmt = con.createStatement();
-			ResultSet result = stmt.executeQuery("SELECT * FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona");
+			ResultSet result = stmt.executeQuery("SELECT * FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona where e_mail = "+e_mail);
 			if(result.next()) {
 				u = new Usuario(
+						result.getInt("idUsuario"),
 						result.getString("Nombre"),
 						result.getString("Apellidos"),
 						result.getString("Direccion"),
@@ -95,6 +96,34 @@ public class BD {
 			throw new Error("ERROR. Trying to getSocio -> " + ex.getMessage());
 		}
 	}
+	
+	public Usuario getSocio(int id) throws SQLException {
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT Correo FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona where idUsuario = "+id);
+			String e_mail = result.getString("Correo");
+			result.close();
+			stmt.close();
+			return getSocio(e_mail);
+	}
+	
+	public Nino getNino(int id) throws SQLException{
+		Nino nino = null;
+		Statement stmt = con.createStatement();
+		ResultSet result = stmt.executeQuery("SELECT * FROM nino JOIN persona ON nino.idNen = persona.idPersona where idNen = "+id);
+		Map<String, Integer> notas = new TreeMap<>();
+		nino = new Nino(
+				result.getInt("idNen"),
+				result.getString("Nombre"),
+				result.getString("Apellidos"),
+				result.getString("Direccion"),
+				result.getString("Pueblo"),
+				result.getInt("Edad"),
+				notas
+		);
+		return nino;
+	}
+	
+	
 
 	public Rol getRol(String e_mail) {
 		try
@@ -132,6 +161,7 @@ public class BD {
 
 			while(result.next()) {
 				apadrinados.add(new Nino(
+						result.getInt("idNen"),
 						result.getString("Nombre"),
 						result.getString("Apellidos"),
 						result.getString("Direccion"),
@@ -180,8 +210,8 @@ public class BD {
 			
 			stmt.execute("INSERT INTO persona(Nombre, Apellidos) VALUES ('"
 					+ u.getNombre() + "','" + u.getApellidos() + "')");
-			stmt.execute("INSERT INTO usuario(Contrasenya, Correo, rol_idRol) VALUES ('"
-					+ password + "','" + u.getE_mail() + "'," + getRolIdDesdeNombre(u.getRole().getNombre()) + ")");
+			stmt.execute("INSERT INTO usuario(Contrasenya, Correo, rol_idRol, idUsuario) VALUES ('"
+					+ password + "','" + u.getE_mail() + "'," + getRolIdDesdeNombre(u.getRole().getNombre()) +"',"+u.getID() +")");
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
 		}
@@ -221,6 +251,7 @@ public class BD {
 			while(result.next()) {
 				usuarios.add(
 						new Usuario(
+							result.getInt("idUsuario"),
 							result.getString("Nombre"),
 							result.getString("Apellidos"),
 							"",
@@ -258,6 +289,7 @@ public class BD {
 								result.getString("Moneda"),
 								result.getString("Descripcion"),
 								new Usuario(
+										result.getInt("idUsuario"),
 										result.getString("Nombre"),
 										result.getString("Apellidos"),
 										null,
@@ -283,6 +315,7 @@ public class BD {
 								result.getString("Moneda"),
 								result.getString("Descripcion"),
 								new Usuario(
+										result.getInt("idUsuario"),
 										result.getString("Nombre"),
 										result.getString("Apellidos"),
 										null,

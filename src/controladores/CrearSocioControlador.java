@@ -46,7 +46,8 @@ public class CrearSocioControlador implements ActionListener{
 		}
 		else {
 			//consulta
-			bd.insertarUsuarioBaseDeDatos(new Usuario(vista.getNombre(), vista.getApellidos(), "","",vista.getCorreo(), null, vista.getRol(bd.getAllRoles())),vista.getContrasenya());
+		// Hay que tocarlo
+		//	bd.insertarUsuarioBaseDeDatos(new Usuario(vista.getNombre(), vista.getApellidos(), "","",vista.getCorreo(), null, vista.getRol(bd.getAllRoles())),vista.getContrasenya());
 		}
 		
 	}else if(e.getActionCommand().equals("ATRAS")) {

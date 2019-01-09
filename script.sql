@@ -1,4 +1,2 @@
-Usage: mysqldump [OPTIONS] database [tables]
-OR     mysqldump [OPTIONS] --databases [OPTIONS] DB1 [DB2 DB3...]
-OR     mysqldump [OPTIONS] --all-databases [OPTIONS]
-For more options, use mysqldump --help
+use mydb;
+SELECT * FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersonausuariousuario

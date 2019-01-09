@@ -3,12 +3,18 @@ package modelos;
 public class Persona {
 
     private String nombre, apellidos, direccion, pueblo;
+    private int id;
 
-    public Persona(String nombre, String apellidos, String direccion, String pueblo) {
+    public Persona(int id, String nombre, String apellidos, String direccion, String pueblo) {
+    	this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.direccion = direccion;
         this.pueblo = pueblo;
+    }
+    
+    public int getID() {
+    	return id;
     }
 
     public String getNombre() {
