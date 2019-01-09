@@ -26,7 +26,6 @@ public class ApadrinarModelo {
 				encontrado = true;
 				if(apa.getEstado()==false) {
 					realizado = true;
-				} else {
 					miBD.activarApadrinamiento(apa.getPadrino(), apa.getNino());
 					apa.activar();
 				}
@@ -99,7 +98,6 @@ public class ApadrinarModelo {
 			socios.add(sb.toString());
 			sb = new StringBuilder();
 		}
-		System.out.println(socios.toString());
 		return socios.toArray(new String[socios.size()]);
 	}
 	public static String[] getNinos() {
@@ -117,7 +115,6 @@ public class ApadrinarModelo {
 				ninos.add(sb.toString());
 				sb = new StringBuilder();
 			}
-			System.out.println(ninos.toString());
 			return ninos.toArray(new String[ninos.size()]);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

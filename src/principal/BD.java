@@ -443,18 +443,20 @@ public class BD {
 		System.out.println(idPadrino);
 		System.out.println(idNino);
 		System.out.println("insertar");
-			Statement stmt = con.createStatement();
+		Statement stmt = con.createStatement();
 			
-			stmt.executeQuery("INSERT INTO apadrinar(NINO_idNen, USUARIO_idUsuario, Activo) VALUES("+
-																									idNino+","+
-																									idPadrino+","+
-																									1+")");
+		stmt.execute("INSERT INTO apadrinar(NINO_idNen, USUARIO_idUsuario, Activo) VALUES("+
+																							idNino+","+
+																							idPadrino+","+
+																							1+")");
+		stmt.close();
 	}
 
 	public void activarApadrinamiento(int idPadrino, int idNino) {
 		try {
 			Statement stmt = con.createStatement();
-			stmt.executeQuery("UPDATE apadrinar SET Activo=1 where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
+			stmt.execute("UPDATE apadrinar SET Activo=1 where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
+			stmt.close();
 		} catch (SQLException e) {
 			System.err.println("ERROR. Trying to activate apadrinamiento");
 		}
@@ -464,7 +466,7 @@ public class BD {
 	public void borrarApadrinamiento(int idPadrino, int idNino) throws SQLException {
 			Statement stmt = con.createStatement();
 			System.out.println("feo");
-			stmt.executeQuery("UPDATE apadrinar SET Activo=0 where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
-
+			stmt.execute("UPDATE apadrinar SET Activo=0 where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
+			stmt.close();
 	}
 }

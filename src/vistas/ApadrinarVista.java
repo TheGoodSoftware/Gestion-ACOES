@@ -76,7 +76,7 @@ public class ApadrinarVista extends javax.swing.JFrame {
         botonDesapadrinar.setText("Desapadrinar");
 
 
-        textoMensaje.setText("Etiqueta de fin de operación");
+        textoMensaje.setText("");
 
         campoBusquedaNino.setText("");
 
