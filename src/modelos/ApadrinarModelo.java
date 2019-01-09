@@ -2,6 +2,7 @@ package modelos;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import principal.BD;
 
@@ -70,19 +71,26 @@ public class ApadrinarModelo {
 		return socios.toArray(new String[socios.size()]);
 	}
 	public static String[] getNinos() {
-		ArrayList<String> ninos = new ArrayList<String>();
-		BD miBD = new BD();
-		ArrayList<Nino> arr = miBD.getAllNinos();
-		StringBuilder sb = new StringBuilder();
-		for(Nino us : arr) {
+		try {
+			ArrayList<String> ninos = new ArrayList<String>();
+			BD miBD = new BD();
+			List<Nino> arr;
+			arr = miBD.getAllNinos();
+			StringBuilder sb = new StringBuilder();
+			for(Nino us : arr) {
 
-			sb.append(us.getID());
-			sb.append(" ");
-			sb.append(us.getNombreCompleto());
-			ninos.add(sb.toString());
-			sb = new StringBuilder();
+				sb.append(us.getID());
+				sb.append(" ");
+				sb.append(us.getNombreCompleto());
+				ninos.add(sb.toString());
+				sb = new StringBuilder();
+			}
+			System.out.println(ninos.toString());
+			return ninos.toArray(new String[ninos.size()]);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		System.out.println(ninos.toString());
-		return ninos.toArray(new String[ninos.size()]);
+		return null;
 	}
 }

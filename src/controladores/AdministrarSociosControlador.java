@@ -42,6 +42,10 @@ public class AdministrarSociosControlador implements ActionListener{
 	     //   creaSocioVista.Controlador(creaSocioCtr);
 	        vistaAdmin.setVisible(false);
 	       // creaSocioCtr.iniciarVista();
+	        //ModificarSocioControlador creaSocioCtr = new ModificarSocioControlador(creaSocioVista, creaSocioModelo, vistaAdmin.getNombreSeleccionado(), vistaAdmin.getApellidosSeleccionado(), vistaAdmin.getCorreoSeleccionado(), vistaAdmin.getRolSeleccionado(bd.getAllRoles()));
+	        //creaSocioVista.Controlador(creaSocioCtr);
+	        vistaAdmin.setVisible(false);
+	        //creaSocioCtr.iniciarVista();
 		} else if(e.getActionCommand().equals("ELIMINAR_SOCIO")) {
 			vistaAdmin.eliminarUsuarioSeleccionado();
 		}

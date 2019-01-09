@@ -16,5 +16,4 @@ public class App {
 		ctr.iniciarVista();
 
 	}
-
 }
