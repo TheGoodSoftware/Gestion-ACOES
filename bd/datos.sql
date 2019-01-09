@@ -46,8 +46,21 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.nino (idNen, Edad, Notas, PROYECTO_idProy) VALUES (473829, 9, '8', 101);
-INSERT INTO mydb.nino (idNen, Edad, Notas, PROYECTO_idProy) VALUES (43644984, 10, '3', 101);
+INSERT INTO mydb.nino (idNen, Edad, PROYECTO_idProy) VALUES (473829, 9, 101);
+INSERT INTO mydb.nino (idNen, Edad, PROYECTO_idProy) VALUES (43644984, 10, 101);
+
+COMMIT;
+
+-- -----------------------------------------------------
+-- Data for table mydb.notas
+-- -----------------------------------------------------
+START TRANSACTION;
+USE mydb;
+INSERT INTO mydb.notas (idNotasNen, Calificacion, Curso, nino_idNen) VALUES (1, 9, 'Primero', 473829);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, Curso, nino_idNen) VALUES (2, 7, 'Segundo', 473829);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, Curso, nino_idNen) VALUES (3, 10, 'Segundo', 43644984);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, Curso, nino_idNen) VALUES (4, 4, 'Tercero', 43644984);
+
 
 COMMIT;
 
@@ -129,7 +142,7 @@ COMMIT;
 START TRANSACTION;
 USE mydb;
 INSERT INTO mydb.objeto (idObjeto, Descripcion, Pais, Localizacion, CONTENEDOR_idCont, USUARIO_idUsuario) VALUES (26332, 'Objeto1', 'Espana', 'Antequera', 12345, 1001);
-INSERT INTO mydb.objecto (idObjeto, Descripcion, Pais, Localizacion, CONTENEDOR_idCont, USUARIO_idUsuario) VALUES (26484, 'Objeto2', 'Honduras', 'Jret', 5423, 1000);
+INSERT INTO mydb.objeto (idObjeto, Descripcion, Pais, Localizacion, CONTENEDOR_idCont, USUARIO_idUsuario) VALUES (26484, 'Objeto2', 'Honduras', 'Jret', 12345, 1000);
 
 COMMIT;
 
