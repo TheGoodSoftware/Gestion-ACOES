@@ -17,21 +17,53 @@ public class ApadrinarModelo {
 
 	//Devuelve true si la operación se ha realizado con éxito
 	public boolean Apadrinar(int socioID, int ninoID) {
-		//TODO
-		try {
-
-			BD miBD = new BD();
-			miBD.getSocio(socioID);
-			miBD.getNino(ninoID);
-		} catch (SQLException e) {
+		BD miBD = new BD();
+		List<Apadrinar> apadrinamientos = miBD.getApadrinamientos();
+		boolean encontrado = false;
+		boolean realizado = false;
+		for(Apadrinar apa: apadrinamientos) {
+			if(apa.getNino()==ninoID && apa.getPadrino()==socioID) {
+				encontrado = true;
+				if(apa.getEstado()==false) {
+					realizado = true;
+				} else {
+					miBD.activarApadrinamiento(apa.getPadrino(), apa.getNino());
+					apa.activar();
+				}
+			}
+		}
+		if(!encontrado) {
+			try {
+				miBD.insertarApadrinamiento(socioID, ninoID);
+			} catch (SQLException e) {
+				return false;
+			}
+		}else if(encontrado && !realizado) {
 			return false;
 		}
 		return true;
 	}
 	// Devuelve true si la operación se ha realizado con éxito
 	public boolean Desapadrinar(int socioID, int ninoID) {
-		//TODO
-		return true;
+		BD miBD = new BD();
+		List<Apadrinar> apadrinamientos = miBD.getApadrinamientos();
+		boolean realizado = false;
+		for(Apadrinar apa: apadrinamientos) {
+			if(apa.getNino()==ninoID && apa.getPadrino()==socioID) {
+				if(apa.getEstado()==true) {
+					realizado = true;
+					try {
+						miBD.borrarApadrinamiento(socioID, ninoID);
+						apa.borrar();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						realizado = false;
+					}
+					
+				}
+			}
+		}
+		return realizado;
 	}
 	
 	public String[] filtrarSocios(String nombre) {
