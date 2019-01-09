@@ -442,7 +442,7 @@ public class BD {
 		// TODO Auto-generated method stub
 		System.out.println(idPadrino);
 		System.out.println(idNino);
-		System.out.println("insertar");
+
 		Statement stmt = con.createStatement();
 			
 		stmt.execute("INSERT INTO apadrinar(NINO_idNen, USUARIO_idUsuario, Activo) VALUES("+
@@ -465,7 +465,6 @@ public class BD {
 	
 	public void borrarApadrinamiento(int idPadrino, int idNino) throws SQLException {
 			Statement stmt = con.createStatement();
-			System.out.println("feo");
 			stmt.execute("UPDATE apadrinar SET Activo=0 where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
 			stmt.close();
 	}
