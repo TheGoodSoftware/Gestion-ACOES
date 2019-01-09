@@ -1,5 +1,11 @@
 package vistas;
 
+import java.awt.Color;
+import java.util.List;
+
+import javax.swing.JList;
+import javax.swing.ListModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -157,7 +163,92 @@ public class ApadrinarVista extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     public void controlador(controladores.ApadrinarControlador ctr) {
-    	
+    	botonApadrinar.addActionListener(ctr);
+    	botonApadrinar.setActionCommand("APADRINAR");
+    	botonDesapadrinar.addActionListener(ctr);
+    	botonDesapadrinar.setActionCommand("DESAPADRINAR");
+    	campoBusquedaNino.addActionListener(ctr);
+    	campoBusquedaNino.setActionCommand("FILTRARNINO");
+    	campoBusquedaSocio.addActionListener(ctr);
+    	campoBusquedaNino.setActionCommand("FILTRARSOCIO");
+    	botonAtras.addActionListener(ctr);
+    	botonAtras.setActionCommand("ATRAS");
+    }
+    
+    public void actualizarNino(String[] ninos) {
+    	listaNinos = new JList<String>(ninos);
+    	// Duda de si hay que actualizar la lista
+    }
+    
+    public void actualizarSocio(String[] socios) {
+    	listaSocios = new JList<String>(socios);
+    }
+    
+    public int getNinoSeleccionado() {
+    	String nino = listaNinos.getSelectedValue();
+    	String[] partes = nino.split(" ");
+    	return Integer.parseInt(partes[0]);
+    }
+    
+    public int getSocioSeleccionado() {
+    	String socio = listaSocios.getSelectedValue();
+    	String[] partes = socio.split(" ");
+    	return Integer.parseInt(partes[0]);
+    }
+    
+    public void setMensajeExito(String msj) {
+    	textoMensaje.setText(msj);
+    	textoMensaje.setForeground(Color.GREEN);
+    }
+    
+    public void setMensajeError(String msj) {
+    	textoMensaje.setText(msj);
+    	textoMensaje.setForeground(Color.RED);
+    }
+    public void actualizarBotonApadrinar(String msj) {
+    	botonApadrinar.setText(msj);
+    }
+    
+    public void actualizarBotonDesapadrinar(String msj) {
+    	botonDesapadrinar.setText(msj);
+    }
+    
+    public void deshabilitarApadrinar() {
+    	botonApadrinar.setEnabled(false);
+    }
+    
+    public void deshabilitarDesapadrinar() {
+    	botonDesapadrinar.setEnabled(false);
+    }
+    
+    public void habilitarApadrinar() {
+    	botonApadrinar.setEnabled(true);
+    }
+    
+    public void habilitarDesapadrinar() {
+    	botonDesapadrinar.setEnabled(true);
+    
+    }
+    
+    public void deshabilitarCamposTexto() {
+    	campoBusquedaNino.setEnabled(false);
+    	campoBusquedaSocio.setEnabled(false);
+    	campoBusquedaNino.setEditable(false);
+    	campoBusquedaSocio.setEditable(false);
+    }
+    public void habilitarCamposTexto() {
+    	campoBusquedaNino.setEnabled(true);
+    	campoBusquedaSocio.setEnabled(true);
+    	campoBusquedaNino.setEditable(true);
+    	campoBusquedaSocio.setEditable(true);
+    }
+    
+    public String getFiltroSocio() {
+    	return campoBusquedaSocio.getText();
+    }
+    
+    public String getFiltroNino() {
+    	return campoBusquedaNino.getText();
     }
 
     /**
