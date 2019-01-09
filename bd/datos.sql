@@ -13,8 +13,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.gestioneconomica (idBalance, balanceTotal) VALUES (114445, -3500);
-INSERT INTO mydb.gestioneconomica (idBalance, balanceTotal) VALUES (3232435, 2400);
+INSERT INTO mydb.gestionEconomica (idBalance, balanceTotal) VALUES (114445, -3500);
+INSERT INTO mydb.gestionEconomica (idBalance, balanceTotal) VALUES (3232435, 2400);
 
 COMMIT;
 
@@ -88,7 +88,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.responsablede (USUARIO_idUsuario, PROYECTO_idProy) VALUES (1000, 101);
+INSERT INTO mydb.responsableDe (USUARIO_idUsuario, PROYECTO_idProy) VALUES (1000, 101);
 
 COMMIT;
 
@@ -98,8 +98,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.rolespermisos (PERMISO_ID, ROL_idRol) VALUES (1, 21);
-INSERT INTO mydb.rolespermisos (PERMISO_ID, ROL_idRol) VALUES (2, 22);
+INSERT INTO mydb.rolesPermisos (PERMISO_ID, ROL_idRol) VALUES (1, 21);
+INSERT INTO mydb.rolesPermisos (PERMISO_ID, ROL_idRol) VALUES (2, 22);
 
 COMMIT;
 
