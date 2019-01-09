@@ -30,6 +30,9 @@ public class ApadrinarControlador implements ActionListener {
 	public void iniciarVista() {
 		//cargar todos los socios y niños
 		vistaApadrinar.setVisible(true);
+		System.out.println(modelo.getSocios());
+		vistaApadrinar.actualizarSocio(modelo.getSocios());
+		vistaApadrinar.actualizarNino(modelo.getNinos());
 	}
 	
 	@Override
@@ -58,8 +61,16 @@ public class ApadrinarControlador implements ActionListener {
 			if(exito) {
 				vistaApadrinar.setMensajeExito("Se desapadrino con exito");
 			} else {
-				vistaApadrinar.setMensajeError("No se pudo desapadrinar correctamente");
+				vistaApadrinar.setMensajeError("No se pudo apadrinar correctamente");
 			};
+			vistaApadrinar.habilitarCamposTexto();
+			vistaApadrinar.habilitarApadrinar();
+			vistaApadrinar.habilitarDesapadrinar();
+			vistaApadrinar.actualizarBotonDesapadrinar("Desapadrinar");
+			vistaApadrinar.actualizarBotonApadrinar("Apadrinar");
+			vistaApadrinar.actualizarSocio(modelo.getSocios());
+			vistaApadrinar.actualizarNino(modelo.getNinos());
+			clickado = false;
 		} else {
 			vistaApadrinar.actualizarBotonApadrinar("Confirmar apadrinamiento");
 			vistaApadrinar.deshabilitarDesapadrinar();
@@ -100,6 +111,8 @@ public class ApadrinarControlador implements ActionListener {
 			vistaApadrinar.habilitarDesapadrinar();
 			vistaApadrinar.actualizarBotonDesapadrinar("Desapadrinar");
 			vistaApadrinar.actualizarBotonApadrinar("Apadrinar");
+			vistaApadrinar.actualizarSocio(modelo.getSocios());
+			vistaApadrinar.actualizarNino(modelo.getNinos());
 			clickado = false;
 		} else {
 			AdminVista admVista = new AdminVista();

@@ -74,7 +74,7 @@ public class BD {
 		{
 			Usuario u = null;
 			Statement stmt = con.createStatement();
-			ResultSet result = stmt.executeQuery("SELECT * FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona where e_mail = "+e_mail);
+			ResultSet result = stmt.executeQuery("SELECT * FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona where Correo = '"+e_mail+"'");
 			if(result.next()) {
 				u = new Usuario(
 						result.getInt("idUsuario"),
@@ -265,6 +265,35 @@ public class BD {
 			stmt.close();
 
 			return usuarios;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Apadrinados -> " + ex.getMessage());
+		}
+	}
+	
+	public ArrayList<Nino> getAllNinos() {
+		try
+		{
+			Statement stmt = con.createStatement();
+			ArrayList<Nino> ninos = new ArrayList<>();
+			ResultSet result = stmt.executeQuery("SELECT * FROM nino JOIN persona ON nino.idNen = persona.idPersona");
+
+			while(result.next()) {
+				ninos.add(
+						new Nino(
+							result.getInt("idNen"),
+							result.getString("Nombre"),
+							result.getString("Apellidos"),
+							result.getString("Direccion"),
+							result.getString("Pueblo"),
+							result.getInt("edad"),
+							null)
+						);
+			}
+			stmt.close();
+
+			return ninos;
 		}
 		catch (SQLException ex)
 		{

@@ -78,9 +78,9 @@ public class ApadrinarVista extends javax.swing.JFrame {
 
         textoMensaje.setText("Etiqueta de fin de operación");
 
-        campoBusquedaNino.setText("Búsqueda niño");
+        campoBusquedaNino.setText("");
 
-        campoBusquedaSocio.setText("Búsqueda socio");
+        campoBusquedaSocio.setText("");
 
 
         botonAtras.setText("Atras");
@@ -170,18 +170,18 @@ public class ApadrinarVista extends javax.swing.JFrame {
     	campoBusquedaNino.addActionListener(ctr);
     	campoBusquedaNino.setActionCommand("FILTRARNINO");
     	campoBusquedaSocio.addActionListener(ctr);
-    	campoBusquedaNino.setActionCommand("FILTRARSOCIO");
+    	campoBusquedaSocio.setActionCommand("FILTRARSOCIO");
     	botonAtras.addActionListener(ctr);
     	botonAtras.setActionCommand("ATRAS");
     }
     
     public void actualizarNino(String[] ninos) {
-    	listaNinos = new JList<String>(ninos);
-    	// Duda de si hay que actualizar la lista
+    	listaNinos.setListData(ninos);
     }
     
     public void actualizarSocio(String[] socios) {
-    	listaSocios = new JList<String>(socios);
+    	listaSocios.setListData(socios);
+    	
     }
     
     public int getNinoSeleccionado() {
