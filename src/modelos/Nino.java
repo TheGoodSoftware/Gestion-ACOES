@@ -6,9 +6,9 @@ public class Nino extends Persona {
     private int edad;
     private Map<String, Integer> notas;
 
-    public Nino(String nombre, String apellido, String direccion, String pueblo, int edad, Map<String, Integer> notas)
+    public Nino(int id, String nombre, String apellido, String direccion, String pueblo, int edad, Map<String, Integer> notas)
     {
-        super(nombre, apellido, direccion, pueblo);
+        super(id, nombre, apellido, direccion, pueblo);
         this.edad = edad;
         this.notas = notas;
     }

@@ -1,6 +1,9 @@
 package modelos;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+
+import principal.BD;
 
 public class ApadrinarModelo {
 	private String[] socios;
@@ -14,6 +17,13 @@ public class ApadrinarModelo {
 	//Devuelve true si la operación se ha realizado con éxito
 	public boolean Apadrinar(int socioID, int ninoID) {
 		//TODO
+		try {
+			BD miBD = new BD();
+			miBD.getSocio(socioID);
+			miBD.getNino(ninoID);
+		} catch (SQLException e) {
+			return false;
+		}
 		return false;
 	}
 	// Devuelve true si la operación se ha realizado con éxito
