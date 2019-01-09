@@ -316,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
     FOREIGN KEY (`ASOCIACION_Nombre`)
     REFERENCES `mydb`.`asociacion` (`Nombre`),
   CONSTRAINT `fk_USUARIO_ROL1`
-    FOREIGN KEY (`ROL_idRol`)
+    FOREIGN KEY (`idUsuario`)
     REFERENCES `mydb`.`rol` (`idRol`),
   CONSTRAINT `idPersUs`
     FOREIGN KEY (`idUsuario`)
