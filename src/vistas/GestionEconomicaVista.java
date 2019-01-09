@@ -2,6 +2,8 @@ package vistas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
 import javax.swing.table.DefaultTableModel;
@@ -113,6 +115,16 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
 				}
 			}
         	
+        });
+        buscadorPorId.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                DefaultTableModel model = (DefaultTableModel) tablaEconomia.getModel();
+                model.setDataVector(GestionEconomica.EconomiaArraytoObjectArray(gestion.getEconomias().stream().filter(economia -> String.valueOf(economia.getId()).startsWith(buscadorPorId.getText())).toArray(Economia[]::new)), 
+                		new String [] {
+                                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Autor"
+                            });
+            }
         });
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -2,6 +2,7 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import java.util.Collections;
@@ -38,9 +39,20 @@ public class AnyadirEconomiaControlador implements ActionListener {
 					economiaID = modelo.getEconomias().get(i).getId();
 			}
 			
-			modelo.getEconomias().add(
-					new Economia(economiaID, (double)values.get(0), (String)values.get(1), (String)values.get(2), 
-							new BD().getSocio((String)values.get(3)), modelo, (String)values.get(3)));
+			economiaID++;
+			
+			try {
+				Economia economia = new Economia(economiaID, Double.parseDouble(values.get(0).toString()), (String)values.get(1), (String)values.get(2), 
+						new BD().getSocio((int)values.get(3)), modelo, (String)values.get(4));
+				modelo.getEconomias().add(economia);
+				new BD().insertEconomia(economia);
+			} catch (NumberFormatException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			vistaGestionEconomica.updateTable();
 			this.vistaEconomiaAnyadir.dispose();
 		}

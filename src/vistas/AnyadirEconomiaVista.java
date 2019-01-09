@@ -3,6 +3,7 @@ package vistas;
 import principal.BD;
 import modelos.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -67,8 +68,8 @@ public class AnyadirEconomiaVista extends javax.swing.JFrame {
 
             monedaTipoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Euro", "Lempira" }));
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            usuarioTexto.setModel(new javax.swing.DefaultComboBoxModel<String>(
-        			(String[]) new BD().getAllUsuarios().stream().map(u -> u.getNombreCompleto()).toArray()
+            usuarioTexto.setModel(new javax.swing.DefaultComboBoxModel<Object>(
+        			(Object[]) new BD().getAllUsuarios().stream().map(u -> u.getNombreCompleto()).toArray()
         		));
             cantidadLabel.setText("Cantidad");
 
@@ -169,6 +170,6 @@ public class AnyadirEconomiaVista extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> monedaTipoBox;
     private javax.swing.JComboBox<String> tipoEconomiaComboBox;
     private javax.swing.JLabel usuarioLabel;
-    private javax.swing.JComboBox<String> usuarioTexto;
+    private javax.swing.JComboBox<Object> usuarioTexto;
     // End of variables declaration                   
 }

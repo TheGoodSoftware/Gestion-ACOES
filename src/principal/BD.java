@@ -69,6 +69,25 @@ public class BD {
 		}
     }
 	
+	public void insertEconomia(Economia e) {
+		try {
+			Statement stmt = con.createStatement();
+			String nombreTabla, nombreId;
+			if(e.getTipo().equalsIgnoreCase("GASTO")) {
+				nombreTabla = "gasto";
+				nombreId = "idGasto";
+			} else {
+				nombreTabla = "donacion";
+				nombreId = "idDon";
+			}
+				
+			stmt.execute("INSERT INTO " + nombreTabla + " VALUES (" + e.getId() + "," + e.getCantidad() + ",'" + e.getMoneda() + "','" + e.getDescripcion() + "'," + e.getGestion().getID() + "," + e.getUsuario().getID() + ")");
+			stmt.close();
+		} catch (SQLException sqlEx) {
+			throw new Error("ERROR. Trying to insert economia -> " + sqlEx.getMessage());
+		}
+	}
+	
 	public void eliminarEconomia(int id, String tipo) {
 		try {
 			Statement stmt = con.createStatement();
@@ -84,7 +103,7 @@ public class BD {
 			stmt.execute("DELETE FROM " + nombreTabla + " WHERE " + nombreId + " = " + id);
 			stmt.close();
 		} catch (SQLException sqlEx) {
-			throw new Error("ERROR. Trying to getSocio -> " + sqlEx.getMessage());
+			throw new Error("ERROR. Trying to delete economia -> " + sqlEx.getMessage());
 		}
 	}
 
@@ -119,10 +138,13 @@ public class BD {
 	public Usuario getSocio(int id) throws SQLException {
 			Statement stmt = con.createStatement();
 			ResultSet result = stmt.executeQuery("SELECT Correo FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona where idUsuario = "+id);
-			String e_mail = result.getString("Correo");
-			result.close();
+			if(result.next()) {
+				String e_mail = result.getString("Correo");
+				result.close();
+				return getSocio(e_mail);
+			}
 			stmt.close();
-			return getSocio(e_mail);
+			return null;
 	}
 	
 	public Nino getNino(int id) throws SQLException{
@@ -308,7 +330,7 @@ public class BD {
 								result.getString("Moneda"),
 								result.getString("Descripcion"),
 								new Usuario(
-										result.getInt("idUsuario"),
+										result.getInt("idPersona"),
 										result.getString("Nombre"),
 										result.getString("Apellidos"),
 										null,
@@ -334,7 +356,7 @@ public class BD {
 								result.getString("Moneda"),
 								result.getString("Descripcion"),
 								new Usuario(
-										result.getInt("idUsuario"),
+										result.getInt("idPersona"),
 										result.getString("Nombre"),
 										result.getString("Apellidos"),
 										null,

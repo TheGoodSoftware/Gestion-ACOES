@@ -27,6 +27,7 @@ public class EconomiaControlador implements ActionListener {
 				break;
 			case "ANYADIR":
 				AnyadirEconomiaVista anyadirEconomia = new AnyadirEconomiaVista(this.gestion);
+				anyadirEconomia.addControlador(new AnyadirEconomiaControlador(this.vistaGestion, anyadirEconomia, gestion));
 				break;
 		}
 	}
