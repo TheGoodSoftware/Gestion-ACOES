@@ -278,6 +278,8 @@ public class AdminVista extends javax.swing.JFrame {
     	gestionarSocios.setActionCommand("GESTION_SOCIOS");
     	gestionEconomica.addActionListener(ctr);
     	gestionEconomica.setActionCommand("GESTION_ECONOMICA");
+    	gestionarNino.addActionListener(ctr);
+    	gestionarNino.setActionCommand("GESTION_NINOS");
     }
 
     public void agenteOff() {
