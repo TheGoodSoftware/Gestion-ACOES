@@ -33,7 +33,7 @@ public class LoginControlador implements ActionListener {
 			//cambia al panel de administrador
 			Usuario loggedUser = modelo.autenticar(vistaLogin.getUsuario(), vistaLogin.getPassword());
 			if(loggedUser != null) {
-				if(!loggedUser.getRole().getNombre().equalsIgnoreCase("SOCIO")) {
+				if(!loggedUser.getRole().getNombre().equalsIgnoreCase("USUARIO")) {
 					AdminControlador ctrAdmin = new AdminControlador(loggedUser);
 					vistaLogin.setVisible(false);
 					ctrAdmin.iniciarVista();

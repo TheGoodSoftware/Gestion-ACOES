@@ -26,4 +26,8 @@ public class Persona {
     public String getPueblo() {
         return pueblo;
     }
+    
+    public String getNombreCompleto() {
+    	return nombre + " " + apellidos;
+    }
 }

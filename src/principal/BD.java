@@ -14,10 +14,11 @@ public class BD {
     private final String CONNECTION_URL = "jdbc:mysql://localhost:3306/mydb";
     private final String CONNECTION_Usuario = "ACOES";
     private final String CONNECTION_PASSWD = "GESTIONACOES";
-    private Connection con;
+    private static Connection con;
 	
 	public BD()
 	{
+		if(con == null)
 		 try {
 	            con = DriverManager.getConnection(CONNECTION_URL, CONNECTION_Usuario, CONNECTION_PASSWD);
 	        } catch (SQLException e) {
@@ -237,6 +238,72 @@ public class BD {
 		catch (SQLException ex)
 		{
 			throw new Error("ERROR. Trying to get Apadrinados -> " + ex.getMessage());
+		}
+	}
+	
+	public GestionEconomica getEconomia() {
+		try
+		{
+			Statement stmt = con.createStatement();
+			ArrayList<Economia> economia = new ArrayList<>();
+			ResultSet result = stmt.executeQuery("SELECT * FROM donacion JOIN gestioneconomica ON donacion.GESTIONECONOMICA_idBalance = gestioneconomica.idBalance JOIN persona ON persona.idPersona = donacion.USUARIO_idUsuario");
+			GestionEconomica gestion = null;
+			
+			while(result.next()) {
+				gestion = new GestionEconomica(result.getInt("GESTIONECONOMICA_idBalance"));
+				economia.add(
+						new Economia(
+								result.getInt("idDon"),
+								result.getDouble("Cantidad"),
+								result.getString("Moneda"),
+								result.getString("Descripcion"),
+								new Usuario(
+										result.getString("Nombre"),
+										result.getString("Apellidos"),
+										null,
+										null,
+										null,
+										null, 
+										null),
+								gestion,
+								"Ingreso"
+								)
+				);
+			}
+			
+			result = stmt.executeQuery("SELECT * FROM gasto JOIN gestioneconomica ON gasto.GESTIONECONOMICA_idBalance = gestioneconomica.idBalance JOIN persona ON persona.idPersona = gasto.USUARIO_idUsuario");
+
+			while(result.next()) {
+				if(gestion == null)
+					gestion = new GestionEconomica(result.getInt("GESTIONECONOMICA_idBalance"));
+				economia.add(
+						new Economia(
+								result.getInt("idGasto"),
+								result.getDouble("Cantidad"),
+								result.getString("Moneda"),
+								result.getString("Descripcion"),
+								new Usuario(
+										result.getString("Nombre"),
+										result.getString("Apellidos"),
+										null,
+										null,
+										null,
+										null, 
+										null),
+								gestion,
+								"Gasto"
+								)
+				);
+			}
+			stmt.close();
+
+			gestion.setEconomia(economia);
+			
+			return gestion;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Economia -> " + ex.getMessage());
 		}
 	}
 	

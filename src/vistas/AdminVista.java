@@ -32,12 +32,9 @@ public class AdminVista extends javax.swing.JFrame {
         informeCambios = new javax.swing.JButton();
         infoNino = new javax.swing.JButton();
         gestionEconomicaPanel = new javax.swing.JLayeredPane();
-        insertarIngreso = new javax.swing.JButton();
+        gestionEconomica = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        insertarGasto = new javax.swing.JButton();
-        modificarIngreso = new javax.swing.JButton();
-        modificarGasto = new javax.swing.JButton();
         gestionEducativaPanel = new javax.swing.JLayeredPane();
         jLabel4 = new javax.swing.JLabel();
         insertarExpediente = new javax.swing.JButton();
@@ -106,20 +103,13 @@ public class AdminVista extends javax.swing.JFrame {
 
         gestionEconomicaPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        insertarIngreso.setText("Insertar ingreso/s");
+        gestionEconomica.setText("Gestion economica");
         jLabel3.setText("Gestión económica");
 
-        insertarGasto.setText("Insertar gasto/s");
-        modificarIngreso.setText("Modificar ingreso/s");
-
-        modificarGasto.setText("Modificar gasto/s");
-
-        gestionEconomicaPanel.setLayer(insertarIngreso, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        gestionEconomicaPanel.setLayer(gestionEconomica, javax.swing.JLayeredPane.DEFAULT_LAYER);
         gestionEconomicaPanel.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         gestionEconomicaPanel.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        gestionEconomicaPanel.setLayer(insertarGasto, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        gestionEconomicaPanel.setLayer(modificarIngreso, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        gestionEconomicaPanel.setLayer(modificarGasto, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        gestionEconomicaPanel.setLayer(gestionEconomica, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(gestionEconomicaPanel);
         gestionEconomicaPanel.setLayout(jLayeredPane2Layout);
@@ -135,10 +125,7 @@ public class AdminVista extends javax.swing.JFrame {
                     .addGroup(jLayeredPane2Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(insertarGasto)
-                            .addComponent(insertarIngreso)
-                            .addComponent(modificarIngreso)
-                            .addComponent(modificarGasto))))
+                            .addComponent(gestionEconomica))))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jLayeredPane2Layout.setVerticalGroup(
@@ -146,13 +133,7 @@ public class AdminVista extends javax.swing.JFrame {
             .addGroup(jLayeredPane2Layout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(insertarIngreso)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(insertarGasto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(modificarIngreso)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(modificarGasto)
+                .addComponent(gestionEconomica)
                 .addGap(30, 30, 30)
                 .addComponent(jLabel2)
                 .addContainerGap(195, Short.MAX_VALUE))
@@ -295,26 +276,22 @@ public class AdminVista extends javax.swing.JFrame {
     	vistaPadrino.setActionCommand("VISTA_SOCIO");
     	 gestionarSocios.addActionListener(ctr);
     	gestionarSocios.setActionCommand("GESTION_SOCIOS");
+    	gestionEconomica.addActionListener(ctr);
+    	gestionEconomica.setActionCommand("GESTION_ECONOMICA");
     }
 
     public void agenteOff() {
         informeEconomico.setDisabledIcon(informeEconomico.getIcon());
         informeCambios.setDisabledIcon(informeCambios.getIcon());
         infoNino.setDisabledIcon(infoNino.getIcon());
-    	insertarIngreso.setDisabledIcon(insertarIngreso.getIcon());
-        insertarGasto.setDisabledIcon(insertarGasto.getIcon());
-        modificarIngreso.setDisabledIcon(modificarIngreso.getIcon());
-        modificarGasto.setDisabledIcon(modificarGasto.getIcon());
+    	gestionEconomica.setDisabledIcon(gestionEconomica.getIcon());
     	insertarExpediente.setDisabledIcon(insertarExpediente.getIcon());
     	modificarExpediente.setDisabledIcon(modificarExpediente.getIcon());
 
     	informeEconomico.setEnabled(false);
     	informeCambios.setEnabled(false);
     	infoNino.setEnabled(false);
-        insertarIngreso.setEnabled(false);
-    	insertarGasto.setEnabled(false);
-    	modificarIngreso.setEnabled(false);
-    	modificarGasto.setEnabled(false);
+        gestionEconomica.setEnabled(false);
     	insertarExpediente.setEnabled(false);
     	modificarExpediente.setEnabled(false);
     }
@@ -338,27 +315,18 @@ public class AdminVista extends javax.swing.JFrame {
     	informeEconomico.setDisabledIcon(informeEconomico.getIcon());
         informeCambios.setDisabledIcon(informeCambios.getIcon());
         infoNino.setDisabledIcon(infoNino.getIcon());
-    	insertarIngreso.setDisabledIcon(insertarIngreso.getIcon());
-        insertarGasto.setDisabledIcon(insertarGasto.getIcon());
-    	modificarIngreso.setDisabledIcon(modificarIngreso.getIcon());
-        modificarGasto.setDisabledIcon(modificarGasto.getIcon());
+    	gestionEconomica.setDisabledIcon(gestionEconomica.getIcon());
         informeEconomico.setEnabled(false);
     	informeCambios.setEnabled(false);
     	infoNino.setEnabled(false);
-        insertarIngreso.setEnabled(false);
-        insertarGasto.setEnabled(false);
-        modificarIngreso.setEnabled(false);
-        modificarGasto.setEnabled(false);
+        gestionEconomica.setEnabled(false);
     }
 
     public void socioOff() {
         informeEconomico.setDisabledIcon(informeEconomico.getIcon());
         informeCambios.setDisabledIcon(informeCambios.getIcon());
         infoNino.setDisabledIcon(infoNino.getIcon());
-    	insertarIngreso.setDisabledIcon(insertarIngreso.getIcon());
-        insertarGasto.setDisabledIcon(insertarGasto.getIcon());
-        modificarIngreso.setDisabledIcon(modificarIngreso.getIcon());
-        modificarGasto.setDisabledIcon(modificarGasto.getIcon());
+    	gestionEconomica.setDisabledIcon(gestionEconomica.getIcon());
     	insertarExpediente.setDisabledIcon(insertarExpediente.getIcon());
         modificarExpediente.setDisabledIcon(modificarExpediente.getIcon());
         fechaEnvio.setDisabledIcon(fechaEnvio.getIcon());
@@ -369,10 +337,7 @@ public class AdminVista extends javax.swing.JFrame {
     	informeEconomico.setEnabled(false);
     	informeCambios.setEnabled(false);
     	infoNino.setEnabled(false);
-        insertarIngreso.setEnabled(false);
-    	insertarGasto.setEnabled(false);
-    	modificarIngreso.setEnabled(false);
-    	modificarGasto.setEnabled(false);
+        gestionEconomica.setEnabled(false);
     	insertarExpediente.setEnabled(false);
         modificarExpediente.setEnabled(false);
     	fechaEnvio.setEnabled(false);
@@ -394,10 +359,7 @@ public class AdminVista extends javax.swing.JFrame {
     private javax.swing.JButton informeEconomico;
     private javax.swing.JButton informeCambios;
     private javax.swing.JButton infoNino;
-    private javax.swing.JButton insertarIngreso;
-    private javax.swing.JButton insertarGasto;
-    private javax.swing.JButton modificarIngreso;
-    private javax.swing.JButton modificarGasto;
+    private javax.swing.JButton gestionEconomica;
     private javax.swing.JButton insertarExpediente;
     private javax.swing.JButton vistaPadrino;
     private javax.swing.JLabel jLabel1;
