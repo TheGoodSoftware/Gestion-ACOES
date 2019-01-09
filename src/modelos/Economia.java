@@ -1,5 +1,7 @@
 package modelos;
 
+import principal.BD;
+
 public class Economia {
 	private int id;
 	private double cantidad;
@@ -36,8 +38,8 @@ public class Economia {
 		return moneda;
 	}
 	
-	public double getCantidad() {
-		return cantidad;
+	public String getCantidad() {
+		return Double.toString(cantidad);
 	}
 	
 	public int getId() {

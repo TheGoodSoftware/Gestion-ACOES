@@ -1,5 +1,15 @@
 package vistas;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+
+import javax.swing.table.DefaultTableModel;
+
+import controladores.EconomiaControlador;
+import modelos.*;
+import principal.BD;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,10 +25,22 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
     /**
      * Creates new form GestionEconomica
      */
-    public GestionEconomicaVista(Object[][] tableContent) {
-        initComponents(tableContent);
+	private GestionEconomica gestion;
+	
+    public GestionEconomicaVista(GestionEconomica gestion) {
+    	this.gestion = gestion;
+    	initComponents();
     }
 
+    
+    public void addControlador(EconomiaControlador ctr) {
+    	atrasBoton.addActionListener(ctr);
+    	atrasBoton.setActionCommand("ATRAS");
+    	anyadirBoton.addActionListener(ctr);
+    	anyadirBoton.setActionCommand("ANYADIR");
+    }
+
+    
 	/**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -26,7 +48,7 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
      */
     @SuppressWarnings({ "unchecked", "serial" })
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents(Object[][] tableContent) {
+    private void initComponents() {
 
         buscadorPorId = new javax.swing.JTextField();
         buscarPorIdLabel = new javax.swing.JLabel();
@@ -38,22 +60,17 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        buscadorPorId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscadorPorIdActionPerformed(evt);
-            }
-        });
 
         buscarPorIdLabel.setText("Buscar por id:");
 
         tablaEconomia.setModel(new javax.swing.table.DefaultTableModel(
-            tableContent,
+            gestion.toObjectArray(),
             new String [] {
-                "Id", "Cantidad", "Tipo", "Concepto", "Autor"
+                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Autor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -67,19 +84,31 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
             tablaEconomia.getColumnModel().getColumn(2).setResizable(false);
             tablaEconomia.getColumnModel().getColumn(3).setResizable(false);
             tablaEconomia.getColumnModel().getColumn(4).setResizable(false);
+            tablaEconomia.getColumnModel().getColumn(5).setResizable(false);
         }
 
         atrasBoton.setText("Atrás");
-        atrasBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atrasBotonActionPerformed(evt);
-            }
-        });
-
+       
         anyadirBoton.setText("Añadir");
 
         eliminarBoton.setText("Eliminar");
 
+        eliminarBoton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(tablaEconomia.getSelectedRow() != -1) {
+					BD bd = new BD();
+					Economia economia = gestion.getEconomias().get(tablaEconomia.getSelectedRow());
+					gestion.getEconomias().remove(tablaEconomia.getSelectedRow());
+					bd.eliminarEconomia(economia.getId(), economia.getTipo());
+					DefaultTableModel model = (DefaultTableModel) tablaEconomia.getModel();
+					model.removeRow(tablaEconomia.getSelectedRow());
+				}
+			}
+        	
+        });
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,49 +151,6 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-
-    private void buscadorPorIdActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // TODO add your handling code here:
-    }                                             
-
-    private void atrasBotonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        // TODO add your handling code here:
-    }                                          
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionEconomicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionEconomicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionEconomicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionEconomicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GestionEconomicaVista(new Object[0][0]).setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton anyadirBoton;

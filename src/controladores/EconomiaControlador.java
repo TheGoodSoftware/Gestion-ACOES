@@ -20,8 +20,15 @@ public class EconomiaControlador implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		switch(e.getActionCommand()) {
+			case "ATRAS":
+				vistaGestion.dispose();
+				vistaAdmin.setVisible(true);
+				break;
+			case "ANYADIR":
+				AnyadirEconomia anyadirEconomia = new AnyadirEconomia(this.gestion);
+				break;
+		}
 	}
 
 }

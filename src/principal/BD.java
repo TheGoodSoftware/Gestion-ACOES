@@ -68,6 +68,25 @@ public class BD {
 			throw new Error("Error al Cerrar la Conexión." + ex.getMessage());
 		}
     }
+	
+	public void eliminarEconomia(int id, String tipo) {
+		try {
+			Statement stmt = con.createStatement();
+			String nombreTabla, nombreId;
+			if(tipo.equalsIgnoreCase("GASTO")) {
+				nombreTabla = "gasto";
+				nombreId = "idGasto";
+			} else {
+				nombreTabla = "donacion";
+				nombreId = "idDon";
+			}
+				
+			stmt.execute("DELETE FROM " + nombreTabla + " WHERE " + nombreId + " = " + id);
+			stmt.close();
+		} catch (SQLException sqlEx) {
+			throw new Error("ERROR. Trying to getSocio -> " + sqlEx.getMessage());
+		}
+	}
 
 	public Usuario getSocio(String e_mail) {
 		try
@@ -246,7 +265,7 @@ public class BD {
 		{
 			Statement stmt = con.createStatement();
 			ArrayList<Economia> economia = new ArrayList<>();
-			ResultSet result = stmt.executeQuery("SELECT * FROM donacion JOIN gestioneconomica ON donacion.GESTIONECONOMICA_idBalance = gestioneconomica.idBalance JOIN persona ON persona.idPersona = donacion.USUARIO_idUsuario");
+			ResultSet result = stmt.executeQuery("SELECT * FROM donacion JOIN gestionEconomica ON donacion.GESTIONECONOMICA_idBalance = gestionEconomica.idBalance JOIN persona ON persona.idPersona = donacion.USUARIO_idUsuario");
 			GestionEconomica gestion = null;
 			
 			while(result.next()) {
@@ -271,7 +290,7 @@ public class BD {
 				);
 			}
 			
-			result = stmt.executeQuery("SELECT * FROM gasto JOIN gestioneconomica ON gasto.GESTIONECONOMICA_idBalance = gestioneconomica.idBalance JOIN persona ON persona.idPersona = gasto.USUARIO_idUsuario");
+			result = stmt.executeQuery("SELECT * FROM gasto JOIN gestionEconomica ON gasto.GESTIONECONOMICA_idBalance = gestionEconomica.idBalance JOIN persona ON persona.idPersona = gasto.USUARIO_idUsuario");
 
 			while(result.next()) {
 				if(gestion == null)

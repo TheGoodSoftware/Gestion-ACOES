@@ -61,17 +61,8 @@ public class AdminControlador implements ActionListener {
     		vistaAdmin.setVisible(false);
     		BD bd = new BD();
     		GestionEconomica gestionEconomica = bd.getEconomia();
-    		Object[][] valores = new Object[gestionEconomica.getEconomias().size()][7];
-    		for(int i = 0; i < gestionEconomica.getEconomias().size(); i++) {
-    			Object[] values = new Object[5];
-    			values[0] = gestionEconomica.getEconomias().get(i).getId();
-    			values[1] = gestionEconomica.getEconomias().get(i).getCantidad();
-    			values[2] = gestionEconomica.getEconomias().get(i).getTipo();
-    			values[3] = gestionEconomica.getEconomias().get(i).getDescripcion();
-    			values[4] = gestionEconomica.getEconomias().get(i).getUsuario().getNombreCompleto();
-    			valores[i] = values;
-    		}
-    		GestionEconomicaVista economiaVista = new GestionEconomicaVista(valores);
+    		GestionEconomicaVista economiaVista = new GestionEconomicaVista(gestionEconomica);
+    		economiaVista.addControlador(new EconomiaControlador(economiaVista, vistaAdmin, gestionEconomica));
     		economiaVista.setVisible(true);
        }
     }
