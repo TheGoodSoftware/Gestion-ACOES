@@ -26,7 +26,7 @@ public class EconomiaControlador implements ActionListener {
 				vistaAdmin.setVisible(true);
 				break;
 			case "ANYADIR":
-				AnyadirEconomia anyadirEconomia = new AnyadirEconomia(this.gestion);
+				AnyadirEconomiaVista anyadirEconomia = new AnyadirEconomiaVista(this.gestion);
 				break;
 		}
 	}

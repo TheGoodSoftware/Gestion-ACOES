@@ -2,27 +2,48 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import modelos.GestionEconomica;
-import vistas.GestionEconomicaVista;
+import java.util.Collections;
+
+import modelos.*;
+import vistas.*;
+import principal.BD;
 
 public class AnyadirEconomiaControlador implements ActionListener {
 
 	private GestionEconomica modelo;
-	private GestionEconomicaVista vista;
+	private AnyadirEconomiaVista vistaEconomiaAnyadir;
+	private GestionEconomicaVista vistaGestionEconomica;
 	
-	public AnyadirEconomiaControlador(GestionEconomicaVista vista, GestionEconomica modelo) {
-		this.vista = vista;
+	public AnyadirEconomiaControlador(GestionEconomicaVista vistaGestionEconomica, AnyadirEconomiaVista vistaEconomia, GestionEconomica modelo) {
+		this.vistaGestionEconomica = vistaGestionEconomica;
+		this.vistaEconomiaAnyadir = vistaEconomia;
 		this.modelo = modelo;
-		this.vista.setVisible(true);
+		this.vistaEconomiaAnyadir.setVisible(true);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("CANCELAR"))
 		{
-			this.vista.dispose();
-		}		
+			this.vistaEconomiaAnyadir.dispose();
+		} else if(e.getActionCommand().equals("ANYADIR")) {
+			ArrayList<Object> values = vistaEconomiaAnyadir.getData();
+			int economiaID = -1;
+			
+			for(int i = 0; i < modelo.getEconomias().size(); i++)
+			{
+				if(modelo.getEconomias().get(i).getId() > economiaID)
+					economiaID = modelo.getEconomias().get(i).getId();
+			}
+			
+			modelo.getEconomias().add(
+					new Economia(economiaID, (double)values.get(0), (String)values.get(1), (String)values.get(2), 
+							new BD().getSocio((String)values.get(3)), modelo, (String)values.get(3)));
+			vistaGestionEconomica.updateTable();
+			this.vistaEconomiaAnyadir.dispose();
+		}
 	}
 	
 }

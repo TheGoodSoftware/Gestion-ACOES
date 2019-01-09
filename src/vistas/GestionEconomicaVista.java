@@ -40,6 +40,12 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
     	anyadirBoton.setActionCommand("ANYADIR");
     }
 
+    public void updateTable() {
+    	DefaultTableModel model = (DefaultTableModel)tablaEconomia.getModel();
+    	model.setDataVector(gestion.toObjectArray(), new String [] {
+                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Autor"
+            });
+    }
     
 	/**
      * This method is called from within the constructor to initialize the form.

@@ -20,6 +20,10 @@ public class GestionEconomica {
 		return this.economia;
 	}
 	
+	public int getID() {
+		return this.id;
+	}
+	
 	public Object[][] toObjectArray() {
 		Object[][] valores = new Object[this.getEconomias().size()][7];
 		for(int i = 0; i < this.getEconomias().size(); i++) {
