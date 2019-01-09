@@ -74,7 +74,7 @@ public class BD {
 		{
 			Usuario u = null;
 			Statement stmt = con.createStatement();
-			ResultSet result = stmt.executeQuery("SELECT * FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona where e_mail = "+e_mail);
+			ResultSet result = stmt.executeQuery("SELECT * FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona where Correo = '"+e_mail+"'");
 			if(result.next()) {
 				u = new Usuario(
 						result.getInt("idUsuario"),
