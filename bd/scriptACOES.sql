@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`apadrinar` (
   `NINO_idNen` INT(10) NOT NULL,
   `USUARIO_idUsuario` INT(10) NOT NULL,
   `Activo` tinyint(1) NOT NULL DEFAULT 1,
+  `Cuota`INT(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (`NINO_idNen`, `USUARIO_idUsuario`),
   INDEX `fk_NIÑO_has_USUARIO_USUARIO1` (`USUARIO_idUsuario` ASC),
   CONSTRAINT `fk_NIÑO_has_USUARIO_NIÑO1`
