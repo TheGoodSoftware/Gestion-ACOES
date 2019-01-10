@@ -163,7 +163,8 @@ public class BD {
 					notas
 			));
 		}
-		
+		stmt.close();
+		result.close();
 		return ninios;
 	}
 	
@@ -304,7 +305,7 @@ public class BD {
 	public void modificarNinoBaseDeDatos(Nino n) {
 		try {
 			Statement stmt = con.createStatement();
-			stmt.execute("UPDATE persona JOIN nino ON nino.idNen=persona.idPersona SET Nombre='"+n.getNombre()+"',Apellidos='" + n.getApellidos()+"' WHERE idNen="+n.getID());
+			stmt.execute("UPDATE persona JOIN nino ON nino.idNen=persona.idPersona SET Nombre='"+n.getNombre()+"',Apellidos='" + n.getApellidos()+"', Edad="+n.getEdad()+" WHERE idNen="+n.getID());
 			stmt.close();
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to update Usuario into database -> " + ex.getMessage());
