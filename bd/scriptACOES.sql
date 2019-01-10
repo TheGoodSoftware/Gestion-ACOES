@@ -24,6 +24,7 @@ USE `mydb` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`apadrinar` (
   `NINO_idNen` INT(10) NOT NULL,
+  `Activo`    TINYINT(4) NOT NULL DEFAULT '1'
   `USUARIO_idUsuario` INT(10) NOT NULL,
   PRIMARY KEY (`NINO_idNen`, `USUARIO_idUsuario`),
   INDEX `fk_NIÑO_has_USUARIO_USUARIO1` (`USUARIO_idUsuario` ASC),
@@ -160,6 +161,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`notas` (
   `idNotasNen` INT(10) NOT NULL,
   `Calificacion` DOUBLE NOT NULL DEFAULT 5,
+  `NotaMedia` DOUBLE NOT NULL DEFAULT 5,
   `Curso` VARCHAR(500) NOT NULL DEFAULT 'Primaria',
   `nino_idNen` INT(10) NOT NULL,
   PRIMARY KEY (`idNotasNen`),
