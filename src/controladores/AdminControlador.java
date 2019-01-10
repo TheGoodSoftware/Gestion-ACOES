@@ -69,7 +69,7 @@ public class AdminControlador implements ActionListener {
     		economiaVista.setVisible(true);
     		break;
     	case "GESTION_NINOS":
-    		GestionNinosControlador gesNinosCtr = new GestionNinosControlador();
+    		GestionNinosControlador gesNinosCtr = new GestionNinosControlador(this.vistaAdmin);
     		vistaAdmin.setVisible(false);
 		try {
 			gesNinosCtr.iniciarVista();
