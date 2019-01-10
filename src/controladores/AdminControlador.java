@@ -68,6 +68,14 @@ public class AdminControlador implements ActionListener {
     		economiaVista.addControlador(new EconomiaControlador(economiaVista, vistaAdmin, gestionEconomica));
     		economiaVista.setVisible(true);
     		break;
+	   	case "GESTION_ACADEMICA":
+		   	vistaAdmin.setVisible(false);
+			bd = new BD();
+		   	GestionAcademica gestionAcademica = bd.getEducacion();
+		   	GestionAcademicaVista educacionVista = new GestionAcademicaVista(gestionAcademica);
+		   	educacionVista.addControlador(new GestionAcademicaControlador(educacionVista, vistaAdmin, gestionAcademica));
+		   	educacionVista.setVisible(true);
+		   	break;
     	case "GESTION_NINOS":
     		GestionNinosControlador gesNinosCtr = new GestionNinosControlador(this.vistaAdmin);
     		vistaAdmin.setVisible(false);

@@ -161,6 +161,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `mydb`.`notas` (
   `idNotasNen` INT(10) NOT NULL,
   `Calificacion` DOUBLE NOT NULL DEFAULT 5,
+  `NotaMedia` DOUBLE NOT NULL DEFAULT 5,
   `Curso` VARCHAR(500) NOT NULL DEFAULT 'Primaria',
   `nino_idNen` INT(10) NOT NULL,
   PRIMARY KEY (`idNotasNen`),

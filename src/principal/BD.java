@@ -107,6 +107,18 @@ public class BD {
 		}
 	}
 
+	public void insertEducacion(Educacion e) {
+		try {
+			Statement stmt = con.createStatement();
+			String nombreTabla = "Expediente";
+
+			stmt.execute("INSERT INTO " + nombreTabla + " VALUES (" + e.getId() + "," + e.getEdad() + ",'" + e.getNotaMedia() + "','" + e.getNombre() + "'," + e.getApellidos() + "," + e.getNino().getID() + "," + e.getGestion().getID() + "," + e.getCurso() + ")");
+			stmt.close();
+		} catch (SQLException sqlEx) {
+			throw new Error("ERROR. Trying to insert educacion -> " + sqlEx.getMessage());
+		}
+	}
+
 	public Usuario getSocio(String e_mail) {
 		try
 		{
@@ -444,6 +456,46 @@ public class BD {
 
 			gestion.setEconomia(economia);
 			
+			return gestion;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Economia -> " + ex.getMessage());
+		}
+	}
+
+	public GestionAcademica getEducacion() {
+		try
+		{
+			Statement stmt = con.createStatement();
+			ArrayList<Educacion> educacion = new ArrayList<>();
+			ResultSet result = stmt.executeQuery("SELECT * FROM nino JOIN persona  ON nino.idNen = persona.idPersona JOIN notas ON nino.idNen = notas.nino_idNen");
+			GestionAcademica gestion = null;
+
+			while(result.next()) {
+				gestion = new GestionAcademica(result.getInt("GESTIONECONOMICA_idBalance"));
+				educacion.add(
+						new Educacion(
+								result.getInt("idNen"),
+								result.getInt("Edad"),
+								result.getDouble("NotaMedia"),
+								result.getString("Nombre"),
+								result.getString("Apellidos"),
+										null,
+										null,
+										result.getString("Curso"))
+
+						);
+
+			}
+
+			result = stmt.executeQuery("SELECT * FROM nino JOIN persona  ON nino.idNen = persona.idPersona JOIN notas ON nino.idNen = notas.nino_idNen");
+
+
+			stmt.close();
+
+			gestion.setEducacion(educacion);
+
 			return gestion;
 		}
 		catch (SQLException ex)

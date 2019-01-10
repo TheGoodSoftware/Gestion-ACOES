@@ -38,8 +38,8 @@ public class Educacion {
         return apellidos;
     }
     
-    public Double getNotaMedia() {
-        return notaMedia;
+    public String getNotaMedia() {
+        return Double.toString(notaMedia);
     }
 
     public String getNombre() {

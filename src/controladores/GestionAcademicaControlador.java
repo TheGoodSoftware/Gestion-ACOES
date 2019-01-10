@@ -1,8 +1,7 @@
 package controladores;
 
-import modelos.GestionAcademica;
-import vistas.AdminVista;
-import vistas.GestionAcademicaVista;
+import modelos.*;
+import vistas.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

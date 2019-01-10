@@ -110,6 +110,17 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
 
         jScrollBar2.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
 
+        buscadorPorId.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                DefaultTableModel model = (DefaultTableModel) tablaAcademica.getModel();
+                model.setDataVector(GestionAcademica.EducacionArraytoObjectArray(gestion.getEducacions().stream().filter(educacion -> String.valueOf(educacion.getId()).startsWith(buscadorPorId.getText())).toArray(Educacion[]::new)),
+                        new String [] {
+                                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Autor"
+                        });
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
