@@ -4,8 +4,11 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.table.DefaultTableModel;
+
 import controladores.GestionNinosControlador;
 import modelos.Nino;
+ 
 
 public class GestionNinosVista extends javax.swing.JFrame {
 
@@ -27,6 +30,8 @@ public class GestionNinosVista extends javax.swing.JFrame {
 
         jSplitPane1 = new javax.swing.JSplitPane();
         buscador = new javax.swing.JTextField();
+        
+        
         tablaNinos = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -68,7 +73,7 @@ public class GestionNinosVista extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Edad", "Sexo ", "Identidad", "CCJ", "Colegio", "Becado"
+                "ID","Nombre", "Edad", "Sexo ", "Identidad","Colegio", "Becado"
             }
         ) {
         	
@@ -98,7 +103,7 @@ public class GestionNinosVista extends javax.swing.JFrame {
 
         nombreTitulo.setText("Nombre");
 
-        fechaNacimientoTitulo.setText("Fecha nacimiento");
+        fechaNacimientoTitulo.setText("Edad");
 
         sexoTitulo.setText("Sexo (V/M)");
 
@@ -279,7 +284,14 @@ public class GestionNinosVista extends javax.swing.JFrame {
     
     // End of variables declaration                   
 	public void controlador(ActionListener ctr) {
-		// TODO Auto-generated method stub
+		this.insertarBoton.addActionListener(ctr);
+		this.insertarBoton.setActionCommand("INSERTAR");
+		this.actualizarBoton.addActionListener(ctr);
+		this.actualizarBoton.setActionCommand("ACTUALIZAR");
+		this.eliminarBoton.addActionListener(ctr);
+		this.eliminarBoton.setActionCommand("ELIMINAR");
+		this.atrasBoton.addActionListener(ctr);
+		this.atrasBoton.setActionCommand("ATRAS");
 		
 	}
 
@@ -290,11 +302,12 @@ public class GestionNinosVista extends javax.swing.JFrame {
 		String[] colegios = {"Loreto", "Santa Fe"};
 		Random rnd = new Random();
 		for(int i = 0; i< allNinos.size();i++) {
-			tableContent[i][0] = allNinos.get(i).getNombre()+" "+allNinos.get(i).getApellidos();
-			tableContent[i][1] = allNinos.get(i).getEdad();
-			tableContent[i][2] = "V"; //CAMBIAR CUANDO SE MODIFIQUE BBDD
-			tableContent[i][3] = identidadArtificial[i];
-			tableContent[i][4] = respuesta[rnd.nextInt(2)];
+			tableContent[i][0] = allNinos.get(i).getID();
+			tableContent[i][1] = allNinos.get(i).getNombre()+" "+allNinos.get(i).getApellidos();
+			tableContent[i][2] = allNinos.get(i).getEdad();
+			tableContent[i][3] = "V"; //CAMBIAR CUANDO SE MODIFIQUE BBDD
+			tableContent[i][4] = identidadArtificial[i];
+			
 			tableContent[i][5] = colegios[rnd.nextInt(2)];
 			tableContent[i][6] = respuesta[rnd.nextInt(2)];
 		}
@@ -302,9 +315,149 @@ public class GestionNinosVista extends javax.swing.JFrame {
 		jTable1.setModel(new javax.swing.table.DefaultTableModel(
 				tableContent,
 				new String[] {
-					"Nombre", "Edad", "Sexo ", "Identidad", "CCJ", "Colegio", "Becado"	
+						"ID","Nombre", "Edad", "Sexo ", "Identidad","Colegio", "Becado"	
 				}
 				));
 		
 	}
+	
+
+	public void setNombre(String nombre) {
+		this.nombreCampo.setText(nombre); 
+	}
+	public void setEdad(String edad) {
+		this.fechaNacCampo.setText(edad); 
+	}
+	public void setSexo(String sexo) {
+		this.sexoCampo.setText(sexo); 
+	}
+	public void setIdentidad(String identidad) {
+		this.identidadCampo.setText(identidad); 
+	}
+	public void setCCJ(String ccj) {
+		if(ccj.equals("Sí")) {
+			this.ccjCampo.setEnabled(true);
+		}
+		else {
+			this.ccjCampo.setEnabled(false);
+		}
+		 
+	}
+	public void setColegio(String colegio) {
+		this.colegioCampo.setText(colegio); 
+	}
+	public void setBecado(String becado) {
+		if(becado.equals("Sí")) {
+			this.becadoCampo.setEnabled(true);
+		}
+		else {
+			this.becadoCampo.setEnabled(false);
+		} 
+	}
+
+	public String getNombre() {
+		
+		return this.nombreCampo.getText();
+	}
+	
+	
+
+	public String getEdad() {
+		// TODO Auto-generated method stub
+		return this.fechaNacCampo.getText();
+	}
+
+	public String getSexo() {
+		// TODO Auto-generated method stub
+		return this.sexoCampo.getText();
+	}
+
+	public String getIdentidad() {
+		// TODO Auto-generated method stub
+		return this.identidadCampo.getText();
+	}
+
+	public String getColegio() {
+		// TODO Auto-generated method stub
+		return this.colegioCampo.getText();
+	}
+
+	public Boolean getCCJ() {
+		return this.ccjCampo.isSelected();
+	}
+
+	public Boolean getBecado() {
+		// TODO Auto-generated method stub
+		return this.becadoCampo.isSelected();
+	}
+	
+	 public String getNombreSeleccionado() {
+	    	int tupla = jTable1.getSelectedRow();
+	    	return (String)jTable1.getValueAt(tupla, 1);
+	    	
+	    }
+	 
+	 public String getIDSeleccionado() {
+		 int tupla = jTable1.getSelectedRow();
+		 return jTable1.getValueAt(tupla, 0).toString();
+	 }
+	 public String getEdadSeleccionada() {
+	    	int tupla = jTable1.getSelectedRow();
+	    	return jTable1.getValueAt(tupla, 2).toString();
+	    	
+	    }
+	 public String getSexoSeleccionado() {
+	    	int tupla = jTable1.getSelectedRow();
+	    	return (String)jTable1.getValueAt(tupla, 3);
+	    	
+	    }
+	 public String getIdentidadSeleccionado() {
+	    	int tupla = jTable1.getSelectedRow();
+	    	return (String)jTable1.getValueAt(tupla, 4);
+	    	
+	    }
+	 /*
+	 public String getCCJSeleccionado() {
+	    	int tupla = jTable1.getSelectedRow();
+	    	return (String)jTable1.getValueAt(tupla, 4);
+	    	
+	    }
+	    */
+	 public String getColegioSeleccionado() {
+	    	int tupla = jTable1.getSelectedRow();
+	    	return (String)jTable1.getValueAt(tupla, 5);
+	    	
+	    }
+	 public String getBecadoSeleccionado() {
+	    	int tupla = jTable1.getSelectedRow();
+	    	return (String)jTable1.getValueAt(tupla, 6);
+	    	
+	    }
+
+	public void setConfirmacionActualizar() {
+		insertarBoton.setEnabled(false);
+		actualizarBoton.setText("CONFIRMAR");
+		eliminarBoton.setEnabled(false);
+		atrasBoton.setEnabled(false);
+		
+	}
+
+	public void habilitarBotones() {
+		insertarBoton.setEnabled(true);
+		actualizarBoton.setText("Actualizar");
+		eliminarBoton.setEnabled(true);
+		atrasBoton.setEnabled(true);
+		
+	}
+	
+	public void eliminarNinoSeleccionado() {
+    	DefaultTableModel model =
+    			  (DefaultTableModel)jTable1.getModel();
+    	int tupla = jTable1.getSelectedRow();
+    	
+    	if(tupla!=-1) {
+    		
+    		model.removeRow(tupla);
+    	}
+    }
 }

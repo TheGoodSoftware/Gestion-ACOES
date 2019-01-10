@@ -246,7 +246,7 @@ public class BD {
 			throw new Error("ERROR. Trying to get Apadrinados -> " + ex.getMessage());
 		}
 	}
-
+	
 	public ArrayList<Rol> getAllRoles() {
 		try
 		{
@@ -279,10 +279,53 @@ public class BD {
 					+ u.getNombre() + "','" + u.getApellidos() + "')");
 			stmt.execute("INSERT INTO usuario(Contrasenya, Correo, rol_idRol, idUsuario) VALUES ('"
 					+ password + "','" + u.getE_mail() + "'," + getRolIdDesdeNombre(u.getRole().getNombre()) +"',"+u.getID() +")");
+			stmt.close();
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to insert Usuario into database -> " + ex.getMessage());
 		}
+		
 	}
+	
+	public void insertarNinoBaseDeDatos(Nino n) {
+		try {
+			Statement stmt = con.createStatement();
+			
+			stmt.execute("INSERT INTO persona VALUES ("+n.getID()+",'"
+					+ n.getNombre() + "','" + n.getApellidos() + "','"+n.getDireccion()+"','"+n.getPueblo()+"')");
+			stmt.execute("INSERT INTO nino VALUES ("+n.getID()+","+
+					n.getEdad() + "," + 101 + ")");
+			stmt.close();
+		} catch (SQLException ex) {
+			throw new Error("ERROR. Trying to insert Ninio into database -> " + ex.getMessage());
+		}
+		
+	}
+	
+	public void modificarNinoBaseDeDatos(Nino n) {
+		try {
+			Statement stmt = con.createStatement();
+			stmt.execute("UPDATE persona JOIN nino ON nino.idNen=persona.idPersona SET Nombre='"+n.getNombre()+"',Apellidos='" + n.getApellidos()+"' WHERE idNen="+n.getID());
+			stmt.close();
+		} catch (SQLException ex) {
+			throw new Error("ERROR. Trying to update Usuario into database -> " + ex.getMessage());
+		}
+	}
+	
+	public void eliminarNinoBaseDeDatos(Integer id) throws SQLException {
+		try {
+		Statement stmt = con.createStatement();
+		stmt.execute("DELETE FROM nino WHERE idNen="+id);
+		stmt.execute("DELETE FROM persona WHERE idPersona="+id);
+		stmt.close();
+		
+		
+		}
+		catch(SQLException ex) {
+			throw new Error("ERROR. Trying to delete ninio from database -> " + ex.getMessage());
+		}
+	}
+	
+	
 
 	public void modificarUsuarioBaseDeDatos(Usuario u, String password) {
 		try {
