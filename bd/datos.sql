@@ -151,8 +151,13 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.donacion (idDon, Descripcion, Cantidad, Moneda, GESTIONECONOMICA_idBalance, USUARIO_idUsuario) VALUES (3333, 'Donante habitual', 300, 'Euro', 114445, 1001);
-INSERT INTO mydb.donacion (idDon, Descripcion, Cantidad, Moneda, GESTIONECONOMICA_idBalance, USUARIO_idUsuario) VALUES (3214, 'Donante2', 1500, 'Lempira', 3232435, 1000);
+INSERT INTO mydb.donacion (idDon, Descripcion, Cantidad, Moneda, GESTIONECONOMICA_idBalance, ProcedenciaBeneficiario, Fecha) VALUES (103, 'Donacion Mensual ACOES Malaga', 300, 'Euro', 114445, 'ACOES Malaga', '21/12/2018');
+INSERT INTO mydb.donacion (idDon, Descripcion, Cantidad, Moneda, GESTIONECONOMICA_idBalance, ProcedenciaBeneficiario, Fecha) VALUES (204, 'Donacion Extra ACOES Madrid', 1500, 'Lempira', 3232435, 'ACOES Madrid', '23/12/2018');
+INSERT INTO mydb.donacion (idDon, Descripcion, Cantidad, Moneda, GESTIONECONOMICA_idBalance, ProcedenciaBeneficiario, Fecha) VALUES (300, 'Donacion Mensual ACOES Leon', 500, 'Euro', 114445, 'ACOES Malaga', '01/01/2019');
+INSERT INTO mydb.donacion (idDon, Descripcion, Cantidad, Moneda, GESTIONECONOMICA_idBalance, ProcedenciaBeneficiario, Fecha) VALUES (415, 'Donacion Mensual ACOES Barcelona', 1500, 'Euro', 114445, 'ACOES Malaga', '03/01/2019');
+INSERT INTO mydb.donacion (idDon, Descripcion, Cantidad, Moneda, GESTIONECONOMICA_idBalance, ProcedenciaBeneficiario, Fecha) VALUES (005, 'Donacion Mensual ACOES Madrid', 300, 'Euro', 114445, 'Donacion ACOES Malaga', '11/01/2019');
+INSERT INTO mydb.donacion (idDon, Descripcion, Cantidad, Moneda, GESTIONECONOMICA_idBalance, ProcedenciaBeneficiario, Fecha) VALUES (026, 'Cuotas apadrinamientos ACOES Malaga', 400, 'Euro', 114445, 'ACOES Malaga', '15/01/2019');
+
 
 COMMIT;
 
@@ -162,7 +167,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, USUARIO_idUsuario) VALUES (7859, 2300, 'Euro', 'Evento1', 114445, 1001);
-INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, USUARIO_idUsuario) VALUES (36274, 1100, 'Lempira', 'MaterialesDiego', 3232435, 1000);
+INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (1000, 1100, 'Lempira', 'Material escolar', 114445, '27/12/2018', 'CCJ San Miguel');
+INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (1001, 500, 'Euro', 'Material escolar', 114445, '15/01/2019', 'CCJ San Marcos');
+INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (903, 1500, 'Lempira', 'Comida desayunos', 114445, '20/01/2019', 'CCJ San Marcos');
+INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (1054, 1700, 'Lempira', 'Gasolina', 114445, '21/01/2019', 'Casa Populorum Montaña');
 
 COMMIT;

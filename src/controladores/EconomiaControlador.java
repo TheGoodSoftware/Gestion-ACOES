@@ -21,10 +21,6 @@ public class EconomiaControlador implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
-			case "ATRAS":
-				//vistaGestion.dispose();
-				vistaAdmin.setVisible(true);
-				break;
 			case "ANYADIR":
 				AnyadirEconomiaVista anyadirEconomia = new AnyadirEconomiaVista(this.gestion);
 				anyadirEconomia.addControlador(new AnyadirEconomiaControlador(this.vistaGestion, anyadirEconomia, gestion));

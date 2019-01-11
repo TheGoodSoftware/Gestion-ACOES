@@ -77,21 +77,18 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`donacion` (
   `idDon` INT(10) NOT NULL,
-  `Descripcion` VARCHAR(500) NULL DEFAULT NULL,
   `Cantidad` DOUBLE NOT NULL,
   `Moneda` VARCHAR(500) NOT NULL DEFAULT 'Euro',
+  `Descripcion` VARCHAR(500) NULL DEFAULT NULL,
+  `Fecha` VARCHAR(10) NOT NULL,
+  `ProcedenciaBeneficiario` VARCHAR(100) NOT NULL DEFAULT '-',
   `GESTIONECONOMICA_idBalance` INT(10) NOT NULL,
-  `USUARIO_idUsuario` INT(10) NOT NULL,
   PRIMARY KEY (`idDon`, `GESTIONECONOMICA_idBalance`),
   UNIQUE INDEX `idDon_UNIQUE` (`idDon` ASC),
   INDEX `fk_DONACIÓN_GESTIÓNECONÓMICA1` (`GESTIONECONOMICA_idBalance` ASC),
-  INDEX `fk_DONACIÓN_USUARIO1` (`USUARIO_idUsuario` ASC),
   CONSTRAINT `fk_DONACIÓN_GESTIÓNECONÓMICA1`
     FOREIGN KEY (`GESTIONECONOMICA_idBalance`)
-    REFERENCES `mydb`.`gestionEconomica` (`idBalance`),
-  CONSTRAINT `fk_DONACIÓN_USUARIO1`
-    FOREIGN KEY (`USUARIO_idUsuario`)
-    REFERENCES `mydb`.`usuario` (`idUsuario`))
+    REFERENCES `mydb`.`gestionEconomica` (`idBalance`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -105,18 +102,15 @@ CREATE TABLE IF NOT EXISTS `mydb`.`gasto` (
   `Cantidad` DOUBLE NOT NULL,
   `Moneda` VARCHAR(500) NOT NULL DEFAULT 'Euro',
   `Descripcion` VARCHAR(500) NULL DEFAULT NULL,
+  `Fecha` VARCHAR(10) NOT NULL,
+  `ProcedenciaBeneficiario` VARCHAR(100) NOT NULL DEFAULT '-',
   `GESTIONECONOMICA_idBalance` INT(10) NOT NULL,
-  `USUARIO_idUsuario` INT(10) NOT NULL,
-  PRIMARY KEY (`idGasto`, `GESTIONECONOMICA_idBalance`, `USUARIO_idUsuario`),
+  PRIMARY KEY (`idGasto`, `GESTIONECONOMICA_idBalance`),
   UNIQUE INDEX `idGasto_UNIQUE` (`idGasto` ASC),
   INDEX `fk_GASTO_GESTIÓNECONÓMICA1` (`GESTIONECONOMICA_idBalance` ASC),
-  INDEX `fk_GASTO_USUARIO2` (`USUARIO_idUsuario` ASC),
   CONSTRAINT `fk_GASTO_GESTIÓNECONÓMICA1`
     FOREIGN KEY (`GESTIONECONOMICA_idBalance`)
-    REFERENCES `mydb`.`gestionEconomica` (`idBalance`),
-  CONSTRAINT `fk_GASTO_USUARIO2`
-    FOREIGN KEY (`USUARIO_idUsuario`)
-    REFERENCES `mydb`.`usuario` (`idUsuario`))
+    REFERENCES `mydb`.`gestionEconomica` (`idBalance`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

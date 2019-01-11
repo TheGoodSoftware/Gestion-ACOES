@@ -27,30 +27,47 @@ public class GestionEconomica {
 	public Object[][] toObjectArray() {
 		Object[][] valores = new Object[this.getEconomias().size()][7];
 		for(int i = 0; i < this.getEconomias().size(); i++) {
-			Object[] values = new Object[6];
+			Object[] values = new Object[7];
 			values[0] = this.getEconomias().get(i).getId();
 			values[1] = this.getEconomias().get(i).getCantidad();
 			values[2] = this.getEconomias().get(i).getMoneda();
 			values[3] = this.getEconomias().get(i).getTipo();
 			values[4] = this.getEconomias().get(i).getDescripcion();
-			values[5] = this.getEconomias().get(i).getUsuario().getNombreCompleto();
+			values[5] = this.getEconomias().get(i).getBeneficiarioProcedencia();
+			values[6] = this.getEconomias().get(i).getFecha();
 			valores[i] = values;
 		}
 		return valores;
 	}
 	
 	public static Object[][] EconomiaArraytoObjectArray(Economia[] economia) {
-		Object[][] valores = new Object[economia.length][6];
+		Object[][] valores = new Object[economia.length][7];
 		for(int i = 0; i < economia.length; i++) {
-			Object[] values = new Object[6];
+			Object[] values = new Object[7];
 			values[0] = economia[i].getId();
 			values[1] = economia[i].getCantidad();
 			values[2] = economia[i].getMoneda();
 			values[3] = economia[i].getTipo();
 			values[4] = economia[i].getDescripcion();
-			values[5] = economia[i].getUsuario().getNombreCompleto();
+			values[5] = economia[i].getBeneficiarioProcedencia();
+			values[6] = economia[i].getFecha();
 			valores[i] = values;
 		}
 		return valores;
+	}
+	
+	public String[] getAllFechas() {
+		ArrayList<String> fechas = new ArrayList<>();
+		fechas.add("-");
+		
+		for(int i = 0; i < economia.size(); i++)
+		{
+			String[] dateValues = economia.get(i).getFecha().split("/");
+			String fechaTemp = dateValues[1] + "/" + dateValues[2];
+			if(!fechas.contains(fechaTemp))
+				fechas.add(fechaTemp);
+		}
+		
+		return fechas.toArray(new String[fechas.size()]);
 	}
 }

@@ -43,13 +43,10 @@ public class AnyadirEconomiaControlador implements ActionListener {
 			
 			try {
 				Economia economia = new Economia(economiaID, Double.parseDouble(values.get(0).toString()), (String)values.get(1), (String)values.get(2), 
-						new BD().getSocio((int)values.get(3)), modelo, (String)values.get(4));
+						modelo, (String)values.get(3), (String)values.get(4), (String)values.get(5));
 				modelo.getEconomias().add(economia);
 				new BD().insertEconomia(economia);
 			} catch (NumberFormatException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}

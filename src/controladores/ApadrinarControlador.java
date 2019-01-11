@@ -3,7 +3,7 @@ package controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import modelos.ApadrinarModelo;
+import modelos.Apadrinar;
 import modelos.LoginModelo;
 import modelos.Usuario;
 import vistas.AdminVista;
@@ -13,7 +13,7 @@ import vistas.LoginVista;
 public class ApadrinarControlador implements ActionListener {
 	
 	private ApadrinarVista vistaApadrinar;
-	private ApadrinarModelo modelo;
+	private Apadrinar modelo;
 	private Usuario usuario;
 	// Como hay que confirmar si ya se ha seleccionado antes apadrinar o desapadrinar
 	// he decidido guardar en la variable state el evento que ha sido pulsado antes
@@ -21,7 +21,7 @@ public class ApadrinarControlador implements ActionListener {
 	// o se cambie a denegar apadrinamiento por ejemplo
 	private Boolean clickado=false;
 	
-	public ApadrinarControlador(ApadrinarVista vista, ApadrinarModelo modelo, Usuario usuario) {
+	public ApadrinarControlador(ApadrinarVista vista, Apadrinar modelo, Usuario usuario) {
 		this.vistaApadrinar = vista;
 		this.modelo = modelo;
 		this.usuario = usuario;
@@ -30,12 +30,13 @@ public class ApadrinarControlador implements ActionListener {
 	public void iniciarVista() {
 		//cargar todos los socios y niños
 		vistaApadrinar.setVisible(true);
-		vistaApadrinar.actualizarSocio(modelo.getSocios());
-		vistaApadrinar.actualizarNino(modelo.getNinos());
+		//vistaApadrinar.actualizarSocio(modelo.getSocios());
+		//vistaApadrinar.actualizarNino(modelo.getNinos());
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		/*
 		String evento = e.getActionCommand();
 		switch(evento) {
 			case "APADRINAR" : apadrinar();
@@ -157,7 +158,7 @@ public class ApadrinarControlador implements ActionListener {
 		vistaApadrinar.deshabilitarMostrar();
 		clickado = true;
 		vistaApadrinar.actualizarNino(modelo.getApadrinados(vistaApadrinar.getSocioSeleccionado()));
-	}
+*/	}
 
 
 }

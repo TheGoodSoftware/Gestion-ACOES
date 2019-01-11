@@ -101,13 +101,13 @@ public class AdministradorVista extends javax.swing.JFrame {
         cerrarBoton.setBorder(null);
         cerrarBoton.setBorderPainted(false);
 
-        jButton8.setText("jButton1");
+        /*jButton8.setText("jButton1");
         jButton8.setBorder(null);
         jButton8.setBorderPainted(false);
 
         jButton9.setText("jButton1");
         jButton9.setBorder(null);
-        jButton9.setBorderPainted(false);
+        jButton9.setBorderPainted(false);*/
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,8 +120,8 @@ public class AdministradorVista extends javax.swing.JFrame {
             .addComponent(gestionSociosBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
             .addComponent(vistaSocioBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
             .addComponent(cerrarBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-            .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-            .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+            //.addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+            //.addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,10 +140,11 @@ public class AdministradorVista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cerrarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                //.addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                //.addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                //.addGap(0, 0, Short.MAX_VALUE)
+                )
         );
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);

@@ -81,7 +81,7 @@ public class BD {
 				nombreId = "idDon";
 			}
 				
-			stmt.execute("INSERT INTO " + nombreTabla + " VALUES (" + e.getId() + "," + e.getCantidad() + ",'" + e.getMoneda() + "','" + e.getDescripcion() + "'," + e.getGestion().getID() + "," + e.getUsuario().getID() + ")");
+			stmt.execute("INSERT INTO " + nombreTabla + " VALUES (" + e.getId() + "," + e.getCantidad() + ",'" + e.getMoneda() + "','" + e.getDescripcion() + "','" + e.getFecha() + "','" + e.getBeneficiarioProcedencia() + "'," + e.getGestion().getID() + ")");
 			stmt.close();
 		} catch (SQLException sqlEx) {
 			throw new Error("ERROR. Trying to insert economia -> " + sqlEx.getMessage());
@@ -402,7 +402,7 @@ public class BD {
 		{
 			Statement stmt = con.createStatement();
 			ArrayList<Economia> economia = new ArrayList<>();
-			ResultSet result = stmt.executeQuery("SELECT * FROM donacion JOIN gestionEconomica ON donacion.GESTIONECONOMICA_idBalance = gestionEconomica.idBalance JOIN persona ON persona.idPersona = donacion.USUARIO_idUsuario");
+			ResultSet result = stmt.executeQuery("SELECT * FROM donacion JOIN gestionEconomica ON donacion.GESTIONECONOMICA_idBalance = gestionEconomica.idBalance");
 			GestionEconomica gestion = null;
 			
 			while(result.next()) {
@@ -413,22 +413,16 @@ public class BD {
 								result.getDouble("Cantidad"),
 								result.getString("Moneda"),
 								result.getString("Descripcion"),
-								new Usuario(
-										result.getInt("idPersona"),
-										result.getString("Nombre"),
-										result.getString("Apellidos"),
-										null,
-										null,
-										null,
-										null, 
-										null),
 								gestion,
-								"Ingreso"
+								"Ingreso",
+								result.getString("ProcedenciaBeneficiario"),
+								result.getString("Fecha")
 								)
 				);
 			}
 			
-			result = stmt.executeQuery("SELECT * FROM gasto JOIN gestionEconomica ON gasto.GESTIONECONOMICA_idBalance = gestionEconomica.idBalance JOIN persona ON persona.idPersona = gasto.USUARIO_idUsuario");
+			result = stmt.executeQuery("SELECT * FROM gasto JOIN gestionEconomica ON "
+					+ "gasto.GESTIONECONOMICA_idBalance = gestionEconomica.idBalance");
 
 			while(result.next()) {
 				if(gestion == null)
@@ -439,17 +433,10 @@ public class BD {
 								result.getDouble("Cantidad"),
 								result.getString("Moneda"),
 								result.getString("Descripcion"),
-								new Usuario(
-										result.getInt("idPersona"),
-										result.getString("Nombre"),
-										result.getString("Apellidos"),
-										null,
-										null,
-										null,
-										null, 
-										null),
 								gestion,
-								"Gasto"
+								"Gasto",
+								result.getString("ProcedenciaBeneficiario"),
+								result.getString("Fecha")
 								)
 				);
 			}

@@ -2,6 +2,7 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 import vistas.*;
@@ -44,14 +45,14 @@ public class AdminControlador implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
        switch(e.getActionCommand()) {
-       case "APADRINAR":
+       /*case "APADRINAR":
     	   ApadrinarVista vistaApadrinar = new ApadrinarVista();
-    	   ApadrinarModelo modeloApadrinar = new ApadrinarModelo();
+    	   Apadrinar modeloApadrinar = new Apadrinar();
     	   ApadrinarControlador ctr = new ApadrinarControlador(vistaApadrinar, modeloApadrinar, this.usuario);
     	   vistaApadrinar.controlador(ctr);
     	   ctr.iniciarVista();
     	   vistaAdmin.setVisible(false);
-    	   break;
+    	   break;*/
     	case "VISTA_SOCIO":
     	    vistaSocio = new SocioVista(usuario);
     	    vistaAdmin.setPanelContenido(vistaSocio);
@@ -89,7 +90,7 @@ public class AdminControlador implements ActionListener {
 		}
     		break;
     	case "CERRAR":
-    	   	vistaAdmin.dispose();
+    	   	vistaAdmin.dispatchEvent(new WindowEvent(vistaAdmin, WindowEvent.WINDOW_CLOSING));
     	   	break;
        }
     }
