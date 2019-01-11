@@ -12,8 +12,9 @@ import java.util.*;
 
 public class AdminControlador implements ActionListener {
 
-    private AdminVista vistaAdmin;
-    private Usuario usuario;
+    //private AdminVista vistaAdmin;
+    private AdministradorVista vistaAdmin;
+	private Usuario usuario;
     private SocioVista vistaSocio;
     //private AdminModelo modelo;
 
@@ -23,6 +24,10 @@ public class AdminControlador implements ActionListener {
     }
 
     public void iniciarVista() {
+    	vistaAdmin = new AdministradorVista();
+    	vistaAdmin.addControlador(this);
+    	vistaAdmin.setVisible(true);
+    	/*
         vistaAdmin = new AdminVista();
         if (usuario.getRole().getNombre().equalsIgnoreCase("ResponsableAcademico")) {
             vistaAdmin.academicoOff();
@@ -32,7 +37,7 @@ public class AdminControlador implements ActionListener {
             vistaAdmin.agenteOff();
         }
         vistaAdmin.controlador(this);
-        vistaAdmin.setVisible(true);
+        vistaAdmin.setVisible(true);*/
     }
 
 
@@ -48,26 +53,24 @@ public class AdminControlador implements ActionListener {
     	   vistaAdmin.setVisible(false);
     	   break;
     	case "VISTA_SOCIO":
-            vistaAdmin.setVisible(false);
     	    vistaSocio = new SocioVista(usuario);
-    	    vistaSocio.setVisible(true);
+    	    vistaAdmin.setPanelContenido(vistaSocio);
     	    break;
     	case "GESTION_SOCIOS":
     		AdministrarSociosModelo adminSocioModelo = new AdministrarSociosModelo();
     		AdministrarSociosVista adminSocioVista = new AdministrarSociosVista();
     		AdministrarSociosControlador adminSocioCtr = new AdministrarSociosControlador(adminSocioVista, adminSocioModelo);
-    		vistaAdmin.setVisible(false);
     		adminSocioVista.controlador(adminSocioCtr);
-    		adminSocioCtr.iniciarVista();
+    		vistaAdmin.setPanelContenido(adminSocioCtr.iniciarVista());
     		break;
     	case "GESTION_ECONOMICA":
-    		vistaAdmin.setVisible(false);
     		BD bd = new BD();
     		GestionEconomica gestionEconomica = bd.getEconomia();
     		GestionEconomicaVista economiaVista = new GestionEconomicaVista(gestionEconomica);
     		economiaVista.addControlador(new EconomiaControlador(economiaVista, vistaAdmin, gestionEconomica));
     		economiaVista.setVisible(true);
-    		break;
+    		vistaAdmin.setPanelContenido(economiaVista); 		
+    		break;/*
 	   	case "GESTION_ACADEMICA":
 		   	vistaAdmin.setVisible(false);
 			bd = new BD();
@@ -75,18 +78,19 @@ public class AdminControlador implements ActionListener {
 		   	GestionAcademicaVista educacionVista = new GestionAcademicaVista(gestionAcademica);
 		   	educacionVista.addControlador(new GestionAcademicaControlador(educacionVista, vistaAdmin, gestionAcademica));
 		   	educacionVista.setVisible(true);
-		   	break;
+		   	break;*/
     	case "GESTION_NINOS":
     		GestionNinosControlador gesNinosCtr = new GestionNinosControlador(this.vistaAdmin);
-    		vistaAdmin.setVisible(false);
 		try {
-			gesNinosCtr.iniciarVista();
+			vistaAdmin.setPanelContenido(gesNinosCtr.iniciarVista());
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			//e1.printStackTrace();
 		}
     		break;
-    		
+    	case "CERRAR":
+    	   	vistaAdmin.dispose();
+    	   	break;
        }
     }
 }

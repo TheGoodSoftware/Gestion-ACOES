@@ -22,7 +22,7 @@ import principal.BD;
  *
  * @author jaysus
  */
-public class GestionEconomicaVista extends javax.swing.JFrame {
+public class GestionEconomicaVista extends javax.swing.JPanel {
 
     /**
      * Creates new form GestionEconomica
@@ -66,7 +66,6 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
         anyadirBoton = new javax.swing.JButton();
         eliminarBoton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
 
         buscarPorIdLabel.setText("Buscar por id:");
@@ -127,8 +126,8 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
             }
         });
         
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -166,8 +165,6 @@ public class GestionEconomicaVista extends javax.swing.JFrame {
                     .addComponent(eliminarBoton))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
-
-        pack();
     }// </editor-fold>                        
 
     // Variables declaration - do not modify                     

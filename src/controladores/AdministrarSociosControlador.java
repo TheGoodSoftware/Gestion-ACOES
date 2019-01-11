@@ -19,8 +19,9 @@ public class AdministrarSociosControlador implements ActionListener{
 		this.modelo = modelo;
 	}
 	
-	public void iniciarVista() {
+	public AdministrarSociosVista iniciarVista() {
 		vistaAdmin.setVisible(true);
+		return vistaAdmin;
 	}
 	
 	@Override

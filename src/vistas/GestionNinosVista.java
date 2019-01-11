@@ -10,7 +10,7 @@ import controladores.GestionNinosControlador;
 import modelos.Nino;
  
 
-public class GestionNinosVista extends javax.swing.JFrame {
+public class GestionNinosVista extends javax.swing.JPanel {
 
     /**
      * Creates new form gestionSociosNinos
@@ -53,7 +53,7 @@ public class GestionNinosVista extends javax.swing.JFrame {
         ccjCampo = new javax.swing.JCheckBox();
         becadoCampo = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
 
         buscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,8 +120,8 @@ public class GestionNinosVista extends javax.swing.JFrame {
 
         becadoCampo.setText("Becado");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -209,8 +209,6 @@ public class GestionNinosVista extends javax.swing.JFrame {
         );
 
         jLabel2.getAccessibleContext().setAccessibleName("Gestión de niños");
-
-        pack();
     }// </editor-fold>                        
 
     private void buscadorActionPerformed(java.awt.event.ActionEvent evt) {                                         

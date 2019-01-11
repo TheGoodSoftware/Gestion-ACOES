@@ -10,9 +10,9 @@ public class EconomiaControlador implements ActionListener {
 	
 	private GestionEconomicaVista vistaGestion;
 	private GestionEconomica gestion;
-	private AdminVista vistaAdmin;
+	private AdministradorVista vistaAdmin;
 	
-	public EconomiaControlador(GestionEconomicaVista vistaGestion, AdminVista vistaAdmin, GestionEconomica gestion) {
+	public EconomiaControlador(GestionEconomicaVista vistaGestion, AdministradorVista vistaAdmin, GestionEconomica gestion) {
 		this.vistaGestion = vistaGestion;
 		this.vistaAdmin = vistaAdmin;
 		this.gestion = gestion;
@@ -22,7 +22,7 @@ public class EconomiaControlador implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
 			case "ATRAS":
-				vistaGestion.dispose();
+				//vistaGestion.dispose();
 				vistaAdmin.setVisible(true);
 				break;
 			case "ANYADIR":

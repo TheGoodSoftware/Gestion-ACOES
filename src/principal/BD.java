@@ -107,7 +107,7 @@ public class BD {
 		}
 	}
 
-	public void insertEducacion(Educacion e) {
+	/*public void insertEducacion(Educacion e) {
 		try {
 			Statement stmt = con.createStatement();
 			String nombreTabla = "Expediente";
@@ -117,7 +117,7 @@ public class BD {
 		} catch (SQLException sqlEx) {
 			throw new Error("ERROR. Trying to insert educacion -> " + sqlEx.getMessage());
 		}
-	}
+	}*/
 
 	public Usuario getSocio(String e_mail) {
 		try
@@ -464,7 +464,7 @@ public class BD {
 			throw new Error("ERROR. Trying to get Economia -> " + ex.getMessage());
 		}
 	}
-
+/*
 	public GestionAcademica getEducacion() {
 		try
 		{
@@ -504,7 +504,7 @@ public class BD {
 			throw new Error("ERROR. Trying to get Economia -> " + ex.getMessage());
 		}
 	}
-	
+	*/
 	public void endConnection()
 	{
 		try {

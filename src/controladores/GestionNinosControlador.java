@@ -6,28 +6,28 @@ import java.sql.SQLException;
 
 import modelos.GestionNinosModelo;
 import principal.BD;
-import vistas.AdminVista;
+import vistas.AdministradorVista;
 import vistas.GestionNinosVista;
 
 public class GestionNinosControlador implements ActionListener{
 	
 	private GestionNinosVista vistaGestionNinos;
 	private GestionNinosModelo modeloGestionNinos;
-	private AdminVista vistaAdmin;
+	private AdministradorVista vistaAdmin;
 	private boolean estadoActualizar;
 	private BD bd = new BD();
-	public GestionNinosControlador(AdminVista vistaAdmin) {
+	public GestionNinosControlador(AdministradorVista vistaAdmin) {
 		vistaGestionNinos = new GestionNinosVista();
 		modeloGestionNinos = new GestionNinosModelo();
 		estadoActualizar = false;
 		this.vistaAdmin = vistaAdmin;
 	}
 	
-	public void iniciarVista() throws SQLException {
+	public GestionNinosVista iniciarVista() throws SQLException {
 		vistaGestionNinos.controlador(this);
 		vistaGestionNinos.cargarTabla(bd.getAllNinos());
 		vistaGestionNinos.setVisible(true);
-		
+		return vistaGestionNinos;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

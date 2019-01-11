@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.Set;
 
-public class SocioVista extends javax.swing.JFrame {
+public class SocioVista extends javax.swing.JPanel {
 
     private Usuario socio;
 
@@ -46,7 +46,7 @@ public class SocioVista extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCalificacionesApadrinados = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+       
 
         labelUsuario.setText("Usuario: " + socio.getNombre() + " (" + socio.getRole().getNombre() + ")");
 
@@ -125,8 +125,8 @@ public class SocioVista extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -183,8 +183,6 @@ public class SocioVista extends javax.swing.JFrame {
                 }
             }
         });
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
