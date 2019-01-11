@@ -30,7 +30,6 @@ public class ApadrinarControlador implements ActionListener {
 	public void iniciarVista() {
 		//cargar todos los socios y niños
 		vistaApadrinar.setVisible(true);
-		System.out.println(modelo.getSocios());
 		vistaApadrinar.actualizarSocio(modelo.getSocios());
 		vistaApadrinar.actualizarNino(modelo.getNinos());
 	}
@@ -49,17 +48,22 @@ public class ApadrinarControlador implements ActionListener {
 			break;
 			case "ATRAS" : atras();
 			break;
+			case "MOSTRARAPADRINADOS" : mostrarApadrinados();
+			break;
+			case "MOSTRARPADRINOS" : mostrarPadrinos();
+			break;
 			default :;
 			break;
 		}
 	}
 	
+
 	public void apadrinar() {
 		if(clickado) {
 			boolean exito = modelo.Apadrinar(vistaApadrinar.getSocioSeleccionado(), vistaApadrinar.getNinoSeleccionado());
 			clickado = false;
 			if(exito) {
-				vistaApadrinar.setMensajeExito("Se desapadrino con exito");
+				vistaApadrinar.setMensajeExito("Se apadrino con exito");
 			} else {
 				vistaApadrinar.setMensajeError("No se pudo apadrinar correctamente");
 			};
@@ -70,11 +74,13 @@ public class ApadrinarControlador implements ActionListener {
 			vistaApadrinar.actualizarBotonApadrinar("Apadrinar");
 			vistaApadrinar.actualizarSocio(modelo.getSocios());
 			vistaApadrinar.actualizarNino(modelo.getNinos());
+			vistaApadrinar.habilitarMostrar();
 			clickado = false;
 		} else {
 			vistaApadrinar.actualizarBotonApadrinar("Confirmar apadrinamiento");
 			vistaApadrinar.deshabilitarDesapadrinar();
 			vistaApadrinar.deshabilitarCamposTexto();
+			vistaApadrinar.deshabilitarMostrar();
 			clickado = true;
 		}
 	}
@@ -88,10 +94,20 @@ public class ApadrinarControlador implements ActionListener {
 			} else {
 				vistaApadrinar.setMensajeError("No se pudo desapadrinar correctamente");
 			};
+			vistaApadrinar.habilitarCamposTexto();
+			vistaApadrinar.habilitarApadrinar();
+			vistaApadrinar.habilitarDesapadrinar();
+			vistaApadrinar.actualizarBotonDesapadrinar("Desapadrinar");
+			vistaApadrinar.actualizarBotonApadrinar("Apadrinar");
+			vistaApadrinar.actualizarSocio(modelo.getSocios());
+			vistaApadrinar.actualizarNino(modelo.getNinos());
+			vistaApadrinar.habilitarMostrar();
+
 		} else {
 			vistaApadrinar.actualizarBotonDesapadrinar("Confirmar desapadrinamiento");
 			vistaApadrinar.deshabilitarApadrinar();
 			vistaApadrinar.deshabilitarCamposTexto();
+			vistaApadrinar.deshabilitarMostrar();
 			clickado = true;
 		}
 	}
@@ -101,7 +117,7 @@ public class ApadrinarControlador implements ActionListener {
 	}
 	
 	public void filtrarSocio() {
-		vistaApadrinar.actualizarSocio(modelo.filtrarSocios(vistaApadrinar.getFiltroSocio()));;
+		vistaApadrinar.actualizarSocio(modelo.filtrarSocios(vistaApadrinar.getFiltroSocio()));
 	}
 	
 	public void atras() {
@@ -113,6 +129,7 @@ public class ApadrinarControlador implements ActionListener {
 			vistaApadrinar.actualizarBotonApadrinar("Apadrinar");
 			vistaApadrinar.actualizarSocio(modelo.getSocios());
 			vistaApadrinar.actualizarNino(modelo.getNinos());
+			vistaApadrinar.habilitarMostrar();
 			clickado = false;
 		} else {
 			AdminVista admVista = new AdminVista();
@@ -122,5 +139,25 @@ public class ApadrinarControlador implements ActionListener {
 			vistaApadrinar.setVisible(false);	
 		}
 	}
+	
+	public void mostrarPadrinos() {
+		vistaApadrinar.deshabilitarApadrinar();
+		vistaApadrinar.deshabilitarCamposTexto();
+		vistaApadrinar.deshabilitarDesapadrinar();
+		vistaApadrinar.deshabilitarMostrar();
+		clickado = true;
+		vistaApadrinar.actualizarSocio(modelo.getPadrinos(vistaApadrinar.getNinoSeleccionado()));
+		
+	}
+
+	public void mostrarApadrinados() {
+		vistaApadrinar.deshabilitarApadrinar();
+		vistaApadrinar.deshabilitarCamposTexto();
+		vistaApadrinar.deshabilitarDesapadrinar();
+		vistaApadrinar.deshabilitarMostrar();
+		clickado = true;
+		vistaApadrinar.actualizarNino(modelo.getApadrinados(vistaApadrinar.getSocioSeleccionado()));
+	}
+
 
 }

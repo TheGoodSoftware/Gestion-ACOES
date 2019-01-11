@@ -184,14 +184,14 @@ public class BD {
 		try {
 		Nino nino = null;
 		Statement stmt = con.createStatement();
-		ResultSet result = stmt.executeQuery("SELECT * FROM nino JOIN persona ON nino.idNen = persona.idPersona where idNen = "+id);
+		ResultSet result = stmt.executeQuery("SELECT nino.idNen FROM nino JOIN persona ON nino.idNen = persona.idPersona where idNen = "+id);
 		Map<String, Integer> notas = new TreeMap<>();
 		nino = new Nino(
 				result.getInt("idNen"),
 				result.getString("Nombre"),
 				result.getString("Apellidos"),
-				result.getString("Direccion"),
-				result.getString("Pueblo"),
+				"",
+				"",
 				result.getInt("Edad"),
 				notas
 		);
@@ -512,5 +512,56 @@ public class BD {
 		} catch (SQLException e) {
 			System.err.println("ERROR. Trying to close database connection");
 		}
+	}
+
+	public List<Apadrinar> getApadrinamientos() {
+		List<Apadrinar> lista = new ArrayList<Apadrinar>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM apadrinar");
+			while(result.next()) {
+				lista.add(new Apadrinar(
+						result.getInt("USUARIO_idUsuario"),
+						result.getInt("NINO_idNen"),
+						result.getBoolean("Activo")
+						));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("ERROR. Trying to get apadrinamientos");
+		}
+		
+		return lista;
+	}
+
+	public void insertarApadrinamiento(int idPadrino, int idNino) throws SQLException {
+		// TODO Auto-generated method stub
+		System.out.println(idPadrino);
+		System.out.println(idNino);
+
+		Statement stmt = con.createStatement();
+			
+		stmt.execute("INSERT INTO apadrinar(NINO_idNen, USUARIO_idUsuario, Activo) VALUES("+
+																							idNino+","+
+																							idPadrino+","+
+																							1+")");
+		stmt.close();
+	}
+
+	public void activarApadrinamiento(int idPadrino, int idNino) {
+		try {
+			Statement stmt = con.createStatement();
+			stmt.execute("UPDATE apadrinar SET Activo=1 where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
+			stmt.close();
+		} catch (SQLException e) {
+			System.err.println("ERROR. Trying to activate apadrinamiento");
+		}
+	}
+		
+	
+	public void borrarApadrinamiento(int idPadrino, int idNino) throws SQLException {
+			Statement stmt = con.createStatement();
+			stmt.execute("UPDATE apadrinar SET Activo=0 where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
+			stmt.close();
 	}
 }
