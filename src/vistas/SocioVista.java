@@ -171,7 +171,7 @@ public class SocioVista extends javax.swing.JPanel {
                 if (e.getValueIsAdjusting()) {
                     Nino seleccionado = socio.getApadrinados().get(listaApadrinados.getSelectedIndex());
                     labelNombreApadrinado.setText("Nombre: " + seleccionado.getNombre() + " " + seleccionado.getApellidos());
-                    labelEdadApadrinado.setText("Edad: " + " " + seleccionado.getEdad());
+                    labelEdadApadrinado.setText("Edad: " + " " + seleccionado.getfechaNacimiento());
                     DefaultTableModel model = (DefaultTableModel) tablaCalificacionesApadrinados.getModel();
                     model.setRowCount(0);
 

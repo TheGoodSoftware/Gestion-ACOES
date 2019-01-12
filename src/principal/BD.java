@@ -158,25 +158,44 @@ public class BD {
 			return null;
 	}
 	
-	public List<Nino> getAllNinos() throws SQLException{
+	public List<Nino> getAllNinos() {
+		try {
 		List<Nino> ninios = new ArrayList<>();
 		Statement stmt = con.createStatement();
 		ResultSet result = stmt.executeQuery("SELECT * FROM nino JOIN persona ON nino.idNen = persona.idPersona");
 		Map<String, Integer> notas = new TreeMap<>();
 		while(result.next()) {
-			ninios.add(new Nino(
-					result.getInt("idNen"),
-					result.getString("Nombre"),
-					result.getString("Apellidos"),
-					result.getString("Direccion"),
-					result.getString("Pueblo"),
-					result.getInt("Edad"),
-					notas
-			));
+		
+				ninios.add(new Nino(
+						result.getInt("idNen"),
+						result.getString("Nombre"),
+						result.getString("Apellidos"),
+						result.getString("Direccion"),
+						result.getString("Pueblo"),
+						result.getString("fechaNacimiento"),
+						notas,
+						result.getString("sexo"),
+						result.getInt("PROYECTO_idProy"),
+						result.getString("fechaAlta"),
+						result.getString("fechaAltaACOES"),
+						result.getString("fechaSalidaACOES"),
+						result.getString("fechaAltaProyecto"),
+						result.getString("fechaSalidaProyecto"),
+						result.getString("observaciones"),
+						result.getString("NIF")
+				));
 		}
-		stmt.close();
-		result.close();
-		return ninios;
+				stmt.close();
+				result.close();
+				return ninios;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		return null;
+		
+		
+		
 	}
 	
 	public Nino getNino(int id) throws SQLException{
@@ -189,10 +208,19 @@ public class BD {
 				result.getInt("idNen"),
 				result.getString("Nombre"),
 				result.getString("Apellidos"),
-				"",
-				"",
-				result.getInt("Edad"),
-				notas
+				result.getString("Direccion"),
+				result.getString("Pueblo"),
+				result.getString("fechaNacimiento"),
+				notas,
+				result.getString("sexo"),
+				result.getInt("PROYECTO_idProy"),
+				result.getString("fechaAlta"),
+				result.getString("fechaAltaACOES"),
+				result.getString("fechaSalidaACOES"),
+				result.getString("fechaAltaProyecto"),
+				result.getString("fechaSalidaProyecto"),
+				result.getString("observaciones"),
+				result.getString("NIF")
 		);
 		return nino;
 		}
@@ -245,8 +273,17 @@ public class BD {
 						result.getString("Apellidos"),
 						result.getString("Direccion"),
 						result.getString("Pueblo"),
-						result.getInt("Edad"),
-						notas
+						result.getString("fechaNacimiento"),
+						notas,
+						result.getString("sexo"),
+						result.getInt("PROYECTO_idProy"),
+						result.getString("fechaAlta"),
+						result.getString("fechaAltaACOES"),
+						result.getString("fechaSalidaACOES"),
+						result.getString("fechaAltaProyecto"),
+						result.getString("fechaSalidaProyecto"),
+						result.getString("observaciones"),
+						result.getString("NIF")
 				));
 			}
 			stmt.close();
@@ -303,9 +340,10 @@ public class BD {
 			Statement stmt = con.createStatement();
 			
 			stmt.execute("INSERT INTO persona VALUES ("+n.getID()+",'"
-					+ n.getNombre() + "','" + n.getApellidos() + "','"+n.getDireccion()+"','"+n.getPueblo()+"')");
-			stmt.execute("INSERT INTO nino VALUES ("+n.getID()+","+
-					n.getEdad() + "," + 101 + ")");
+					+ n.getNombre() + "','" + n.getApellidos() + "','"+n.getDireccion()+"','"+n.getPueblo()+"','Karruka')");
+			stmt.execute("INSERT INTO nino VALUES ("+n.getID()+",'"+
+					n.getfechaNacimiento() + "','" + n.getSexo() + "','" + n.getFechaAlta() +"','" + n.getFechaAltaACOES() +"','" + n.getFechaSalidaACOES() +"','" + n.getFechaAltaProyecto() +
+					"','" + n.getFechaSalidaProyecto() +"','" + n.getObservaciones() +"'," + n.getProyecto() + ",'"+ n.getNIF() +   "')");
 			stmt.close();
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to insert Ninio into database -> " + ex.getMessage());
@@ -316,7 +354,7 @@ public class BD {
 	public void modificarNinoBaseDeDatos(Nino n) {
 		try {
 			Statement stmt = con.createStatement();
-			stmt.execute("UPDATE persona JOIN nino ON nino.idNen=persona.idPersona SET Nombre='"+n.getNombre()+"',Apellidos='" + n.getApellidos()+"', Edad="+n.getEdad()+" WHERE idNen="+n.getID());
+			stmt.execute("UPDATE persona JOIN nino ON nino.idNen=persona.idPersona SET Nombre='"+n.getNombre()+"',Apellidos='" + n.getApellidos()+"', Edad="+n.getfechaNacimiento()+" WHERE idNen="+n.getID());
 			stmt.close();
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to update Usuario into database -> " + ex.getMessage());

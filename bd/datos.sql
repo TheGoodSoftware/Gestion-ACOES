@@ -50,9 +50,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.nino (idNen, Edad, PROYECTO_idProy) VALUES (473829, 9, 101);
-INSERT INTO mydb.nino (idNen, Edad, PROYECTO_idProy) VALUES (43644984, 10, 101);
-INSERT INTO mydb.nino (idNen, Edad, PROYECTO_idProy) VALUES (43644985, 10, 101);
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy) VALUES (473829, 9, 101);
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy) VALUES (43644984, 10, 101);
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy) VALUES (43644985, 10, 101);
 
 
 COMMIT;

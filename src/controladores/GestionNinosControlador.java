@@ -25,13 +25,18 @@ public class GestionNinosControlador implements ActionListener{
 	
 	public GestionNinosVista iniciarVista() throws SQLException {
 		vistaGestionNinos.controlador(this);
-		vistaGestionNinos.cargarTabla(bd.getAllNinos());
+		this.cargarTabla();
+		//vistaGestionNinos.cargarTabla(bd.getAllNinos());
 		vistaGestionNinos.setVisible(true);
 		return vistaGestionNinos;
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
+		case "INSERTAR":
+			AnyadirNinoControlador anyadirNinoCtr = new AnyadirNinoControlador(this);
+			anyadirNinoCtr.iniciarVista();
+		/*
 		case "INSERTAR":
 			modeloGestionNinos.insertarNino(vistaGestionNinos.getNombre(), vistaGestionNinos.getEdad(), vistaGestionNinos.getSexo(), vistaGestionNinos.getIdentidad(), vistaGestionNinos.getCCJ(), vistaGestionNinos.getColegio(), vistaGestionNinos.getBecado());
 			try {
@@ -76,8 +81,14 @@ public class GestionNinosControlador implements ActionListener{
 			this.vistaGestionNinos.setVisible(false);
 			this.vistaAdmin.setVisible(true);
 			break;
-		}
 		
+		*/
+		
+		}
+	}
+
+	public void cargarTabla() throws SQLException {
+		this.vistaGestionNinos.cargarTabla(bd.getAllNinos());
 	}
 
 }
