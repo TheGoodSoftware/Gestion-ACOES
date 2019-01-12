@@ -18,7 +18,7 @@ public class BD {
 	
 	public BD()
 	{
-		if(con == null)
+		
 		 try {
 	            con = DriverManager.getConnection(CONNECTION_URL, CONNECTION_Usuario, CONNECTION_PASSWD);
 	        } catch (SQLException e) {
