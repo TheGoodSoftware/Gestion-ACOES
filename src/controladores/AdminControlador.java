@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import vistas.*;
 import modelos.*;
+import principal.App;
 import principal.BD;
 
 import java.util.*;
@@ -28,17 +29,13 @@ public class AdminControlador implements ActionListener {
     	vistaAdmin = new AdministradorVista();
     	vistaAdmin.addControlador(this);
     	vistaAdmin.setVisible(true);
-    	/*
-        vistaAdmin = new AdminVista();
-        if (usuario.getRole().getNombre().equalsIgnoreCase("ResponsableAcademico")) {
-            vistaAdmin.academicoOff();
-        } else if (usuario.getRole().getNombre().equalsIgnoreCase("ResponsableEconomico")) {
-            vistaAdmin.economicoOff();
-        } else if (usuario.getRole().getNombre().equalsIgnoreCase("Agente")) {
-            vistaAdmin.agenteOff();
+        if (usuario.getRole().getNombre().equalsIgnoreCase("ACADEMICO")) {
+            vistaAdmin.setOnlyAcademico();
+        } else if (usuario.getRole().getNombre().equalsIgnoreCase("ECONOMIA")) {
+            vistaAdmin.setOnlyEconomia();
+        }else if (usuario.getRole().getNombre().equalsIgnoreCase("AGENTE")) {
+            vistaAdmin.setOnlySocios();
         }
-        vistaAdmin.controlador(this);
-        vistaAdmin.setVisible(true);*/
     }
 
 
@@ -91,6 +88,13 @@ public class AdminControlador implements ActionListener {
     		break;
     	case "CERRAR":
     	   	vistaAdmin.dispatchEvent(new WindowEvent(vistaAdmin, WindowEvent.WINDOW_CLOSING));
+    	   	break;
+    	case "CERRAR_SESION":
+    	   	vistaAdmin.dispose();
+    	   	LoginVista loginVista = new LoginVista();
+    	   	LoginControlador controladorLogin = new LoginControlador(loginVista, new LoginModelo());
+    	   	loginVista.controlador(controladorLogin);
+    	   	controladorLogin.iniciarVista();
     	   	break;
        }
     }

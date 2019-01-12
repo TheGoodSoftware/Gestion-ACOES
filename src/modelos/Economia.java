@@ -11,8 +11,9 @@ public class Economia {
 	private String tipo;
 	private String beneficiarioProcedencia;
 	private String fecha;
+	private Boolean aceptado;
 	
-	public Economia(int id, double cantidad, String moneda, String descripcion, GestionEconomica gestion, String tipo, String beneficiarioProcedencia, String fecha)
+	public Economia(int id, double cantidad, String moneda, String descripcion, GestionEconomica gestion, String tipo, String beneficiarioProcedencia, String fecha, Boolean aceptado)
 	{
 		this.id = id;
 		this.cantidad = cantidad;
@@ -22,6 +23,11 @@ public class Economia {
 		this.tipo = tipo;
 		this.fecha = fecha;
 		this.beneficiarioProcedencia = beneficiarioProcedencia;
+		this.aceptado = aceptado;
+	}
+	
+	public String getAceptado() {
+		return (aceptado) ? "Sí" : "No";
 	}
 
 	public String getBeneficiarioProcedencia()

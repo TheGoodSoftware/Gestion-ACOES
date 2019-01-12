@@ -43,9 +43,9 @@ public class GestionEconomica {
 	}
 	
 	public Object[][] toObjectArray() {
-		Object[][] valores = new Object[this.getEconomias().size()][7];
+		Object[][] valores = new Object[this.getEconomias().size()][8];
 		for(int i = 0; i < this.getEconomias().size(); i++) {
-			Object[] values = new Object[7];
+			Object[] values = new Object[8];
 			values[0] = this.getEconomias().get(i).getId();
 			values[1] = this.getEconomias().get(i).getCantidad();
 			values[2] = this.getEconomias().get(i).getMoneda();
@@ -53,15 +53,16 @@ public class GestionEconomica {
 			values[4] = this.getEconomias().get(i).getDescripcion();
 			values[5] = this.getEconomias().get(i).getBeneficiarioProcedencia();
 			values[6] = this.getEconomias().get(i).getFecha();
+			values[7] = this.getEconomias().get(i).getAceptado();
 			valores[i] = values;
 		}
 		return valores;
 	}
 	
 	public static Object[][] EconomiaArraytoObjectArray(Economia[] economia) {
-		Object[][] valores = new Object[economia.length][7];
+		Object[][] valores = new Object[economia.length][8];
 		for(int i = 0; i < economia.length; i++) {
-			Object[] values = new Object[7];
+			Object[] values = new Object[8];
 			values[0] = economia[i].getId();
 			values[1] = economia[i].getCantidad();
 			values[2] = economia[i].getMoneda();
@@ -69,6 +70,7 @@ public class GestionEconomica {
 			values[4] = economia[i].getDescripcion();
 			values[5] = economia[i].getBeneficiarioProcedencia();
 			values[6] = economia[i].getFecha();
+			values[7] = economia[i].getAceptado();
 			valores[i] = values;
 		}
 		return valores;

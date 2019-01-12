@@ -23,6 +23,27 @@ public class AdministradorVista extends javax.swing.JFrame {
         initComponents();
     }
     
+    public void setOnlyAcademico() {
+    	this.gestionEconomiaBoton.setEnabled(false);
+    	this.gestionNinosBoton.setEnabled(false);
+    	this.gestionSociosBoton.setEnabled(false);
+    	this.gestionApadrinamientosBoton.setEnabled(false);
+    }
+    
+    public void setOnlyEconomia() {
+    	this.gestionAcademicaBoton.setEnabled(false);
+    	this.gestionNinosBoton.setEnabled(false);
+    	this.gestionSociosBoton.setEnabled(false);
+    	this.gestionApadrinamientosBoton.setEnabled(false);
+    }
+    
+    public void setOnlySocios() {
+    	this.gestionAcademicaBoton.setEnabled(false);
+    	this.gestionNinosBoton.setEnabled(false);
+    	this.gestionEconomiaBoton.setEnabled(false);
+    	this.gestionApadrinamientosBoton.setEnabled(false);
+    }
+    
     public void setPanelContenido(javax.swing.JPanel contentPane)
     {
     	System.out.println("Changed content");
@@ -44,6 +65,8 @@ public class AdministradorVista extends javax.swing.JFrame {
     	cerrarBoton.setActionCommand("CERRAR");
     	gestionSociosBoton.addActionListener(ctr);
     	gestionSociosBoton.setActionCommand("GESTION_SOCIOS");
+    	cerrarSesionBoton.addActionListener(ctr);
+    	cerrarSesionBoton.setActionCommand("CERRAR_SESION");
     }
 
     /**
@@ -63,7 +86,7 @@ public class AdministradorVista extends javax.swing.JFrame {
         gestionSociosBoton = new javax.swing.JButton();
         vistaSocioBoton = new javax.swing.JButton();
         cerrarBoton = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        cerrarSesionBoton = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         //contentPane = new javax.swing.JPanel();
@@ -101,10 +124,10 @@ public class AdministradorVista extends javax.swing.JFrame {
         cerrarBoton.setBorder(null);
         cerrarBoton.setBorderPainted(false);
 
-        /*jButton8.setText("jButton1");
-        jButton8.setBorder(null);
-        jButton8.setBorderPainted(false);
-
+        cerrarSesionBoton.setText("Cerrar Sesion");
+        cerrarSesionBoton.setBorder(null);
+        cerrarSesionBoton.setBorderPainted(false);
+/*
         jButton9.setText("jButton1");
         jButton9.setBorder(null);
         jButton9.setBorderPainted(false);*/
@@ -119,8 +142,8 @@ public class AdministradorVista extends javax.swing.JFrame {
             .addComponent(gestionNinosBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
             .addComponent(gestionSociosBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
             .addComponent(vistaSocioBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+            .addComponent(cerrarSesionBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
             .addComponent(cerrarBoton, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-            //.addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
             //.addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,10 +161,10 @@ public class AdministradorVista extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(vistaSocioBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cerrarSesionBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cerrarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                //.addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                //.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 //.addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 //.addGap(0, 0, Short.MAX_VALUE)
                 )
@@ -180,7 +203,7 @@ public class AdministradorVista extends javax.swing.JFrame {
     private javax.swing.JButton gestionNinosBoton;
     private javax.swing.JButton gestionSociosBoton;
     private javax.swing.JButton cerrarBoton;
-    private javax.swing.JButton jButton8;
+    private javax.swing.JButton cerrarSesionBoton;
     private javax.swing.JButton jButton9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;

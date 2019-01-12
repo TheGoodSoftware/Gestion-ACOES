@@ -18,7 +18,6 @@ public class BD {
 	
 	public BD()
 	{
-		if(con == null)
 		 try {
 	            con = DriverManager.getConnection(CONNECTION_URL, CONNECTION_Usuario, CONNECTION_PASSWD);
 	        } catch (SQLException e) {
@@ -416,7 +415,8 @@ public class BD {
 								gestion,
 								"Ingreso",
 								result.getString("ProcedenciaBeneficiario"),
-								result.getString("Fecha")
+								result.getString("Fecha"),
+								result.getBoolean("Aprobado")
 								)
 				);
 			}
@@ -436,7 +436,8 @@ public class BD {
 								gestion,
 								"Gasto",
 								result.getString("ProcedenciaBeneficiario"),
-								result.getString("Fecha")
+								result.getString("Fecha"),
+								result.getBoolean("Aprobado")
 								)
 				);
 			}

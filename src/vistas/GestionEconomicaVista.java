@@ -104,7 +104,7 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
 	                economiaVistaActual = gestion.getEconomias().stream().filter(economia -> economia.getFecha().endsWith(buscadorMesBox.getSelectedItem().toString())).toArray(Economia[]::new);
 					model.setDataVector(GestionEconomica.EconomiaArraytoObjectArray(economiaVistaActual), 
 	                		new String [] {
-	                                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha"
+	                                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha", "Aceptado"
 	                            });
 	                balanceTotalField.setText(Double.toString(GestionEconomica.getBalanceTotal(economiaVistaActual)));
 	                fechaActual = buscadorMesBox.getSelectedItem().toString();
@@ -136,11 +136,11 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
         tablaEconomia.setModel(new javax.swing.table.DefaultTableModel(
                 gestion.toObjectArray(),
                 new String [] {
-                		"Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha"
+                		"Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha", "Aceptado"
                 }
             ) {
                 boolean[] canEdit = new boolean [] {
-                    false, false, false, false, false, false, false
+                    false, false, false, false, false, false, false, false
                 };
 
                 public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -155,7 +155,7 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
                 DefaultTableModel model = (DefaultTableModel) tablaEconomia.getModel();
                 model.setDataVector(GestionEconomica.EconomiaArraytoObjectArray(economias), 
                 		new String [] {
-                                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha"
+                				"Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha", "Aceptado"
                             });
                 balanceTotalField.setText(Double.toString(GestionEconomica.getBalanceTotal(economias)));
             }
@@ -169,6 +169,7 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
             tablaEconomia.getColumnModel().getColumn(3).setResizable(false);
             tablaEconomia.getColumnModel().getColumn(4).setResizable(false);
             tablaEconomia.getColumnModel().getColumn(5).setResizable(false);
+            tablaEconomia.getColumnModel().getColumn(6).setResizable(false);
         }
 
         anyadirBoton.setText("Añadir");

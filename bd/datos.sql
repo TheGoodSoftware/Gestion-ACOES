@@ -26,7 +26,11 @@ USE mydb;
 INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (1000, 'Francisco', 'Jonasio', 'Calle Cersh N3', 'Calatchka');
 INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (1001, 'Dimitri', 'Vetrov', 'Colegio Vicente Shrot', 'Fritch');
 INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (473829, 'Carlos', 'Carle', 'Calle Cersh N3', 'Calatchka');
-INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644984, 'Pedro', 'Mora', 'Colegio Vicente Shrot', 'Fritch');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644984, 'Pedro', 'Mora', 'Calle Almendro', 'Cuenca');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644985, 'Juan', 'Ruiz', 'Calle Escorial', 'Madrid');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644986, 'Marcos', 'Martin', 'Avenida España', 'Malaga');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644987, 'Cristiano', 'Ronaldo', 'Carril Bici', 'Malaga');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644988, 'Benito', 'Asparagus', 'Calle Peatonal', 'Malaga');
 
 
 COMMIT;
@@ -48,6 +52,8 @@ START TRANSACTION;
 USE mydb;
 INSERT INTO mydb.nino (idNen, Edad, PROYECTO_idProy) VALUES (473829, 9, 101);
 INSERT INTO mydb.nino (idNen, Edad, PROYECTO_idProy) VALUES (43644984, 10, 101);
+INSERT INTO mydb.nino (idNen, Edad, PROYECTO_idProy) VALUES (43644985, 10, 101);
+
 
 COMMIT;
 
@@ -72,6 +78,9 @@ START TRANSACTION;
 USE mydb;
 INSERT INTO mydb.permiso (ID, Descripcion) VALUES (1, 'ADMIN');
 INSERT INTO mydb.permiso (ID, Descripcion) VALUES (2, 'USUARIO');
+INSERT INTO mydb.permiso (ID, Descripcion) VALUES (3, 'ECONOMIA');
+INSERT INTO mydb.permiso (ID, Descripcion) VALUES (4, 'ACADEMICO');
+INSERT INTO mydb.permiso (ID, Descripcion) VALUES (5, 'AGENTE');
 
 COMMIT;
 
@@ -82,7 +91,9 @@ START TRANSACTION;
 USE mydb;
 INSERT INTO mydb.rol (idRol, Nombre, Pais, Descripcion) VALUES (21, 'ADMIN', 'Espana', 'Todos los permisos');
 INSERT INTO mydb.rol (idRol, Nombre, Pais, Descripcion) VALUES (22, 'USUARIO', 'Espana', 'Uso estandar');
-
+INSERT INTO mydb.rol (idRol, Nombre, Pais, Descripcion) VALUES (23, 'ECONOMIA', 'Honduras', 'Economia');
+INSERT INTO mydb.rol (idRol, Nombre, Pais, Descripcion) VALUES (24, 'ACADEMICO', 'Honduras', 'Academico');
+INSERT INTO mydb.rol (idRol, Nombre, Pais, Descripcion) VALUES (25, 'AGENTE', 'Espana', 'Agente');
 COMMIT;
 
 
@@ -93,6 +104,9 @@ START TRANSACTION;
 USE mydb;
 INSERT INTO mydb.usuario (idUsuario, Contrasenya, Correo, ASOCIACION_Nombre, ROL_idRol) VALUES (1001, 'contrasenya', 'usuario@correo.es', 'Jose Juan', 22);
 INSERT INTO mydb.usuario (idUsuario, Contrasenya, Correo, ASOCIACION_Nombre, ROL_idRol) VALUES (1000, 'admin', 'admin@correo.es', 'Benito Bashet', 21);
+INSERT INTO mydb.usuario (idUsuario, Contrasenya, Correo, ASOCIACION_Nombre, ROL_idRol) VALUES (43644986, 'economia', 'economia@correo.es', 'Benito Bashet', 23);
+INSERT INTO mydb.usuario (idUsuario, Contrasenya, Correo, ASOCIACION_Nombre, ROL_idRol) VALUES (43644987, 'academico', 'academico@correo.es', 'Benito Bashet', 24);
+INSERT INTO mydb.usuario (idUsuario, Contrasenya, Correo, ASOCIACION_Nombre, ROL_idRol) VALUES (43644988, 'agente', 'agente@correo.es', 'Benito Bashet', 25);
 
 COMMIT;
 
@@ -113,6 +127,9 @@ START TRANSACTION;
 USE mydb;
 INSERT INTO mydb.rolesPermisos (PERMISO_ID, ROL_idRol) VALUES (1, 21);
 INSERT INTO mydb.rolesPermisos (PERMISO_ID, ROL_idRol) VALUES (2, 22);
+INSERT INTO mydb.rolesPermisos (PERMISO_ID, ROL_idRol) VALUES (3, 23);
+INSERT INTO mydb.rolesPermisos (PERMISO_ID, ROL_idRol) VALUES (4, 24);
+INSERT INTO mydb.rolesPermisos (PERMISO_ID, ROL_idRol) VALUES (5, 25);
 
 COMMIT;
 
@@ -123,6 +140,7 @@ COMMIT;
 START TRANSACTION;
 USE mydb;
 INSERT INTO mydb.apadrinar (NINO_idNen, USUARIO_idUsuario) VALUES (473829, 1000);
+INSERT INTO mydb.apadrinar (NINO_idNen, USUARIO_idUsuario) VALUES (43644985, 1000);
 
 COMMIT;
 

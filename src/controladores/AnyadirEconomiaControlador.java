@@ -43,7 +43,7 @@ public class AnyadirEconomiaControlador implements ActionListener {
 			
 			try {
 				Economia economia = new Economia(economiaID, Double.parseDouble(values.get(0).toString()), (String)values.get(1), (String)values.get(2), 
-						modelo, (String)values.get(3), (String)values.get(4), (String)values.get(5));
+						modelo, (String)values.get(3), (String)values.get(4), (String)values.get(5), false);
 				modelo.getEconomias().add(economia);
 				new BD().insertEconomia(economia);
 			} catch (NumberFormatException e1) {
