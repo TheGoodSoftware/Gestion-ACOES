@@ -6,6 +6,7 @@ public class GestionEconomica {
 	private int id;
 	private double balanceTotal;
 	private ArrayList<Economia> economia;
+	private final static double LEMPIRAS_A_EUROS = 0.036;
 	
 	public GestionEconomica(int id) {
 		this.id = id;
@@ -22,6 +23,23 @@ public class GestionEconomica {
 	
 	public int getID() {
 		return this.id;
+	}
+	
+	public static double getBalanceTotal(Economia[] economias) {
+		double balanceTotal = 0.0;
+		
+		for(int i = 0; i < economias.length; i++)
+		{
+			double valor = (economias[i].getMoneda().equalsIgnoreCase("LEMPIRAS")) 
+					? Double.parseDouble(economias[i].getCantidad()) * LEMPIRAS_A_EUROS : Double.parseDouble(economias[i].getCantidad());
+			
+			if(economias[i].getTipo().equalsIgnoreCase("GASTO"))
+				balanceTotal -= valor;
+			else
+				balanceTotal += valor;
+		}
+		
+		return balanceTotal;
 	}
 	
 	public Object[][] toObjectArray() {

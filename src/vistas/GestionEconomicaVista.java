@@ -9,6 +9,7 @@ import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
 import controladores.EconomiaControlador;
+import informes.EconomiaInforme;
 import modelos.*;
 import principal.BD;
 
@@ -28,16 +29,27 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
      * Creates new form GestionEconomica
      */
 	private GestionEconomica gestion;
+	private Economia[] economiaVistaActual;
+	private String fechaActual;
 	
     public GestionEconomicaVista(GestionEconomica gestion) {
     	this.gestion = gestion;
     	initComponents();
     }
+    
+    public String getFechaActual() {
+    	return fechaActual;
+    }
 
+    public Economia[] getEconomiasActual() {
+    	return economiaVistaActual;
+    }
     
     public void addControlador(EconomiaControlador ctr) {
     	anyadirBoton.addActionListener(ctr);
     	anyadirBoton.setActionCommand("ANYADIR");
+    	imprimirInformeBoton.addActionListener(ctr);
+    	imprimirInformeBoton.setActionCommand("IMPRIMIR");
     }
 
     public void updateTable() {
@@ -45,6 +57,10 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
     	model.setDataVector(gestion.toObjectArray(), new String [] {
     			"Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha"
             });
+    	balanceTotalField.setText(Double.toString(GestionEconomica.getBalanceTotal(gestion.getEconomias().toArray(new Economia[gestion.getEconomias().size()]))));
+    	fechaActual = "Periodo completo";
+    	buscadorMesBox.setSelectedIndex(0);
+    	economiaVistaActual = gestion.getEconomias().toArray(new Economia[gestion.getEconomias().size()]);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,8 +77,19 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
         tablaEconomia = new javax.swing.JTable();
         anyadirBoton = new javax.swing.JButton();
         eliminarBoton = new javax.swing.JButton();
+        imprimirInformeBoton = new javax.swing.JButton();
         buscadorMesBox = new javax.swing.JComboBox<>();
         fechaBuscarLabel = new javax.swing.JLabel();
+        balanceTotalLabel = new javax.swing.JLabel();
+        balanceTotalField = new javax.swing.JTextField();
+        
+        imprimirInformeBoton.setText("Guardar informe");
+        
+        balanceTotalField.setEditable(false);
+        balanceTotalField.setText(Double.toString(GestionEconomica.getBalanceTotal(gestion.getEconomias().toArray(new Economia[gestion.getEconomias().size()]))));
+        
+        fechaActual = "XX/XX/XXXX";
+        economiaVistaActual = gestion.getEconomias().toArray(new Economia[gestion.getEconomias().size()]);
         
         setPreferredSize(new java.awt.Dimension(1000, 500));
 
@@ -74,10 +101,14 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
 					updateTable();
 				else {
 					DefaultTableModel model = (DefaultTableModel) tablaEconomia.getModel();
-	                model.setDataVector(GestionEconomica.EconomiaArraytoObjectArray(gestion.getEconomias().stream().filter(economia -> economia.getFecha().endsWith(buscadorMesBox.getSelectedItem().toString())).toArray(Economia[]::new)), 
+	                economiaVistaActual = gestion.getEconomias().stream().filter(economia -> economia.getFecha().endsWith(buscadorMesBox.getSelectedItem().toString())).toArray(Economia[]::new);
+					model.setDataVector(GestionEconomica.EconomiaArraytoObjectArray(economiaVistaActual), 
 	                		new String [] {
 	                                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha"
 	                            });
+	                balanceTotalField.setText(Double.toString(GestionEconomica.getBalanceTotal(economiaVistaActual)));
+	                fechaActual = buscadorMesBox.getSelectedItem().toString();
+	                
 				}
 			}
             
@@ -96,6 +127,7 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
 					bd.eliminarEconomia(economia.getId(), economia.getTipo());
 					DefaultTableModel model = (DefaultTableModel) tablaEconomia.getModel();
 					model.removeRow(tablaEconomia.getSelectedRow());
+					economiaVistaActual = gestion.getEconomias().toArray(new Economia[gestion.getEconomias().size()]);
 				}
 			}
         	
@@ -119,11 +151,13 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
         buscadorPorId.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
+            	Economia[] economias = gestion.getEconomias().stream().filter(economia -> String.valueOf(economia.getId()).startsWith(buscadorPorId.getText())).toArray(Economia[]::new);
                 DefaultTableModel model = (DefaultTableModel) tablaEconomia.getModel();
-                model.setDataVector(GestionEconomica.EconomiaArraytoObjectArray(gestion.getEconomias().stream().filter(economia -> String.valueOf(economia.getId()).startsWith(buscadorPorId.getText())).toArray(Economia[]::new)), 
+                model.setDataVector(GestionEconomica.EconomiaArraytoObjectArray(economias), 
                 		new String [] {
                                 "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha"
                             });
+                balanceTotalField.setText(Double.toString(GestionEconomica.getBalanceTotal(economias)));
             }
         });
         
@@ -147,6 +181,8 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
 
         fechaBuscarLabel.setText("Buscar por mes");
 
+        balanceTotalLabel.setText("(0.036Lemp ~ 1€)   Balance total (€):");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,24 +194,30 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
                         .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(anyadirBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(eliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(buscarPorIdLabel)
                         .addGap(18, 18, 18)
                         .addComponent(buscadorPorId, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 381, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(fechaBuscarLabel)
                         .addGap(18, 18, 18)
                         .addComponent(buscadorMesBox, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))))
+                        .addGap(32, 32, 32))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(anyadirBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(eliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                        .addComponent(imprimirInformeBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addComponent(balanceTotalLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(balanceTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buscadorPorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarPorIdLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -186,12 +228,17 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eliminarBoton)
-                    .addComponent(anyadirBoton))
-                .addContainerGap())
+                    .addComponent(anyadirBoton)
+                    .addComponent(balanceTotalLabel)
+                    .addComponent(balanceTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imprimirInformeBoton))
+                .addGap(14, 14, 14))
         );
     }// </editor-fold>                        
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify  
+    private javax.swing.JTextField balanceTotalField;
+    private javax.swing.JLabel balanceTotalLabel;
     private javax.swing.JButton anyadirBoton;
     private javax.swing.JComboBox<String> buscadorMesBox;
     private javax.swing.JTextField buscadorPorId;
@@ -200,5 +247,6 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
     private javax.swing.JLabel fechaBuscarLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaEconomia;
+    private javax.swing.JButton imprimirInformeBoton;
     // 
 }

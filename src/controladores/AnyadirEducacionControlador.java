@@ -40,7 +40,7 @@ public class AnyadirEducacionControlador implements ActionListener {
             }
 
             educacionID++;
-
+/*
             try {
                 Educacion educacion = new Educacion(educacionID, Integer.parseInt(values.get(0).toString()), Double.parseDouble(values.get(1).toString()), (String)values.get(2),
                         (String)values.get(3), (Nino)values.get(4), modelo, (String)values.get(5));
@@ -54,7 +54,7 @@ public class AnyadirEducacionControlador implements ActionListener {
                 e1.printStackTrace();
             }
             vistaGestionAcademica.updateTable();
-            this.AnyadirEducacionVista.dispose();
+            this.AnyadirEducacionVista.dispose();*/
         }
     }
 

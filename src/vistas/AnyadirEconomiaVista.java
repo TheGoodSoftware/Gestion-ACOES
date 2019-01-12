@@ -101,7 +101,7 @@ public class AnyadirEconomiaVista extends javax.swing.JFrame {
 
         jLabel1.setText("Proc/Benef");
 
-        fechaLabel.setText("Fecha (xx/xx/xxxx)");
+        fechaLabel.setText("Fecha");
         
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

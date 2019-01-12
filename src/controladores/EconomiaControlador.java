@@ -1,10 +1,13 @@
 package controladores;
 
+import informes.EconomiaInforme;
 import modelos.*;
 import vistas.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EconomiaControlador implements ActionListener {
 	
@@ -24,6 +27,14 @@ public class EconomiaControlador implements ActionListener {
 			case "ANYADIR":
 				AnyadirEconomiaVista anyadirEconomia = new AnyadirEconomiaVista(this.gestion);
 				anyadirEconomia.addControlador(new AnyadirEconomiaControlador(this.vistaGestion, anyadirEconomia, gestion));
+				break;
+			case "IMPRIMIR":
+			try {
+				new EconomiaInforme(new ArrayList<Economia>(Arrays.asList(vistaGestion.getEconomiasActual())), vistaGestion.getFechaActual());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 				break;
 		}
 	}
