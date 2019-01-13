@@ -1,11 +1,17 @@
 package vistas;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import modelos.Nino;
 
@@ -15,6 +21,7 @@ import modelos.Nino;
  */
 public class GestionNinosVista extends javax.swing.JPanel {
 
+	private TableRowSorter<TableModel> rowSorter;
     /**
 	 * 
 	 */
@@ -129,13 +136,48 @@ public class GestionNinosVista extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
+      
+        
+        buscador.getDocument().addDocumentListener(new DocumentListener(){
 
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = buscador.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = buscador.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        });
+        
         
     }// </editor-fold>                                       
 
     private void buscadorActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
+    }                    
+    
+    
+
 
     /**
      * @param args the command line arguments
@@ -222,7 +264,9 @@ public class GestionNinosVista extends javax.swing.JPanel {
 	                  "ID", "Nombre", "Apellidos", "Fecha Nacimiento", "NIF", "Dirección", "Población", "Sexo", "Proyecto", "Fecha alta", "Fecha alta ACOES", "Fecha salida ACOES", "Fecha alta proyecto", "Fecha salida proyecto", "Observaciones"
 	              }
 	          ));
-
+	      
+	      rowSorter = new TableRowSorter<>(tabla.getModel());
+	      tabla.setRowSorter(rowSorter);
 	}
 	
 	public String getIDSeleccionado() {
