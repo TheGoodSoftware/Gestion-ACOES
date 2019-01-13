@@ -411,6 +411,7 @@ public class BD {
 		stmt.execute("DELETE FROM nino WHERE idNen="+id);
 		stmt.execute("DELETE FROM persona WHERE idPersona="+id);
 		stmt.close();
+
 		
 		
 		}
