@@ -34,144 +34,106 @@ public class ApadrinarVista extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+    	 selectorGroup = new javax.swing.ButtonGroup();
+         botonNino = new javax.swing.JRadioButton();
+         botonSocio = new javax.swing.JRadioButton();
+         jScrollPane1 = new javax.swing.JScrollPane();
+         listaPersonas = new javax.swing.JList<>();
+         botonApadrinar = new javax.swing.JButton();
+         botonDesapadrinar = new javax.swing.JButton();
+         botonMostrar = new javax.swing.JButton();
+         textoMensaje = new javax.swing.JLabel();
+         campoBusqueda = new javax.swing.JTextField();
+         textoBuscar = new javax.swing.JLabel();
+         selectorGroup.add(botonNino);
+         selectorGroup.add(botonSocio);
+         botonSocio.setSelected(true);
 
-        panelListaSocios = new javax.swing.JScrollPane();
-        listaSocios = new javax.swing.JList<>();
-        panelListaNinos = new javax.swing.JScrollPane();
-        listaNinos = new javax.swing.JList<>();
-        textoSocios = new javax.swing.JLabel();
-        textoNinos = new javax.swing.JLabel();
-        textoGestionApadrinamientos = new javax.swing.JLabel();
-        botonApadrinar = new javax.swing.JButton();
-        botonDesapadrinar = new javax.swing.JButton();
-        textoMensaje = new javax.swing.JLabel();
-        campoBusquedaNino = new javax.swing.JTextField();
-        campoBusquedaSocio = new javax.swing.JTextField();
-        botonAtras = new javax.swing.JButton();
-        botonMostrarApadrinados = new javax.swing.JButton();
-        botonMostrarPadrinos = new javax.swing.JButton();
+         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+         botonNino.setText("Niños");
+         botonSocio.setText("Socios");
 
-        listaSocios.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        panelListaSocios.setViewportView(listaSocios);
+         listaPersonas.setModel(new javax.swing.AbstractListModel<String>() {
+             String[] strings = { "", "", "", "", "" };
+             public int getSize() { return strings.length; }
+             public String getElementAt(int i) { return strings[i]; }
+         });
+         
+         jScrollPane1.setViewportView(listaPersonas);
 
-        listaNinos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        panelListaNinos.setViewportView(listaNinos);
+         botonApadrinar.setText("Apadrinar");
 
-        textoSocios.setText("Socios");
-
-        textoNinos.setText("Niños");
-
-        textoGestionApadrinamientos.setText("Gestión de apadrinamientos");
-
-        botonApadrinar.setText("Apadrinar");
-        
-
-        botonDesapadrinar.setText("Desapadrinar");
-        
-        botonMostrarApadrinados.setText("Mostrar apadrinados");
-        botonMostrarPadrinos.setText("Mostrar padrinos");
+         botonDesapadrinar.setText("Desapadrinar");
 
 
-        textoMensaje.setText("");
-
-        campoBusquedaNino.setText("");
-
-        campoBusquedaSocio.setText("");
+         botonMostrar.setText("Mostrar");
 
 
-        botonAtras.setText("Atras");
+         textoMensaje.setText("Mensaje operación");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panelListaSocios, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(textoSocios))
-                            .addComponent(campoBusquedaSocio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonApadrinar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonDesapadrinar, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                            .addComponent(botonMostrarApadrinados, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                            .addComponent(botonMostrarPadrinos, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textoGestionApadrinamientos)
-                        .addGap(52, 52, 52)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelListaNinos, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(campoBusquedaNino, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addComponent(textoNinos)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(botonAtras)
-                        .addGap(25, 25, 25))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(291, 291, 291)
-                .addComponent(textoMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textoGestionApadrinamientos)
-                        .addComponent(botonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textoSocios, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(textoNinos, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(campoBusquedaNino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(campoBusquedaSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(panelListaNinos, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                                    .addComponent(panelListaSocios, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(botonApadrinar)
-                                .addGap(20, 20, 20)
-                                .addComponent(botonDesapadrinar)
-                                .addGap(20,20,20)
-                                .addComponent(botonMostrarApadrinados)
-                                .addGap(20,20,20)
-                                .addComponent(botonMostrarPadrinos)))
-                        .addGap(12, 12, 12)
-                        .addComponent(textoMensaje)))
-                .addGap(39, 39, 39))
-        );
+         textoBuscar.setText("Buscar:");
 
-        pack();
+         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+         getContentPane().setLayout(layout);
+         layout.setHorizontalGroup(
+             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+             .addGroup(layout.createSequentialGroup()
+                 .addGap(206, 206, 206)
+                 .addComponent(botonNino)
+                 .addGap(128, 128, 128)
+                 .addComponent(botonSocio)
+                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+             .addGroup(layout.createSequentialGroup()
+                 .addGap(135, 135, 135)
+                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                     .addGroup(layout.createSequentialGroup()
+                         .addGap(61, 61, 61)
+                         .addComponent(textoMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                         .addGap(0, 0, Short.MAX_VALUE))
+                     .addGroup(layout.createSequentialGroup()
+                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                             .addGroup(layout.createSequentialGroup()
+                                 .addGap(45, 45, 45)
+                                 .addComponent(textoBuscar)
+                                 .addGap(18, 18, 18)
+                                 .addComponent(campoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                             .addGroup(layout.createSequentialGroup()
+                                 .addGap(147, 147, 147)
+                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                     .addComponent(botonDesapadrinar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                     .addComponent(botonApadrinar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                     .addComponent(botonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                         .addContainerGap(103, Short.MAX_VALUE))))
+         );
+         layout.setVerticalGroup(
+             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+             .addGroup(layout.createSequentialGroup()
+                 .addContainerGap(45, Short.MAX_VALUE)
+                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                     .addComponent(botonNino)
+                     .addComponent(botonSocio))
+                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                     .addGroup(layout.createSequentialGroup()
+                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                             .addComponent(campoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                             .addComponent(textoBuscar))
+                         .addGap(62, 62, 62)
+                         .addComponent(botonApadrinar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                         .addGap(18, 18, 18)
+                         .addComponent(botonDesapadrinar)
+                         .addGap(18, 18, 18)
+                         .addComponent(botonMostrar)
+                         .addGap(96, 96, 96)
+                         .addComponent(textoMensaje))
+                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
+                 .addGap(35, 35, 35))
+         );
+
+         pack();
+       
     }// </editor-fold>                        
 
     public void controlador(controladores.ApadrinarControlador ctr) {
@@ -179,36 +141,26 @@ public class ApadrinarVista extends javax.swing.JFrame {
     	botonApadrinar.setActionCommand("APADRINAR");
     	botonDesapadrinar.addActionListener(ctr);
     	botonDesapadrinar.setActionCommand("DESAPADRINAR");
-    	campoBusquedaNino.addActionListener(ctr);
-    	campoBusquedaNino.setActionCommand("FILTRARNINO");
-    	campoBusquedaSocio.addActionListener(ctr);
-    	campoBusquedaSocio.setActionCommand("FILTRARSOCIO");
-    	botonAtras.addActionListener(ctr);
-    	botonAtras.setActionCommand("ATRAS");
-    	botonMostrarApadrinados.addActionListener(ctr);
-    	botonMostrarApadrinados.setActionCommand("MOSTRARAPADRINADOS");
-    	botonMostrarPadrinos.addActionListener(ctr);
-    	botonMostrarPadrinos.setActionCommand("MOSTRARPADRINOS");
+    	campoBusqueda.addActionListener(ctr);
+    	campoBusqueda.setActionCommand("FILTRAR");
+    	botonMostrar.addActionListener(ctr);
+    	botonMostrar.setActionCommand("MOSTRAR");
+    	botonSocio.addActionListener(ctr);
+    	botonSocio.setActionCommand("SHOWNINOS");
+    	botonNino.addActionListener(ctr);
+    	botonNino.setActionCommand("SHOWSOCIOS");
     }
     
-    public void actualizarNino(String[] ninos) {
-    	listaNinos.setListData(ninos);
+
+    
+    public void actualizarLista(String[] personas) {
+    	listaPersonas.setListData(personas);
     }
     
-    public void actualizarSocio(String[] socios) {
-    	listaSocios.setListData(socios);
-    	
-    }
     
-    public int getNinoSeleccionado() {
-    	String nino = listaNinos.getSelectedValue();
-    	String[] partes = nino.split(" ");
-    	return Integer.parseInt(partes[0]);
-    }
-    
-    public int getSocioSeleccionado() {
-    	String socio = listaSocios.getSelectedValue();
-    	String[] partes = socio.split(" ");
+    public int getSeleccionado() {
+    	String persona = listaPersonas.getSelectedValue();
+    	String[] partes = persona.split(" ");
     	return Integer.parseInt(partes[0]);
     }
     
@@ -221,6 +173,8 @@ public class ApadrinarVista extends javax.swing.JFrame {
     	textoMensaje.setText(msj);
     	textoMensaje.setForeground(Color.RED);
     }
+    
+    /* Old function that can be reused in a future
     public void actualizarBotonApadrinar(String msj) {
     	botonApadrinar.setText(msj);
     }
@@ -255,26 +209,11 @@ public class ApadrinarVista extends javax.swing.JFrame {
     	botonMostrarApadrinados.setEnabled(true);
     	botonMostrarPadrinos.setEnabled(true);
     }
+    */
     
-    public void deshabilitarCamposTexto() {
-    	campoBusquedaNino.setEnabled(false);
-    	campoBusquedaSocio.setEnabled(false);
-    	campoBusquedaNino.setEditable(false);
-    	campoBusquedaSocio.setEditable(false);
-    }
-    public void habilitarCamposTexto() {
-    	campoBusquedaNino.setEnabled(true);
-    	campoBusquedaSocio.setEnabled(true);
-    	campoBusquedaNino.setEditable(true);
-    	campoBusquedaSocio.setEditable(true);
-    }
     
-    public String getFiltroSocio() {
-    	return campoBusquedaSocio.getText();
-    }
-    
-    public String getFiltroNino() {
-    	return campoBusquedaNino.getText();
+    public String getFiltro() {
+    	return campoBusqueda.getText();
     }
 
     /**
@@ -313,20 +252,17 @@ public class ApadrinarVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton botonApadrinar;
-    private javax.swing.JButton botonDesapadrinar;
-    private javax.swing.JButton botonAtras;
-    private javax.swing.JButton botonMostrarApadrinados;
-    private javax.swing.JButton botonMostrarPadrinos;
-    private javax.swing.JLabel textoSocios;
-    private javax.swing.JLabel textoNinos;
-    private javax.swing.JLabel textoGestionApadrinamientos;
-    private javax.swing.JLabel textoMensaje;
-    private javax.swing.JList<String> listaSocios;
-    private javax.swing.JList<String> listaNinos;
-    private javax.swing.JScrollPane panelListaSocios;
-    private javax.swing.JScrollPane panelListaNinos;
-    private javax.swing.JTextField campoBusquedaNino;
-    private javax.swing.JTextField campoBusquedaSocio;
-    // End of variables declaration          
+    private javax.swing.ButtonGroup selectorGroup; // Aprender a usarlo
+    private javax.swing.JButton botonApadrinar; // botonApadrinar
+    private javax.swing.JButton botonDesapadrinar; // botonDesapadrinar
+    private javax.swing.JButton botonMostrar; // botonMostrar
+    private javax.swing.JLabel textoMensaje;	// etiquetaOperacion
+    private javax.swing.JLabel textoBuscar;	// etiquetaBuscar
+    private javax.swing.JList<String> listaPersonas; // panelListaPersonas
+    private javax.swing.JRadioButton botonNino;	// botonNino
+    private javax.swing.JRadioButton botonSocio;	// botonSocio
+    private javax.swing.JScrollPane jScrollPane1; // PanelPersonas
+    private javax.swing.JTextField campoBusqueda; // campoBusqueda
+    // End of variables declaration                 
+   
 }
