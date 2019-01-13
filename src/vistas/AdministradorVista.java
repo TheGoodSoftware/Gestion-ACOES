@@ -67,6 +67,8 @@ public class AdministradorVista extends javax.swing.JFrame {
     	gestionSociosBoton.setActionCommand("GESTION_SOCIOS");
     	cerrarSesionBoton.addActionListener(ctr);
     	cerrarSesionBoton.setActionCommand("CERRAR_SESION");
+    	gestionApadrinamientosBoton.addActionListener(ctr);
+    	gestionApadrinamientosBoton.setActionCommand("APADRINAR");
     }
 
     /**

@@ -17,7 +17,7 @@ import javax.swing.ListModel;
  *
  * @author cherra
  */
-public class ApadrinarVista extends javax.swing.JFrame {
+public class ApadrinarVista extends  javax.swing.JPanel  {
 
     /**
      * Creates new form ApadrinarVista
@@ -48,9 +48,6 @@ public class ApadrinarVista extends javax.swing.JFrame {
          selectorGroup.add(botonNino);
          selectorGroup.add(botonSocio);
          botonSocio.setSelected(true);
-
-         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
          botonNino.setText("Niños");
          botonSocio.setText("Socios");
 
@@ -74,8 +71,8 @@ public class ApadrinarVista extends javax.swing.JFrame {
 
          textoBuscar.setText("Buscar:");
 
-         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-         getContentPane().setLayout(layout);
+         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+         this.setLayout(layout);
          layout.setHorizontalGroup(
              layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
              .addGroup(layout.createSequentialGroup()
@@ -131,8 +128,6 @@ public class ApadrinarVista extends javax.swing.JFrame {
                      .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
                  .addGap(35, 35, 35))
          );
-
-         pack();
        
     }// </editor-fold>                        
 
@@ -146,9 +141,9 @@ public class ApadrinarVista extends javax.swing.JFrame {
     	botonMostrar.addActionListener(ctr);
     	botonMostrar.setActionCommand("MOSTRAR");
     	botonSocio.addActionListener(ctr);
-    	botonSocio.setActionCommand("SHOWNINOS");
+    	botonSocio.setActionCommand("MOSTRARSOCIOS");
     	botonNino.addActionListener(ctr);
-    	botonNino.setActionCommand("SHOWSOCIOS");
+    	botonNino.setActionCommand("MOSTRARNINOS");
     }
     
 
@@ -172,6 +167,10 @@ public class ApadrinarVista extends javax.swing.JFrame {
     public void setMensajeError(String msj) {
     	textoMensaje.setText(msj);
     	textoMensaje.setForeground(Color.RED);
+    }
+    
+    public String getBotonSeleccionado() {
+    	return selectorGroup.getSelection().getActionCommand();
     }
     
     /* Old function that can be reused in a future
@@ -219,37 +218,6 @@ public class ApadrinarVista extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ApadrinarVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ApadrinarVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ApadrinarVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ApadrinarVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ApadrinarVista().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify                     
     private javax.swing.ButtonGroup selectorGroup; // Aprender a usarlo

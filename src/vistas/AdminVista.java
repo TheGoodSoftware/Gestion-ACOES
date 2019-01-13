@@ -272,6 +272,7 @@ public class AdminVista extends javax.swing.JFrame {
     public void controlador(controladores.AdminControlador ctr) {
     	consultarApadrinamiento.addActionListener(ctr);
     	consultarApadrinamiento.setActionCommand("APADRINAR");
+    	System.out.println("HOLA");
     	vistaPadrino.addActionListener(ctr);
     	vistaPadrino.setActionCommand("VISTA_SOCIO");
     	 gestionarSocios.addActionListener(ctr);

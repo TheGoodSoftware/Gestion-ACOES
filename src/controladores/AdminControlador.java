@@ -68,7 +68,17 @@ public class AdminControlador implements ActionListener {
     		economiaVista.addControlador(new EconomiaControlador(economiaVista, vistaAdmin, gestionEconomica));
     		economiaVista.setVisible(true);
     		vistaAdmin.setPanelContenido(economiaVista); 		
-    		break;/*
+    		break;
+    	case "APADRINAR":
+    		System.out.println("Changed content");
+    		ApadrinarVista apadrinarVista = new ApadrinarVista();
+    		ApadrinarModelo apadrinarModelo = new ApadrinarModelo(this.usuario.getAsociacion());
+    		ApadrinarControlador apadrinarControlador = new ApadrinarControlador(apadrinarVista, apadrinarModelo, usuario);
+    		apadrinarVista.controlador(apadrinarControlador);
+    		apadrinarControlador.iniciarVista();
+    		vistaAdmin.setPanelContenido(apadrinarVista);
+    		break;
+    		/*
 	   	case "GESTION_ACADEMICA":
 		   	vistaAdmin.setVisible(false);
 			bd = new BD();

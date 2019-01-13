@@ -7,10 +7,18 @@ import principal.BD;
 
 public class Usuario extends Persona {
     private String e_mail;
+    private String asociacion;
     private Rol role;
     private ArrayList<Nino> apadrinados;
 
     public Usuario(int id, String nombre, String apellidos, String direccion, String pueblo, String e_mail,  ArrayList<Nino> apadrinados, Rol role) {
+        super(id, nombre, apellidos, direccion, pueblo);
+        this.e_mail = e_mail;
+        this.role = role;
+        this.apadrinados = apadrinados;
+    }
+    // Temporalmente creo los dos constructores hasta que las consultas de la BBDD etc. se adapten al constructor de abajo
+    public Usuario(int id, String nombre, String apellidos, String direccion, String pueblo, String e_mail,  ArrayList<Nino> apadrinados, Rol role, String Asociacion) {
         super(id, nombre, apellidos, direccion, pueblo);
         this.e_mail = e_mail;
         this.role = role;
@@ -28,5 +36,9 @@ public class Usuario extends Persona {
 
     public ArrayList<Nino> getApadrinados() {
         return apadrinados;
+    }
+    
+    public String getAsociacion() {
+    	return asociacion;
     }
 }

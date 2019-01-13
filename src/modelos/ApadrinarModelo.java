@@ -9,19 +9,21 @@ import principal.BD;
 public class ApadrinarModelo {
 	private String[] socios;
 	private String[] ninos;
+	// Arreglar para que solo se muestren los niños sin apadrinar
+	// O los niños que estén apadrinados por un socio de mi Asociacion
 	
-	public ApadrinarModelo() {
-		socios = this.getSocios();
+	public ApadrinarModelo(String asociacion) {
+		socios = this.getSocios(asociacion);
 		ninos = this.getNinos();
 	}
 
 	//Devuelve true si la operación se ha realizado con éxito
 	public boolean Apadrinar(int socioID, int ninoID) {
 		BD miBD = new BD();
-		List<Apadrinar> apadrinamientos = miBD.getApadrinamientos();
+		List<ApadrinarClase> apadrinamientos = miBD.getApadrinamientos();
 		boolean encontrado = false;
 		boolean realizado = false;
-		for(Apadrinar apa: apadrinamientos) {
+		for(ApadrinarClase apa: apadrinamientos) {
 			if(apa.getNino()==ninoID && apa.getPadrino()==socioID) {
 				encontrado = true;
 				if(apa.getEstado()==false) {
@@ -45,9 +47,9 @@ public class ApadrinarModelo {
 	// Devuelve true si la operación se ha realizado con éxito
 	public boolean Desapadrinar(int socioID, int ninoID) {
 		BD miBD = new BD();
-		List<Apadrinar> apadrinamientos = miBD.getApadrinamientos();
+		List<ApadrinarClase> apadrinamientos = miBD.getApadrinamientos();
 		boolean realizado = false;
-		for(Apadrinar apa: apadrinamientos) {
+		for(ApadrinarClase apa: apadrinamientos) {
 			if(apa.getNino()==ninoID && apa.getPadrino()==socioID) {
 				if(apa.getEstado()==true) {
 					realizado = true;
@@ -85,18 +87,20 @@ public class ApadrinarModelo {
 		return filtroNinos.toArray(new String[filtroNinos.size()]);
 	}
 	
-	public static String[] getSocios() {
+	public static String[] getSocios(String asociacion) {
 		ArrayList<String> socios = new ArrayList<String>();
 		BD miBD = new BD();
 		ArrayList<Usuario> arr = miBD.getAllUsuarios();
 		StringBuilder sb = new StringBuilder();
 		for(Usuario us : arr) {
+			if(us.getApadrinados().equals(asociacion)) {
+				sb.append(us.getID());
+				sb.append(" ");
+				sb.append(us.getNombreCompleto());
+				socios.add(sb.toString());
+				sb = new StringBuilder();
+			}
 
-			sb.append(us.getID());
-			sb.append(" ");
-			sb.append(us.getNombreCompleto());
-			socios.add(sb.toString());
-			sb = new StringBuilder();
 		}
 		return socios.toArray(new String[socios.size()]);
 	}
@@ -107,7 +111,6 @@ public class ApadrinarModelo {
 		arr = miBD.getAllNinos();
 		StringBuilder sb = new StringBuilder();
 		for(Nino us : arr) {
-
 			sb.append(us.getID());
 			sb.append(" ");
 			sb.append(us.getNombreCompleto());
@@ -118,7 +121,7 @@ public class ApadrinarModelo {
 	}
 
 	public String[] getApadrinados(int socioSeleccionado) {
-		List<Integer> apadrinados = Apadrinar.getApadrinados(socioSeleccionado);
+		List<Integer> apadrinados = ApadrinarClase.getApadrinados(socioSeleccionado);
 		List<String> resultado = new ArrayList<String>();
 		BD miBD = new BD();
 		StringBuilder sb = new StringBuilder();
@@ -147,25 +150,7 @@ public class ApadrinarModelo {
 		return resultado.toArray(new String[resultado.size()]);
 	}
 
-	public String[] getPadrinos(int ninoSeleccionado) {
-		List<Integer> padrinos = Apadrinar.getPadrinos(ninoSeleccionado);
-		List<String> resultado = new ArrayList<String>();
-		BD miBD = new BD();
-		StringBuilder sb = new StringBuilder();
-		try {
-		for(Integer padrino : padrinos) {
-			
-				Usuario u = miBD.getSocio(padrino);
-				sb.append(padrino);
-				sb.append(" ");
-				sb.append(u.getNombreCompleto());
-				resultado.add(sb.toString());
-				sb = new StringBuilder();
-		}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return resultado.toArray(new String[resultado.size()]);
-		
+	public int getPadrino(int ninoSeleccionado) {
+		return ApadrinarClase.getPadrino(ninoSeleccionado);
 	}
 }

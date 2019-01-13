@@ -5,17 +5,20 @@ import java.util.List;
 
 import principal.BD;
 
-public class Apadrinar {
+public class ApadrinarClase {
 	private int codigoPadrino;
 	private int codigoNino;
 	private boolean activo;
+	private int cuota=0;
 	
-	public Apadrinar(int codigoPadrino, int codigoNino, boolean activo) {
+	public ApadrinarClase(int codigoPadrino, int codigoNino, boolean activo, int cuota) {
 		this.codigoPadrino = codigoPadrino;
 		this.codigoNino = codigoNino;
 		this.activo = activo;
+		this.cuota = cuota;
 	}
-	
+
+
 	public boolean getEstado() {
 		return activo;
 	}
@@ -36,24 +39,24 @@ public class Apadrinar {
 		activo = true;
 	}
 	
-	public static List<Apadrinar> getApadrinamientos(){
+	public static List<ApadrinarClase> getApadrinamientos(){
 		BD miBD = new BD();
 		return miBD.getApadrinamientos();
 	}
-	public static List<Integer> getPadrinos(int nino)
+	public static int getPadrino(int nino)
 	{
 		List<Integer> lista = new ArrayList<Integer>();
-		for(Apadrinar apa : getApadrinamientos()) {
+		for(ApadrinarClase apa : getApadrinamientos()) {
 			if(apa.getNino()==nino && apa.getEstado()) {
-				lista.add(apa.getPadrino());
+				return apa.getPadrino();
 			}
 		}
-		return lista;
+		return 0;
 	}
 	
 	public static List<Integer> getApadrinados(int socio){
 		List<Integer> lista = new ArrayList<Integer>();
-		for(Apadrinar apa : getApadrinamientos()) {
+		for(ApadrinarClase apa : getApadrinamientos()) {
 			if(apa.getPadrino()==socio && apa.getEstado()) {
 				lista.add(apa.getNino());
 			}

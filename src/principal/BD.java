@@ -113,7 +113,7 @@ public class BD {
 			Statement stmt = con.createStatement();
 			String nombreTabla = "Expediente";
 
-			stmt.execute("INSERT INTO " + nombreTabla + " VALUES (" + e.getId() + "," + e.getEdad() + ",'" + e.getNotaMedia() + "','" + e.getNombre() + "'," + e.getApellidos() + "," + e.getNino().getID() + "," + e.getGestion().getID() + "," + e.getCurso() + ")");
+			stmt.execute("INSERT INTO " + nombreTabla + " VALUES (" + e.getId() + "," + e.getEdad() + ",'" + e.getNotaMedia() + "','" + e.getNombre() + "'," + e.getApellidos() + "," + e.().getID() + "," + e.getGestion().getID() + "," + e.getCurso() + ")");
 			stmt.close();
 		} catch (SQLException sqlEx) {
 			throw new Error("ERROR. Trying to insert educacion -> " + sqlEx.getMessage());
@@ -204,27 +204,30 @@ public class BD {
 		try {
 		Nino nino = null;
 		Statement stmt = con.createStatement();
-		ResultSet result = stmt.executeQuery("SELECT nino.idNen FROM nino JOIN persona ON nino.idNen = persona.idPersona where idNen = "+id);
+		ResultSet result = stmt.executeQuery("SELECT * FROM nino JOIN persona ON nino.idNen = persona.idPersona where nino.idNen = "+id);
 		Map<String, Integer> notas = new TreeMap<>();
-		nino = new Nino(
-				result.getInt("idNen"),
-				result.getString("Nombre"),
-				result.getString("Apellidos"),
-				result.getString("Direccion"),
-				result.getString("Pueblo"),
-				result.getString("fechaNacimiento"),
-				notas,
-				result.getString("sexo"),
-				result.getInt("PROYECTO_idProy"),
-				result.getString("fechaAlta"),
-				result.getString("fechaAltaACOES"),
-				result.getString("fechaSalidaACOES"),
-				result.getString("fechaAltaProyecto"),
-				result.getString("fechaSalidaProyecto"),
-				result.getString("observaciones"),
-				result.getString("NIF")
-		);
-		return nino;
+		if(result.next()) {
+			nino = new Nino(
+					result.getInt("idNen"),
+					result.getString("Nombre"),
+					result.getString("Apellidos"),
+					result.getString("Direccion"),
+					result.getString("Pueblo"),
+					result.getString("fechaNacimiento"),
+					notas,
+					result.getString("sexo"),
+					result.getInt("PROYECTO_idProy"),
+					result.getString("fechaAlta"),
+					result.getString("fechaAltaACOES"),
+					result.getString("fechaSalidaACOES"),
+					result.getString("fechaAltaProyecto"),
+					result.getString("fechaSalidaProyecto"),
+					result.getString("observaciones"),
+					result.getString("NIF")
+			);
+			return nino;
+		}
+			return null;
 		}
 		catch (SQLException ex)
 		{
@@ -585,16 +588,38 @@ public class BD {
 		}
 	}
 
-	public List<Apadrinar> getApadrinamientos() {
-		List<Apadrinar> lista = new ArrayList<Apadrinar>();
+	public List<ApadrinarClase> getApadrinamientos() {
+		List<ApadrinarClase> lista = new ArrayList<ApadrinarClase>();
 		try {
 			Statement stmt = con.createStatement();
 			ResultSet result = stmt.executeQuery("SELECT * FROM apadrinar");
 			while(result.next()) {
-				lista.add(new Apadrinar(
+				lista.add(new ApadrinarClase(
 						result.getInt("USUARIO_idUsuario"),
 						result.getInt("NINO_idNen"),
-						result.getBoolean("Activo")
+						result.getBoolean("Activo"),
+						result.getInt("Cuota")
+						));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("ERROR. Trying to get apadrinamientos");
+		}
+		
+		return lista;
+	}
+	
+	public List<ApadrinarClase> getApadrinamientosPadrino(int id) {
+		List<ApadrinarClase> lista = new ArrayList<ApadrinarClase>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM apadrinar where USUARIO_idUsuario= "+id);
+			while(result.next()) {
+				lista.add(new ApadrinarClase(
+						result.getInt("USUARIO_idUsuario"),
+						result.getInt("NINO_idNen"),
+						result.getBoolean("Activo"),
+						result.getInt("Cuota")
 						));
 			}
 		} catch (SQLException e) {

@@ -2,26 +2,33 @@ package controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
-import modelos.Apadrinar;
+import javax.swing.JOptionPane;
+
+import modelos.ApadrinarClase;
+import modelos.ApadrinarModelo;
 import modelos.LoginModelo;
+import modelos.Nino;
 import modelos.Usuario;
+import principal.BD;
 import vistas.AdminVista;
 import vistas.ApadrinarVista;
+import vistas.CrearSocioVista;
 import vistas.LoginVista;
+import vistas.MostrarPersonasVista;
+import vistas.MostrarSocioVista;
 
 public class ApadrinarControlador implements ActionListener {
 	
 	private ApadrinarVista vistaApadrinar;
-	private Apadrinar modelo;
+	private ApadrinarModelo modelo;
 	private Usuario usuario;
-	// Como hay que confirmar si ya se ha seleccionado antes apadrinar o desapadrinar
-	// he decidido guardar en la variable state el evento que ha sido pulsado antes
-	// otra opción es que si se ha pulsado por ejemplo el botón apadrinar se deshabilite el botón desapadrinar
-	// o se cambie a denegar apadrinamiento por ejemplo
 	private Boolean clickado=false;
 	
-	public ApadrinarControlador(ApadrinarVista vista, Apadrinar modelo, Usuario usuario) {
+	public ApadrinarControlador(ApadrinarVista vista, ApadrinarModelo modelo, Usuario usuario) {
 		this.vistaApadrinar = vista;
 		this.modelo = modelo;
 		this.usuario = usuario;
@@ -30,135 +37,97 @@ public class ApadrinarControlador implements ActionListener {
 	public void iniciarVista() {
 		//cargar todos los socios y niños
 		vistaApadrinar.setVisible(true);
-		//vistaApadrinar.actualizarSocio(modelo.getSocios());
-		//vistaApadrinar.actualizarNino(modelo.getNinos());
+		mostrarSocios();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/*
+		 try {
 		String evento = e.getActionCommand();
 		switch(evento) {
 			case "APADRINAR" : apadrinar();
 			break;
 			case "DESAPADRINAR" : desapadrinar();
 			break;
-			case "FILTRARNINO" : filtrarNino();
+			case "MOSTRARNINOS" : mostrarNinos();
 			break;
-			case "FILTRARSOCIO" : filtrarSocio();
+			case "MOSTRARSOCIOS" : mostrarSocios();
 			break;
-			case "ATRAS" : atras();
+			case "MOSTRAR" :
+				mostrar();
+			
 			break;
-			case "MOSTRARAPADRINADOS" : mostrarApadrinados();
-			break;
-			case "MOSTRARPADRINOS" : mostrarPadrinos();
+			case "FILTRAR" : filtrar();
 			break;
 			default :;
 			break;
 		}
+		 } catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	}
 	
 
+	public void mostrarSocios() {
+		vistaApadrinar.actualizarLista(modelo.getSocios(this.usuario.getAsociacion()));
+	}
+
+	public void mostrarNinos() {
+		vistaApadrinar.actualizarLista(modelo.getNinos());
+	}
+
 	public void apadrinar() {
-		if(clickado) {
-			boolean exito = modelo.Apadrinar(vistaApadrinar.getSocioSeleccionado(), vistaApadrinar.getNinoSeleccionado());
-			clickado = false;
-			if(exito) {
-				vistaApadrinar.setMensajeExito("Se apadrino con exito");
-			} else {
-				vistaApadrinar.setMensajeError("No se pudo apadrinar correctamente");
-			};
-			vistaApadrinar.habilitarCamposTexto();
-			vistaApadrinar.habilitarApadrinar();
-			vistaApadrinar.habilitarDesapadrinar();
-			vistaApadrinar.actualizarBotonDesapadrinar("Desapadrinar");
-			vistaApadrinar.actualizarBotonApadrinar("Apadrinar");
-			vistaApadrinar.actualizarSocio(modelo.getSocios());
-			vistaApadrinar.actualizarNino(modelo.getNinos());
-			vistaApadrinar.habilitarMostrar();
-			clickado = false;
-		} else {
-			vistaApadrinar.actualizarBotonApadrinar("Confirmar apadrinamiento");
-			vistaApadrinar.deshabilitarDesapadrinar();
-			vistaApadrinar.deshabilitarCamposTexto();
-			vistaApadrinar.deshabilitarMostrar();
-			clickado = true;
-		}
+
 	}
 	
 	public void desapadrinar() {
-		if(clickado) {
-			boolean exito = modelo.Desapadrinar(vistaApadrinar.getSocioSeleccionado(), vistaApadrinar.getNinoSeleccionado());
-			clickado = false;
-			if(exito) {
-				vistaApadrinar.setMensajeExito("Se desapadrino con exito");
-			} else {
-				vistaApadrinar.setMensajeError("No se pudo desapadrinar correctamente");
-			};
-			vistaApadrinar.habilitarCamposTexto();
-			vistaApadrinar.habilitarApadrinar();
-			vistaApadrinar.habilitarDesapadrinar();
-			vistaApadrinar.actualizarBotonDesapadrinar("Desapadrinar");
-			vistaApadrinar.actualizarBotonApadrinar("Apadrinar");
-			vistaApadrinar.actualizarSocio(modelo.getSocios());
-			vistaApadrinar.actualizarNino(modelo.getNinos());
-			vistaApadrinar.habilitarMostrar();
 
+	}
+	
+	public void filtrar() {
+		if(vistaApadrinar.getBotonSeleccionado().equals("MOSTRARSOCIOS")) {
+			vistaApadrinar.actualizarLista(modelo.filtrarSocios(vistaApadrinar.getFiltro()));
 		} else {
-			vistaApadrinar.actualizarBotonDesapadrinar("Confirmar desapadrinamiento");
-			vistaApadrinar.deshabilitarApadrinar();
-			vistaApadrinar.deshabilitarCamposTexto();
-			vistaApadrinar.deshabilitarMostrar();
-			clickado = true;
+			vistaApadrinar.actualizarLista(modelo.filtrarNinos(vistaApadrinar.getFiltro()));
 		}
 	}
 	
-	public void filtrarNino() {
-		vistaApadrinar.actualizarNino(modelo.filtrarNinos(vistaApadrinar.getFiltroNino()));;
-	}
-	
-	public void filtrarSocio() {
-		vistaApadrinar.actualizarSocio(modelo.filtrarSocios(vistaApadrinar.getFiltroSocio()));
-	}
-	
-	public void atras() {
-		if(clickado) {
-			vistaApadrinar.habilitarCamposTexto();
-			vistaApadrinar.habilitarApadrinar();
-			vistaApadrinar.habilitarDesapadrinar();
-			vistaApadrinar.actualizarBotonDesapadrinar("Desapadrinar");
-			vistaApadrinar.actualizarBotonApadrinar("Apadrinar");
-			vistaApadrinar.actualizarSocio(modelo.getSocios());
-			vistaApadrinar.actualizarNino(modelo.getNinos());
-			vistaApadrinar.habilitarMostrar();
-			clickado = false;
+	public void mostrar() throws SQLException {
+		System.out.println("HOLA");
+		// TODO Auto-generated method stub
+		if(vistaApadrinar.getBotonSeleccionado().equals("MOSTRARSOCIOS")) {
+			mostrarApadrinados();
 		} else {
-			AdminVista admVista = new AdminVista();
-			AdminControlador ctr = new AdminControlador(this.usuario);
-			admVista.controlador(ctr);
-			ctr.iniciarVista();
-			vistaApadrinar.setVisible(false);	
+			mostrarPadrino();
 		}
 	}
 	
-	public void mostrarPadrinos() {
-		vistaApadrinar.deshabilitarApadrinar();
-		vistaApadrinar.deshabilitarCamposTexto();
-		vistaApadrinar.deshabilitarDesapadrinar();
-		vistaApadrinar.deshabilitarMostrar();
-		clickado = true;
-		vistaApadrinar.actualizarSocio(modelo.getPadrinos(vistaApadrinar.getNinoSeleccionado()));
+	public void mostrarPadrino() throws SQLException {
+		BD miBD = new BD();
+		MostrarSocioVista padrino = new MostrarSocioVista();
+		int usuario = modelo.getPadrino(vistaApadrinar.getSeleccionado());
+		Usuario u = miBD.getSocio(usuario);
+		padrino.setParametros(u.getNombre(), u.getApellidos(), u.getE_mail(), u.getAsociacion());
+		padrino.setVisible(true);
+	}
+
+	public void mostrarApadrinados() throws SQLException {
+		BD miBD = new BD();
+		MostrarPersonasVista apadrinadosVista = new MostrarPersonasVista();
+		Usuario u = miBD.getSocio(vistaApadrinar.getSeleccionado());
+		List<ApadrinarClase> apadrinamientos = miBD.getApadrinamientosPadrino(u.getID());
+		List<String> apadrinadosLista = new ArrayList<String>();
+		for(ApadrinarClase apadrinar : apadrinamientos) {
+			
+				Nino n = miBD.getNino(apadrinar.getNino());
+				apadrinadosLista.add(n.getID()+" "+n.getNombreCompleto());
+				//apadrinadosLista.add(Integer.toString(apadrinar.getNino()));
 		
+		}
+		apadrinadosVista.setList(apadrinadosLista.toArray(new String[apadrinadosLista.size()]));
+		apadrinadosVista.setVisible(true);
 	}
-
-	public void mostrarApadrinados() {
-		vistaApadrinar.deshabilitarApadrinar();
-		vistaApadrinar.deshabilitarCamposTexto();
-		vistaApadrinar.deshabilitarDesapadrinar();
-		vistaApadrinar.deshabilitarMostrar();
-		clickado = true;
-		vistaApadrinar.actualizarNino(modelo.getApadrinados(vistaApadrinar.getSocioSeleccionado()));
-*/	}
 
 
 }
