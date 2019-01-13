@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.swing.table.DefaultTableModel;
+
 import modelos.Nino;
 
 /**
@@ -88,7 +90,7 @@ public class GestionNinosVista extends javax.swing.JPanel {
 
         eliminarBoton.setText("Eliminar");
 
-        generarFichaBoton.setText("Generar ficha");
+        generarFichaBoton.setText("Generar ficha información");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -286,6 +288,17 @@ public class GestionNinosVista extends javax.swing.JPanel {
 		 int tupla = tabla.getSelectedRow();
 		 return tabla.getValueAt(tupla, 14).toString();
 	 }
+
+		public void eliminarNinoSeleccionado() {
+    	DefaultTableModel model =
+    			  (DefaultTableModel)tabla.getModel();
+    	int tupla = tabla.getSelectedRow();
+
+    	if(tupla!=-1) {
+
+    		model.removeRow(tupla);
+    	}
+    }
 	
 	
 	
