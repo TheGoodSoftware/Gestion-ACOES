@@ -86,27 +86,27 @@ public class AnadirNinoFormularioVista extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jLabel1.setText("Nombre");
+        jLabel1.setText("Nombre (*)");
 
-        jLabel2.setText("Apellidos");
+        jLabel2.setText("Apellidos (*)");
 
-        jLabel3.setText("Fecha nacimiento");
+        jLabel3.setText("Fecha nacimiento (*)");
 
         jLabel4.setText("NIF");
 
-        jLabel5.setText("Población");
+        jLabel5.setText("Población (*)");
 
-        jLabel6.setText("Sexo");
+        jLabel6.setText("Sexo (*)");
 
-        jLabel7.setText("Proyecto");
+        jLabel7.setText("Proyecto (*)");
 
-        jLabel8.setText("Fecha alta");
+        jLabel8.setText("Fecha alta (*)");
 
-        jLabel9.setText("Fecha alta ACOES");
+        jLabel9.setText("Fecha alta ACOES (*)");
 
         jLabel10.setText("Fecha salida ACOES");
 
-        jLabel11.setText("Fecha alta proyecto");
+        jLabel11.setText("Fecha alta proyecto (*)");
 
         jLabel12.setText("Fecha salida proyecto");
 
