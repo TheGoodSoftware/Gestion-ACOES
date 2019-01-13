@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import com.sun.corba.se.spi.orbutil.fsm.State;
+
 import modelos.*;
 
 public class BD {
@@ -230,6 +232,22 @@ public class BD {
 		}
 	}
 	
+	public int getMaxIDNino() {
+		try {
+		Statement stmt = con.createStatement();
+		ResultSet result = stmt.executeQuery("SELECT MAX(idPersona) as id FROM persona");
+		
+		if(result.next()) {
+		return result.getInt("id")+1;
+		}
+		stmt.close();
+		result.close();
+		}catch(SQLException ex) {
+			throw new Error("ERROR. Trying to get max id from Ninos + -> Msg: "+ex);
+		}
+		return -1;
+	}
+	
 	
 
 	public Rol getRol(String e_mail) {
@@ -319,6 +337,27 @@ public class BD {
 			throw new Error("ERROR. Trying to get Roles -> " + ex.getMessage());
 		}
 	}
+	
+	public Map<Integer, String> getAllProyectos() {
+		try
+		{
+			Statement stmt = con.createStatement();
+			Map<Integer, String> proyectos = new TreeMap<>();
+			ResultSet result = stmt.executeQuery("SELECT * FROM proyecto");
+
+			while(result.next()) {
+				proyectos.put(result.getInt("idProy"), result.getString("Descripcion"));
+				
+			}
+			stmt.close();
+
+			return proyectos;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Proyectos -> " + ex.getMessage());
+		}
+	}
 
 	public void insertarUsuarioBaseDeDatos(Usuario u, String password) {
 		try {
@@ -354,7 +393,12 @@ public class BD {
 	public void modificarNinoBaseDeDatos(Nino n) {
 		try {
 			Statement stmt = con.createStatement();
-			stmt.execute("UPDATE persona JOIN nino ON nino.idNen=persona.idPersona SET Nombre='"+n.getNombre()+"',Apellidos='" + n.getApellidos()+"', Edad="+n.getfechaNacimiento()+" WHERE idNen="+n.getID());
+			
+			stmt.execute("UPDATE persona JOIN nino ON nino.idNen=persona.idPersona SET Nombre='"+n.getNombre()+"',Apellidos='" + n.getApellidos()+"', fechaNacimiento='"+
+			n.getfechaNacimiento()+"', sexo='"+n.getSexo()+"', fechaAlta='"+n.getFechaAlta()+"',fechaAltaACOES='"+n.getFechaAltaACOES()+"',fechaSalidaACOES='"+
+			n.getFechaSalidaACOES()+"',fechaAltaProyecto='"+n.getFechaAltaProyecto()+"',fechaSalidaProyecto='"+n.getFechaSalidaProyecto()+"',observaciones='"+
+			n.getObservaciones()+"',PROYECTO_idProy="+n.getProyecto()+",NIF='"+n.getNIF()+"' WHERE idNen="+n.getID());
+			
 			stmt.close();
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to update Usuario into database -> " + ex.getMessage());

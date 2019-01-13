@@ -2,10 +2,13 @@ package vistas;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.util.Collection;
+import java.util.Map;
 
 import javax.swing.JLabel;
 
 import controladores.AnyadirNinoControlador;
+import principal.BD;
 
 /**
  *
@@ -70,8 +73,12 @@ public class AnadirNinoFormularioVista extends javax.swing.JFrame {
         });
 
         sexoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "V", "M" }));
-
-        proyectoCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        
+        BD bd = new BD();
+        Collection<String> proyectos = bd.getAllProyectos().values();
+        for(String name : proyectos) {
+        	proyectoCampo.addItem(name);
+        }
 
         jScrollPane1.setEnabled(false);
 
@@ -348,9 +355,60 @@ public class AnadirNinoFormularioVista extends javax.swing.JFrame {
 		return this.jTextArea1.getText();
 	}
 	public int getProyecto() {
-		return 0;
+		BD bd = new BD();
+		Map<Integer, String> proyectos = bd.getAllProyectos();
+		for(Integer key : proyectos.keySet()) {
+			if(proyectos.get(key).equals(this.proyectoCampo.getSelectedItem().toString())) {
+				return key;
+			}
+		}
+		return -1;
 	}
 	public String getDireccion() {
 		return this.direccionCampo.getText();
 	}
+	public void setNombre(String nombre) {
+		this.campoNombre.setText(nombre);
+	}
+	public void setApellido(String apellido) {
+		this.apellidosCampo.setText(apellido);
+	}
+	public void setFechaNacimiento(String fecha) {
+		this.fechaNacCampo.setText(fecha);
+	}
+	public void setSexo(String sexo) {
+		this.sexoCampo.setSelectedItem(sexo);
+	}
+	public void setProyecto(String proy) {
+		this.proyectoCampo.setSelectedItem(proy);
+	}
+	public void setNIF(String nif) {
+		this.identidadCampo.setText(nif);
+	}
+	public void setObservacion(String obs) {
+		this.jTextArea1.setText(obs);
+	}
+	public void setFechaAlta(String fecha) {
+		this.fechaAltaCampo.setText(fecha);
+	}
+	public void setFechaAltaACOES(String fecha) {
+		this.fechaAltaACOESCampo.setText(fecha);
+	}
+	public void setFechaSalidaACOES(String fecha) {
+		this.fechaSalidaACOESCampo.setText(fecha);
+	}
+	public void setFechaAltaProyecto(String fecha) {
+		this.fechaAltaProyectoCampo.setText(fecha);
+	}
+	public void setFechaSalidaProyecto(String fecha) {
+		this.fechaSalidaProyecto.setText(fecha);
+	}
+	public void setPoblacion(String pob) {
+		this.poblacionCampo.setText(pob);
+	}
+	public void setDireccion(String dir) {
+		this.direccionCampo.setText(dir);
+	}
+	 
+	
 }

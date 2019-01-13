@@ -36,6 +36,16 @@ public class GestionNinosControlador implements ActionListener{
 		case "INSERTAR":
 			AnyadirNinoControlador anyadirNinoCtr = new AnyadirNinoControlador(this);
 			anyadirNinoCtr.iniciarVista();
+			break;
+		case "ACTUALIZAR":
+			AnyadirNinoControlador modificarNinoCtr = new AnyadirNinoControlador(this, Integer.parseInt(vistaGestionNinos.getIDSeleccionado()));
+			modificarNinoCtr.preCargarDatos(vistaGestionNinos.getNombreSeleccionado(), vistaGestionNinos.getApellidosSeleccionado(), 
+					vistaGestionNinos.getFechaNacSeleccionado(),vistaGestionNinos.getNIFSeleccionado(), vistaGestionNinos.getDireccionSeleccionado(),
+					vistaGestionNinos.getPoblacionSeleccionado(), vistaGestionNinos.getSexoSeleccionado(), vistaGestionNinos.getProyectoSeleccionado()
+					,vistaGestionNinos.getFechaAltaSeleccionado(), vistaGestionNinos.getFechaAltaACOESSeleccionado(), vistaGestionNinos.getFechaSalidaACOESSeleccionado(),
+					vistaGestionNinos.getAltaProyectoSeleccionado(), vistaGestionNinos.getSalidaProyectoSeleccionado(), vistaGestionNinos.getObservacionSeleccionado());
+			modificarNinoCtr.iniciarVista();
+			break;
 		/*
 		case "INSERTAR":
 			modeloGestionNinos.insertarNino(vistaGestionNinos.getNombre(), vistaGestionNinos.getEdad(), vistaGestionNinos.getSexo(), vistaGestionNinos.getIdentidad(), vistaGestionNinos.getCCJ(), vistaGestionNinos.getColegio(), vistaGestionNinos.getBecado());
@@ -88,7 +98,7 @@ public class GestionNinosControlador implements ActionListener{
 	}
 
 	public void cargarTabla() throws SQLException {
-		this.vistaGestionNinos.cargarTabla(bd.getAllNinos());
+		this.vistaGestionNinos.cargarTabla(bd.getAllNinos(), bd.getAllProyectos());
 	}
 
 }
