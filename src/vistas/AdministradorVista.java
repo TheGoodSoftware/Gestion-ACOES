@@ -19,7 +19,6 @@ public class AdministradorVista extends javax.swing.JFrame {
      * Creates new form GestionACOES
      */
     public AdministradorVista() {
-    	this.setUndecorated(true);
         initComponents();
     }
     
@@ -79,7 +78,7 @@ public class AdministradorVista extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
+    	this.setTitle("GestionACOES");
         jPanel1 = new javax.swing.JPanel();
         gestionEconomiaBoton = new javax.swing.JButton();
         gestionAcademicaBoton = new javax.swing.JButton();

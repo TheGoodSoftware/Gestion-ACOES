@@ -81,11 +81,31 @@ public class BD {
 				nombreTabla = "donacion";
 				nombreId = "idDon";
 			}
-				
-			stmt.execute("INSERT INTO " + nombreTabla + " VALUES (" + e.getId() + "," + e.getCantidad() + ",'" + e.getMoneda() + "','" + e.getDescripcion() + "','" + e.getFecha() + "','" + e.getBeneficiarioProcedencia() + "'," + e.getGestion().getID() + ")");
+			
+			System.out.println(e.getGestion().getID());
+			stmt.execute("INSERT INTO "+ nombreTabla  + "(" + nombreId + ", Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (" + e.getId() + "," + e.getCantidad() + ",'" + e.getMoneda() + "','" + e.getDescripcion() + "'," + e.getGestion().getID() + ",'" + e.getFecha() + "','" + e.getBeneficiarioProcedencia() + "')");
 			stmt.close();
 		} catch (SQLException sqlEx) {
 			throw new Error("ERROR. Trying to insert economia -> " + sqlEx.getMessage());
+		}
+	}
+	
+	public void modificarEconomia(Economia e) {
+		try {
+			Statement stmt = con.createStatement();
+			String nombreTabla, nombreId;
+			if(e.getTipo().equalsIgnoreCase("GASTO")) {
+				nombreTabla = "gasto";
+				nombreId = "idGasto";
+			} else {
+				nombreTabla = "donacion";
+				nombreId = "idDon";
+			}
+			stmt.execute("UPDATE "+ nombreTabla  + " SET " + "Cantidad=" + e.getCantidad() + ",Moneda='" + e.getMoneda()
+			+ "',Descripcion='" + e.getDescripcion() + "',Fecha='"+ e.getFecha() + "',ProcedenciaBeneficiario='" + e.getBeneficiarioProcedencia() + "' WHERE " + nombreId + "=" + e.getId());
+			stmt.close();
+		} catch (SQLException sqlEx) {
+			throw new Error("ERROR. Trying to modify economia -> " + sqlEx.getMessage());
 		}
 	}
 	
@@ -352,7 +372,6 @@ public class BD {
 
 			while(result.next()) {
 				proyectos.put(result.getInt("idProy"), result.getString("Descripcion"));
-				
 			}
 			stmt.close();
 

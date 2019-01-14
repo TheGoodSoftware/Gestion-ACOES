@@ -35,7 +35,7 @@ public class ApadrinarPopUpControlador implements ActionListener{
 	}
 
 	private void cancelar() {
-		vista.setVisible(false);
+		vista.dispose();
 	}
 
 	private void confirmar() {

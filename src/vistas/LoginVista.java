@@ -41,7 +41,7 @@ public class LoginVista extends javax.swing.JFrame {
         mensajeBienvenida = new javax.swing.JLabel();
         campoError = new javax.swing.JLabel();
     
-        
+        this.setTitle("Inicio de sesión - GestionACOES");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 

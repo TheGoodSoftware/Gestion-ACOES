@@ -29,7 +29,7 @@ public class AnyadirEconomiaControlador implements ActionListener {
 		if(e.getActionCommand().equals("CANCELAR"))
 		{
 			this.vistaEconomiaAnyadir.dispose();
-		} else if(e.getActionCommand().equals("ANYADIR")) {
+		} else if(e.getActionCommand().equals("CONFIRMAR")) {
 			ArrayList<Object> values = vistaEconomiaAnyadir.getData();
 			int economiaID = -1;
 			

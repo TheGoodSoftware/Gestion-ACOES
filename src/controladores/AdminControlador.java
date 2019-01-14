@@ -29,6 +29,7 @@ public class AdminControlador implements ActionListener {
     	vistaAdmin = new AdministradorVista();
     	vistaAdmin.addControlador(this);
     	vistaAdmin.setVisible(true);
+    	vistaAdmin.setPanelContenido(new InicialVista(usuario));
         if (usuario.getRole().getNombre().equalsIgnoreCase("ACADEMICO")) {
             vistaAdmin.setOnlyAcademico();
         } else if (usuario.getRole().getNombre().equalsIgnoreCase("ECONOMIA")) {
