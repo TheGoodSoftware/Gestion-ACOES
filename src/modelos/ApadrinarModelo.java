@@ -21,6 +21,9 @@ public class ApadrinarModelo {
 	//Devuelve true si la operación se ha realizado con éxito
 	public boolean Apadrinar(int socioID, int ninoID, int cuota) {
 		BD miBD = new BD();
+		if(ApadrinarClase.getPadrino(ninoID)!=0) {
+			return false;
+		}
 		List<ApadrinarClase> apadrinamientos = miBD.getApadrinamientos();
 		boolean encontrado = false;
 		boolean realizado = false;
@@ -181,11 +184,11 @@ public class ApadrinarModelo {
 		List<ApadrinarClase> apadrinamientos = miBD.getApadrinamientosPadrino(u.getID());
 		List<String> apadrinadosLista = new ArrayList<String>();
 		for(ApadrinarClase apadrinar : apadrinamientos) {
-			
-				Nino n = miBD.getNino(apadrinar.getNino());
-				apadrinadosLista.add(n.getID()+" "+n.getNombreCompleto());
-				//apadrinadosLista.add(Integer.toString(apadrinar.getNino()));
-		
+				if(apadrinar.getEstado()) {
+					Nino n = miBD.getNino(apadrinar.getNino());
+					apadrinadosLista.add(n.getID()+" "+n.getNombreCompleto());
+					//apadrinadosLista.add(Integer.toString(apadrinar.getNino()));
+				}
 		}
 		return apadrinadosLista;
 	}
