@@ -1,8 +1,11 @@
 package controladores;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
+
+import javax.swing.JFrame;
 
 import modelos.LoginModelo;
 import modelos.Nino;
@@ -39,7 +42,12 @@ public class LoginControlador implements ActionListener {
 					ctrAdmin.iniciarVista();
 				} else {
 					SocioVista vistaSocio = new SocioVista(loggedUser);
-					vistaSocio.setVisible(true);
+					JFrame vista = new JFrame();
+					vista.setContentPane(vistaSocio);
+					vista.setTitle("GestionACOES");
+					vista.setMinimumSize(new Dimension(820, 400));
+					vista.setVisible(true);
+					vistaLogin.setVisible(false);
 				}
 			}
 			else {

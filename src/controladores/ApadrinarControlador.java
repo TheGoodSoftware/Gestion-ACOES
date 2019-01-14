@@ -56,7 +56,6 @@ public class ApadrinarControlador implements ActionListener {
 			break;
 			case "MOSTRAR" :
 				mostrar();
-			
 			break;
 			case "FILTRAR" : filtrar();
 			break;
