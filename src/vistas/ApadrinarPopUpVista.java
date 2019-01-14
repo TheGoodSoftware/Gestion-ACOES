@@ -158,6 +158,10 @@ public class ApadrinarPopUpVista extends javax.swing.JFrame {
     	String[] partes = persona.split(" ");
     	return Integer.parseInt(partes[0]);
     }
+    
+    public void enableCuota(boolean enable) {
+    	cuotaCampo.setEnabled(enable);
+    }
 
     public void controlador(ApadrinarPopUpControlador ctr) {
     	confirmarBoton.addActionListener(ctr);

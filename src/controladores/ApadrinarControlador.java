@@ -103,6 +103,7 @@ public class ApadrinarControlador implements ActionListener {
 		ApadrinarPopUpVista apadrinarPopUpVista = new ApadrinarPopUpVista();
 		ApadrinarPopUpControlador apadrinarPopUpControlador = new ApadrinarPopUpControlador(apadrinarPopUpVista, modelo, vistaApadrinar);
 		apadrinarPopUpVista.setApadrinarDesapadrinar("Despadrinar");
+		apadrinarPopUpVista.enableCuota(false);
 		if(vistaApadrinar.getBotonSeleccionado().equals("MOSTRARSOCIOS")) {
 			BD miBD = new BD();
 			Usuario persona;
