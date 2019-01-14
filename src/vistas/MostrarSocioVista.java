@@ -43,7 +43,7 @@ public class MostrarSocioVista extends javax.swing.JFrame {
           correoUsuario = new javax.swing.JLabel();
           asociacionUsuario = new javax.swing.JLabel();
 
-          setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+          setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
           nombreEtiqueta.setText("Nombre:");
 

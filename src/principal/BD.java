@@ -323,12 +323,13 @@ public class BD {
 			ArrayList<Nino> apadrinados = new ArrayList<>();
 			ResultSet result = stmt.executeQuery("SELECT * FROM apadrinar JOIN nino ON apadrinar.nino_idNen = nino.idNen JOIN usuario ON apadrinar.usuario_idUsuario = usuario.idUsuario JOIN persona P on nino.idNen = P.idPersona WHERE Correo = '" + e_mail + "'");
 
-			Map<String, Integer> notas = new TreeMap<>();
-			Random rnd = new Random();
-			notas.put("1Primaria", rnd.nextInt(10) + 1);
-			notas.put("2Primaria", rnd.nextInt(10) + 1);
-
 			while(result.next()) {
+				
+				Map<String, Integer> notas = new TreeMap<>();
+				Random rnd = new Random();
+				notas.put("1Primaria", rnd.nextInt(10) + 1);
+				notas.put("2Primaria", rnd.nextInt(10) + 1);
+				
 				apadrinados.add(new Nino(
 						result.getInt("idNen"),
 						result.getString("Nombre"),

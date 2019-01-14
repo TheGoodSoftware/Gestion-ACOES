@@ -117,7 +117,7 @@ public class CrearSocioVista extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(nombreEtiqueta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
-                        .addComponent(atrasBoton)
+                        //.addComponent(atrasBoton)
                         .addGap(52, 52, 52))))
         );
         layout.setVerticalGroup(
