@@ -19,6 +19,7 @@ public class ApadrinarClase {
 	}
 
 
+
 	public boolean getEstado() {
 		return activo;
 	}

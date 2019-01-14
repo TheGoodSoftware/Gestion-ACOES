@@ -47,6 +47,13 @@ public class ApadrinarPopUpControlador implements ActionListener{
 				} else {
 					apadrinarVista.setMensajeError("El apadrinameinto no se realizó correctamente");
 				}
+			} else {
+				boolean exito = modelo.Apadrinar(vista.getSeleccionado(), vista.getPersonaPrecargada(),vista.getCuota());
+				if(exito) {
+					apadrinarVista.setMensajeExito("El apadrinamiento se realizó con éxito");
+				} else {
+					apadrinarVista.setMensajeError("El apadrinameinto no se realizó correctamente");
+				}
 			}
 		} else {
 			if(vista.getCargadoDesde().toUpperCase().contains("SOCIO")) {

@@ -3,12 +3,10 @@ package controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import modelos.ApadrinarClase;
 import modelos.ApadrinarModelo;
 import modelos.LoginModelo;
 import modelos.Nino;
@@ -24,7 +22,7 @@ import vistas.MostrarSocioVista;
 
 public class ApadrinarControlador implements ActionListener {
 	
-	private ApadrinarVista vistaApadrinar;
+	public ApadrinarVista vistaApadrinar;
 	private ApadrinarModelo modelo;
 	private Usuario usuario;
 	private Boolean clickado=false;
@@ -81,17 +79,59 @@ public class ApadrinarControlador implements ActionListener {
 		ApadrinarPopUpVista apadrinarPopUpVista = new ApadrinarPopUpVista();
 		ApadrinarPopUpControlador apadrinarPopUpControlador = new ApadrinarPopUpControlador(apadrinarPopUpVista, modelo, vistaApadrinar);
 		apadrinarPopUpVista.setApadrinarDesapadrinar("Apadrinar");
-		BD miBD = new BD();
-		Usuario u = miBD.getSocio(vistaApadrinar.getSeleccionado()); // Arreglar esto
-		apadrinarPopUpVista.setLista(modelo.getNinos());
-		apadrinarPopUpVista.setUsuario(u.getID()+" "+u.getNombreCompleto(), vistaApadrinar.getBotonSeleccionado().substring(7, vistaApadrinar.getBotonSeleccionado().length()));
-		apadrinarPopUpVista.controlador(apadrinarPopUpControlador);
-		apadrinarPopUpVista.setVisible(true);
+		if(vistaApadrinar.getBotonSeleccionado().equals("MOSTRARSOCIOS")) {
+			BD miBD = new BD();
+			Usuario persona = miBD.getSocio(vistaApadrinar.getSeleccionado()); // Arreglar esto
+			apadrinarPopUpVista.setLista(modelo.getNinos());
+			apadrinarPopUpVista.setUsuario(persona.getID()+" "+persona.getNombreCompleto(), vistaApadrinar.getBotonSeleccionado().substring(7, vistaApadrinar.getBotonSeleccionado().length()));
+			apadrinarPopUpVista.controlador(apadrinarPopUpControlador);
+			apadrinarPopUpVista.setVisible(true);
+		} else {
+			BD miBD = new BD();
+			Nino persona = miBD.getNino(vistaApadrinar.getSeleccionado()); // Arreglar esto
+			apadrinarPopUpVista.setLista(modelo.getSocios());
+			apadrinarPopUpVista.setUsuario(persona.getID()+" "+persona.getNombreCompleto(), vistaApadrinar.getBotonSeleccionado().substring(7, vistaApadrinar.getBotonSeleccionado().length()));
+			apadrinarPopUpVista.controlador(apadrinarPopUpControlador);
+			apadrinarPopUpVista.setVisible(true);
+		}
+
 		
 	}
 	
 	public void desapadrinar() {
-
+		try {
+		ApadrinarPopUpVista apadrinarPopUpVista = new ApadrinarPopUpVista();
+		ApadrinarPopUpControlador apadrinarPopUpControlador = new ApadrinarPopUpControlador(apadrinarPopUpVista, modelo, vistaApadrinar);
+		apadrinarPopUpVista.setApadrinarDesapadrinar("Despadrinar");
+		if(vistaApadrinar.getBotonSeleccionado().equals("MOSTRARSOCIOS")) {
+			BD miBD = new BD();
+			Usuario persona;
+			persona = miBD.getSocio(vistaApadrinar.getSeleccionado());
+			List<String> lista = modelo.getApadrinadosLista(vistaApadrinar.getSeleccionado());
+			apadrinarPopUpVista.setLista(lista.toArray(new String[lista.size()]));
+			apadrinarPopUpVista.setUsuario(persona.getID()+" "+persona.getNombreCompleto(), vistaApadrinar.getBotonSeleccionado().substring(7, vistaApadrinar.getBotonSeleccionado().length()));
+			apadrinarPopUpVista.controlador(apadrinarPopUpControlador);
+			apadrinarPopUpVista.setVisible(true);
+		} else {
+			BD miBD = new BD();
+			Nino persona = miBD.getNino(vistaApadrinar.getSeleccionado()); // Arreglar esto
+			Usuario u = miBD.getSocio(modelo.getPadrino(vistaApadrinar.getSeleccionado()));
+			String[] lista = new String[1];
+			if(u != null) {
+				lista[0] = u.getID()+" "+ u.getNombreCompleto();
+			} else {
+				lista[0] = null;
+			}
+			
+			apadrinarPopUpVista.setLista(lista);
+			apadrinarPopUpVista.setUsuario(persona.getID()+" "+persona.getNombreCompleto(), vistaApadrinar.getBotonSeleccionado().substring(7, vistaApadrinar.getBotonSeleccionado().length()));
+			apadrinarPopUpVista.controlador(apadrinarPopUpControlador);
+			apadrinarPopUpVista.setVisible(true);
+		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} // Arreglar esto
 	}
 	
 	public void filtrar() {
@@ -116,25 +156,21 @@ public class ApadrinarControlador implements ActionListener {
 		MostrarSocioVista padrino = new MostrarSocioVista();
 		int usuario = modelo.getPadrino(vistaApadrinar.getSeleccionado());
 		Usuario u = miBD.getSocio(usuario);
-		padrino.setParametros(u.getNombre(), u.getApellidos(), u.getE_mail(), u.getAsociacion());
+		if(u != null) {
+			padrino.setParametros(u.getNombre(), u.getApellidos(), u.getE_mail(), u.getAsociacion());
+		} else {
+			padrino.setParametros("", "", "", "");
+		}
 		padrino.setVisible(true);
 	}
 
-	public void mostrarApadrinados() throws SQLException {
-		BD miBD = new BD();
-		MostrarPersonasVista apadrinadosVista = new MostrarPersonasVista();
-		Usuario u = miBD.getSocio(vistaApadrinar.getSeleccionado());
-		List<ApadrinarClase> apadrinamientos = miBD.getApadrinamientosPadrino(u.getID());
-		List<String> apadrinadosLista = new ArrayList<String>();
-		for(ApadrinarClase apadrinar : apadrinamientos) {
-			
-				Nino n = miBD.getNino(apadrinar.getNino());
-				apadrinadosLista.add(n.getID()+" "+n.getNombreCompleto());
-				//apadrinadosLista.add(Integer.toString(apadrinar.getNino()));
+	public String[] mostrarApadrinados() throws SQLException {
 		
-		}
+		MostrarPersonasVista apadrinadosVista = new MostrarPersonasVista();
+		List<String> apadrinadosLista = modelo.getApadrinadosLista(vistaApadrinar.getSeleccionado());
 		apadrinadosVista.setList(apadrinadosLista.toArray(new String[apadrinadosLista.size()]));
 		apadrinadosVista.setVisible(true);
+		return apadrinadosLista.toArray(new String[apadrinadosLista.size()]);
 	}
 
 

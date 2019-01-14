@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import controladores.ApadrinarControlador;
 import principal.BD;
 
 public class ApadrinarModelo {
@@ -172,5 +173,20 @@ public class ApadrinarModelo {
 
 	public int getPadrino(int ninoSeleccionado) {
 		return ApadrinarClase.getPadrino(ninoSeleccionado);
+	}
+
+	public List<String> getApadrinadosLista(int i) throws SQLException {
+		BD miBD = new BD();
+		Usuario u = miBD.getSocio(i);
+		List<ApadrinarClase> apadrinamientos = miBD.getApadrinamientosPadrino(u.getID());
+		List<String> apadrinadosLista = new ArrayList<String>();
+		for(ApadrinarClase apadrinar : apadrinamientos) {
+			
+				Nino n = miBD.getNino(apadrinar.getNino());
+				apadrinadosLista.add(n.getID()+" "+n.getNombreCompleto());
+				//apadrinadosLista.add(Integer.toString(apadrinar.getNino()));
+		
+		}
+		return apadrinadosLista;
 	}
 }
