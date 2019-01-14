@@ -1,11 +1,14 @@
 package vistas;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -13,7 +16,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import modelos.Economia;
 import modelos.Nino;
+import principal.BD;
 
 /**
  *
@@ -98,6 +103,37 @@ public class GestionNinosVista extends javax.swing.JPanel {
         eliminarBoton.setText("Eliminar");
 
         generarFichaBoton.setText("Generar ficha información");
+        
+        eliminarBoton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(tabla.getSelectedRow() != -1) {
+					int result = JOptionPane.showConfirmDialog(null, "¿Estás seguro de querer eliminar la fila seleccionada?", "Eliminación de niño", JOptionPane.YES_NO_OPTION);
+					if(result == JOptionPane.YES_OPTION) {
+						try {
+							
+							new BD().eliminarNinoBaseDeDatos(Integer.parseInt(getIDSeleccionado()));
+							DefaultTableModel model =
+					    			  (DefaultTableModel)tabla.getModel();
+					    	int tupla = tabla.getSelectedRow();
+
+					    	if(tupla!=-1) {
+
+					    		model.removeRow(tupla);
+					    	}
+						} catch (NumberFormatException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				}
+			}
+        	
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -333,16 +369,7 @@ public class GestionNinosVista extends javax.swing.JPanel {
 		 return tabla.getValueAt(tupla, 14).toString();
 	 }
 
-		public void eliminarNinoSeleccionado() {
-    	DefaultTableModel model =
-    			  (DefaultTableModel)tabla.getModel();
-    	int tupla = tabla.getSelectedRow();
-
-    	if(tupla!=-1) {
-
-    		model.removeRow(tupla);
-    	}
-    }
+		
 	
 	
 	
