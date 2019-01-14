@@ -37,6 +37,7 @@ public class ModificarEconomiaControlador implements ActionListener {
 			modelo.setTipo(data.get(3).toString());
 			modelo.setBeneficiarioProcedencia(data.get(4).toString());
 			modelo.setFecha(data.get(5).toString());
+			new BD().modificarEconomia(modelo);
 			vistaGestionEconomica.updateTable();
 			this.vistaEconomiaModificar.dispose();
 		}

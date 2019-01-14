@@ -90,6 +90,25 @@ public class BD {
 		}
 	}
 	
+	public void modificarEconomia(Economia e) {
+		try {
+			Statement stmt = con.createStatement();
+			String nombreTabla, nombreId;
+			if(e.getTipo().equalsIgnoreCase("GASTO")) {
+				nombreTabla = "gasto";
+				nombreId = "idGasto";
+			} else {
+				nombreTabla = "donacion";
+				nombreId = "idDon";
+			}
+			stmt.execute("UPDATE "+ nombreTabla  + " SET " + "Cantidad=" + e.getCantidad() + ",Moneda='" + e.getMoneda()
+			+ "',Descripcion='" + e.getDescripcion() + "',Fecha='"+ e.getFecha() + "',ProcedenciaBeneficiario='" + e.getBeneficiarioProcedencia() + "' WHERE " + nombreId + "=" + e.getId());
+			stmt.close();
+		} catch (SQLException sqlEx) {
+			throw new Error("ERROR. Trying to modify economia -> " + sqlEx.getMessage());
+		}
+	}
+	
 	public void eliminarEconomia(int id, String tipo) {
 		try {
 			Statement stmt = con.createStatement();
@@ -353,7 +372,6 @@ public class BD {
 
 			while(result.next()) {
 				proyectos.put(result.getInt("idProy"), result.getString("Descripcion"));
-				
 			}
 			stmt.close();
 
