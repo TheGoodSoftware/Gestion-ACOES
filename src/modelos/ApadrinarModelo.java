@@ -18,7 +18,7 @@ public class ApadrinarModelo {
 	}
 
 	//Devuelve true si la operación se ha realizado con éxito
-	public boolean Apadrinar(int socioID, int ninoID) {
+	public boolean Apadrinar(int socioID, int ninoID, int cuota) {
 		BD miBD = new BD();
 		List<ApadrinarClase> apadrinamientos = miBD.getApadrinamientos();
 		boolean encontrado = false;
@@ -28,14 +28,14 @@ public class ApadrinarModelo {
 				encontrado = true;
 				if(apa.getEstado()==false) {
 					realizado = true;
-					miBD.activarApadrinamiento(apa.getPadrino(), apa.getNino());
+					miBD.activarApadrinamiento(apa.getPadrino(), apa.getNino(), cuota);
 					apa.activar();
 				}
 			}
 		}
 		if(!encontrado) {
 			try {
-				miBD.insertarApadrinamiento(socioID, ninoID);
+				miBD.insertarApadrinamiento(socioID, ninoID, cuota);
 			} catch (SQLException e) {
 				return false;
 			}
@@ -87,13 +87,32 @@ public class ApadrinarModelo {
 		return filtroNinos.toArray(new String[filtroNinos.size()]);
 	}
 	
-	public static String[] getSocios(String asociacion) {
+	public static String[] getSocios() {
 		ArrayList<String> socios = new ArrayList<String>();
 		BD miBD = new BD();
 		ArrayList<Usuario> arr = miBD.getAllUsuarios();
 		StringBuilder sb = new StringBuilder();
 		for(Usuario us : arr) {
-			if(us.getApadrinados().equals(asociacion)) {
+			
+				sb.append(us.getID());
+				sb.append(" ");
+				sb.append(us.getNombreCompleto());
+				socios.add(sb.toString());
+				sb = new StringBuilder();
+
+		}
+		return socios.toArray(new String[socios.size()]);
+	}
+	
+	public static String[] getSocios(String asociacion) {
+		System.out.println(asociacion);
+		ArrayList<String> socios = new ArrayList<String>();
+		BD miBD = new BD();
+		ArrayList<Usuario> arr = miBD.getAllUsuarios();
+		StringBuilder sb = new StringBuilder();
+		for(Usuario us : arr) {
+			System.out.println(us.getAsociacion());
+			if(us.getAsociacion().equals(asociacion)) {
 				sb.append(us.getID());
 				sb.append(" ");
 				sb.append(us.getNombreCompleto());
@@ -104,6 +123,7 @@ public class ApadrinarModelo {
 		}
 		return socios.toArray(new String[socios.size()]);
 	}
+	
 	public static String[] getNinos() {
 		ArrayList<String> ninos = new ArrayList<String>();
 		BD miBD = new BD();

@@ -15,6 +15,7 @@ import modelos.Nino;
 import modelos.Usuario;
 import principal.BD;
 import vistas.AdminVista;
+import vistas.ApadrinarPopUpVista;
 import vistas.ApadrinarVista;
 import vistas.CrearSocioVista;
 import vistas.LoginVista;
@@ -77,8 +78,17 @@ public class ApadrinarControlador implements ActionListener {
 		vistaApadrinar.actualizarLista(modelo.getNinos());
 	}
 
-	public void apadrinar() {
-
+	public void apadrinar() throws SQLException {
+		ApadrinarPopUpVista apadrinarPopUpVista = new ApadrinarPopUpVista();
+		ApadrinarPopUpControlador apadrinarPopUpControlador = new ApadrinarPopUpControlador(apadrinarPopUpVista, modelo, vistaApadrinar);
+		apadrinarPopUpVista.setApadrinarDesapadrinar("Apadrinar");
+		BD miBD = new BD();
+		Usuario u = miBD.getSocio(vistaApadrinar.getSeleccionado()); // Arreglar esto
+		apadrinarPopUpVista.setLista(modelo.getNinos());
+		apadrinarPopUpVista.setUsuario(u.getID()+" "+u.getNombreCompleto(), vistaApadrinar.getBotonSeleccionado().substring(7, vistaApadrinar.getBotonSeleccionado().length()));
+		apadrinarPopUpVista.controlador(apadrinarPopUpControlador);
+		apadrinarPopUpVista.setVisible(true);
+		
 	}
 	
 	public void desapadrinar() {
@@ -94,7 +104,6 @@ public class ApadrinarControlador implements ActionListener {
 	}
 	
 	public void mostrar() throws SQLException {
-		System.out.println("HOLA");
 		// TODO Auto-generated method stub
 		if(vistaApadrinar.getBotonSeleccionado().equals("MOSTRARSOCIOS")) {
 			mostrarApadrinados();
