@@ -25,16 +25,28 @@ public class AnyadirEconomiaVista extends javax.swing.JFrame {
     /**
      * Creates new form AnyadirEconomia
      */
-	private GestionEconomica gestion;
-	
-    public AnyadirEconomiaVista(GestionEconomica gestion) {
-    	this.gestion = gestion;
+
+    public AnyadirEconomiaVista() {
         try {
 			initComponents();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    public AnyadirEconomiaVista(Economia economia) {
+    	try {
+    		initComponents();
+    		this.cantidadTexto.setText(economia.getCantidad());
+    		this.descripcionTexto.setText(economia.getDescripcion());
+    		this.fechaTexto.setText(economia.getFecha().replaceAll("/", ""));
+    		this.monedaTipoBox.setSelectedItem(economia.getMoneda());
+    		this.procBenefTexto.setText(economia.getBeneficiarioProcedencia());
+    		this.tipoCombo.setSelectedItem(economia.getTipo());
+    	} catch (ParseException e) {
+    		e.printStackTrace();
+    	}
     }
     
     public ArrayList<Object> getData() {
@@ -48,11 +60,11 @@ public class AnyadirEconomiaVista extends javax.swing.JFrame {
     	return values;
     }
     
-    public void addControlador(controladores.AnyadirEconomiaControlador ctr) {
+    public void addControlador(ActionListener ctr) {
     	cancelarBoton.addActionListener(ctr);
     	cancelarBoton.setActionCommand("CANCELAR");
     	anyadirBoton.addActionListener(ctr);
-    	anyadirBoton.setActionCommand("ANYADIR");
+    	anyadirBoton.setActionCommand("CONFIRMAR");
     }
 
 
@@ -93,7 +105,7 @@ public class AnyadirEconomiaVista extends javax.swing.JFrame {
 
         monedaTipoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lempira", "Euro"}));
 
-        anyadirBoton.setText("Añadir");
+        anyadirBoton.setText("Confirmar");
 
         cancelarBoton.setText("Cancelar");
 

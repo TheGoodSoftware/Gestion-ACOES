@@ -26,6 +26,62 @@ public class Economia {
 		this.aceptado = aceptado;
 	}
 	
+	
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public void setCantidad(double cantidad) {
+		this.cantidad = cantidad;
+	}
+
+
+
+	public void setMoneda(String moneda) {
+		this.moneda = moneda;
+	}
+
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
+
+	public void setGestion(GestionEconomica gestion) {
+		this.gestion = gestion;
+	}
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+
+	public void setBeneficiarioProcedencia(String beneficiarioProcedencia) {
+		this.beneficiarioProcedencia = beneficiarioProcedencia;
+	}
+
+
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+
+
+	public void setAceptado(Boolean aceptado) {
+		this.aceptado = aceptado;
+	}
+
+
+
 	public String getAceptado() {
 		return (aceptado) ? "Sí" : "No";
 	}

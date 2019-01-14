@@ -25,8 +25,12 @@ public class EconomiaControlador implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
 			case "ANYADIR":
-				AnyadirEconomiaVista anyadirEconomia = new AnyadirEconomiaVista(this.gestion);
+				AnyadirEconomiaVista anyadirEconomia = new AnyadirEconomiaVista();
 				anyadirEconomia.addControlador(new AnyadirEconomiaControlador(this.vistaGestion, anyadirEconomia, gestion));
+				break;
+			case "MODIFICAR":
+				AnyadirEconomiaVista modificarEconomia = new AnyadirEconomiaVista(vistaGestion.getEconomiaSeleccionada());
+				modificarEconomia.addControlador(new ModificarEconomiaControlador(this.vistaGestion, modificarEconomia, vistaGestion.getEconomiaSeleccionada()));
 				break;
 			case "IMPRIMIR":
 			try {

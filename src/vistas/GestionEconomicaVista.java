@@ -45,9 +45,15 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
     	return economiaVistaActual;
     }
     
+    public Economia getEconomiaSeleccionada() {
+    	return economiaVistaActual[tablaEconomia.getSelectedRow()];
+    }
+    
     public void addControlador(EconomiaControlador ctr) {
     	anyadirBoton.addActionListener(ctr);
     	anyadirBoton.setActionCommand("ANYADIR");
+    	modificarBoton.addActionListener(ctr);
+    	modificarBoton.setActionCommand("MODIFICAR");
     	imprimirInformeBoton.addActionListener(ctr);
     	imprimirInformeBoton.setActionCommand("IMPRIMIR");
     }
@@ -82,6 +88,7 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
         fechaBuscarLabel = new javax.swing.JLabel();
         balanceTotalLabel = new javax.swing.JLabel();
         balanceTotalField = new javax.swing.JTextField();
+        modificarBoton = new javax.swing.JButton();
         
         imprimirInformeBoton.setText("Guardar informe");
         
@@ -173,7 +180,7 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
         }
 
         anyadirBoton.setText("Añadir");
-
+        modificarBoton.setText("Modificar");
         eliminarBoton.setText("Eliminar");
 
         buscadorMesBox.setModel(new javax.swing.DefaultComboBoxModel<>(
@@ -206,9 +213,11 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(anyadirBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(modificarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(eliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                        .addComponent(imprimirInformeBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imprimirInformeBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(balanceTotalLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -229,6 +238,7 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eliminarBoton)
+                    .addComponent(modificarBoton)
                     .addComponent(anyadirBoton)
                     .addComponent(balanceTotalLabel)
                     .addComponent(balanceTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,6 +255,7 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
     private javax.swing.JTextField buscadorPorId;
     private javax.swing.JLabel buscarPorIdLabel;
     private javax.swing.JButton eliminarBoton;
+    private javax.swing.JButton modificarBoton;
     private javax.swing.JLabel fechaBuscarLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaEconomia;

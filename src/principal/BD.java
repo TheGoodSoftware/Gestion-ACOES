@@ -81,8 +81,9 @@ public class BD {
 				nombreTabla = "donacion";
 				nombreId = "idDon";
 			}
-				
-			stmt.execute("INSERT INTO " + nombreTabla + " VALUES (" + e.getId() + "," + e.getCantidad() + ",'" + e.getMoneda() + "','" + e.getDescripcion() + "','" + e.getFecha() + "','" + e.getBeneficiarioProcedencia() + "'," + e.getGestion().getID() + ")");
+			
+			System.out.println(e.getGestion().getID());
+			stmt.execute("INSERT INTO "+ nombreTabla  + "(" + nombreId + ", Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (" + e.getId() + "," + e.getCantidad() + ",'" + e.getMoneda() + "','" + e.getDescripcion() + "'," + e.getGestion().getID() + ",'" + e.getFecha() + "','" + e.getBeneficiarioProcedencia() + "')");
 			stmt.close();
 		} catch (SQLException sqlEx) {
 			throw new Error("ERROR. Trying to insert economia -> " + sqlEx.getMessage());
