@@ -11,18 +11,13 @@ public class Usuario extends Persona {
     private Rol role;
     private ArrayList<Nino> apadrinados;
 
-    public Usuario(int id, String nombre, String apellidos, String direccion, String pueblo, String e_mail,  ArrayList<Nino> apadrinados, Rol role) {
-        super(id, nombre, apellidos, direccion, pueblo);
-        this.e_mail = e_mail;
-        this.role = role;
-        this.apadrinados = apadrinados;
-    }
     // Temporalmente creo los dos constructores hasta que las consultas de la BBDD etc. se adapten al constructor de abajo
-    public Usuario(int id, String nombre, String apellidos, String direccion, String pueblo, String e_mail,  ArrayList<Nino> apadrinados, Rol role, String Asociacion) {
+    public Usuario(int id, String nombre, String apellidos, String direccion, String pueblo, String e_mail,  ArrayList<Nino> apadrinados, Rol role, String asociacion) {
         super(id, nombre, apellidos, direccion, pueblo);
         this.e_mail = e_mail;
         this.role = role;
         this.apadrinados = apadrinados;
+        this.asociacion = asociacion;
     }
     
 

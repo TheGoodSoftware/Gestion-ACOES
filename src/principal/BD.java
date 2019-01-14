@@ -135,7 +135,8 @@ public class BD {
 						result.getString("Pueblo"),
 						e_mail,
 						getApadrinados(e_mail),
-						getRol(e_mail)
+						getRol(e_mail),
+						result.getString("ASOCIACION_Nombre")
 				);
 			}
 			result.close();
@@ -148,6 +149,7 @@ public class BD {
 		}
 	}
 	
+
 	public Usuario getSocio(int id) throws SQLException {
 			Statement stmt = con.createStatement();
 			ResultSet result = stmt.executeQuery("SELECT Correo FROM usuario JOIN persona ON usuario.idUsuario = persona.idPersona where idUsuario = "+id);
@@ -466,7 +468,8 @@ public class BD {
 							"",
 							result.getString("Correo"),
 								new ArrayList<>(),
-								getRol(result.getString("Correo"))
+								getRol(result.getString("Correo")),
+							result.getString("ASOCIACION_Nombre")
 						)
 				);
 			}
@@ -630,24 +633,26 @@ public class BD {
 		return lista;
 	}
 
-	public void insertarApadrinamiento(int idPadrino, int idNino) throws SQLException {
+	public void insertarApadrinamiento(int idPadrino, int idNino, int cuota) throws SQLException {
 		// TODO Auto-generated method stub
 		System.out.println(idPadrino);
 		System.out.println(idNino);
 
 		Statement stmt = con.createStatement();
 			
-		stmt.execute("INSERT INTO apadrinar(NINO_idNen, USUARIO_idUsuario, Activo) VALUES("+
+		stmt.execute("INSERT INTO apadrinar(NINO_idNen, USUARIO_idUsuario, Activo, Cuota) VALUES("+
 																							idNino+","+
 																							idPadrino+","+
-																							1+")");
+																							1+","+
+																							cuota + ")");
 		stmt.close();
 	}
 
-	public void activarApadrinamiento(int idPadrino, int idNino) {
+	public void activarApadrinamiento(int idPadrino, int idNino, int cuota) {
 		try {
 			Statement stmt = con.createStatement();
 			stmt.execute("UPDATE apadrinar SET Activo=1 where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
+			stmt.execute("UPDATE apadrinar SET Cuota="+ cuota+" where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
 			stmt.close();
 		} catch (SQLException e) {
 			System.err.println("ERROR. Trying to activate apadrinamiento");
@@ -659,5 +664,11 @@ public class BD {
 			Statement stmt = con.createStatement();
 			stmt.execute("UPDATE apadrinar SET Activo=0 where USUARIO_idUsuario="+idPadrino+" and NINO_idNen = "+idNino);
 			stmt.close();
+	}
+	
+	public String getPersona(int id) {
+		//TODO para el metodo ApadrinarControlador para pasarle la persona como string
+		// quiero extraer la persona en formato ID +" "+ Nombre completo
+		return "";
 	}
 }
