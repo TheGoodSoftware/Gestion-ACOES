@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import controladores.EconomiaControlador;
@@ -61,7 +62,7 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
     public void updateTable() {
     	DefaultTableModel model = (DefaultTableModel)tablaEconomia.getModel();
     	model.setDataVector(gestion.toObjectArray(), new String [] {
-    			"Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha"
+    			"Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Procedencia/Beneficiario", "Fecha", "Aceptado"
             });
     	balanceTotalField.setText(Double.toString(GestionEconomica.getBalanceTotal(gestion.getEconomias().toArray(new Economia[gestion.getEconomias().size()]))));
     	fechaActual = "Periodo completo";
@@ -128,13 +129,16 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(tablaEconomia.getSelectedRow() != -1) {
-					BD bd = new BD();
-					Economia economia = gestion.getEconomias().get(tablaEconomia.getSelectedRow());
-					gestion.getEconomias().remove(tablaEconomia.getSelectedRow());
-					bd.eliminarEconomia(economia.getId(), economia.getTipo());
-					DefaultTableModel model = (DefaultTableModel) tablaEconomia.getModel();
-					model.removeRow(tablaEconomia.getSelectedRow());
-					economiaVistaActual = gestion.getEconomias().toArray(new Economia[gestion.getEconomias().size()]);
+					int result = JOptionPane.showConfirmDialog(null, "¿Estás seguro de querer eliminar la fila seleccionada?", "Eliminación de economía", JOptionPane.YES_NO_OPTION);
+					if(result == JOptionPane.YES_OPTION) {
+						BD bd = new BD();
+						Economia economia = gestion.getEconomias().get(tablaEconomia.getSelectedRow());
+						gestion.getEconomias().remove(tablaEconomia.getSelectedRow());
+						bd.eliminarEconomia(economia.getId(), economia.getTipo());
+						DefaultTableModel model = (DefaultTableModel) tablaEconomia.getModel();
+						model.removeRow(tablaEconomia.getSelectedRow());
+						economiaVistaActual = gestion.getEconomias().toArray(new Economia[gestion.getEconomias().size()]);
+					}
 				}
 			}
         	
@@ -217,11 +221,11 @@ public class GestionEconomicaVista extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(eliminarBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(imprimirInformeBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(imprimirInformeBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(49, 49, 49)
                         .addComponent(balanceTotalLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(balanceTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(balanceTotalField, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(

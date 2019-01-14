@@ -42,6 +42,8 @@ public class ApadrinarPopUpVista extends javax.swing.JFrame {
         cancelarBoton = new javax.swing.JButton();
         apadrinarDesapadrinarTexto = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
         personaTexto.setText("Persona:");
 
         usuarioTexto.setText("persona seleccionada");

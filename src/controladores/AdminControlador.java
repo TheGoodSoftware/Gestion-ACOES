@@ -29,7 +29,9 @@ public class AdminControlador implements ActionListener {
     	vistaAdmin = new AdministradorVista();
     	vistaAdmin.addControlador(this);
     	vistaAdmin.setVisible(true);
-    	vistaAdmin.setPanelContenido(new InicialVista(usuario));
+    	InicialVista vista = new InicialVista(usuario);
+    	vista.addControlador(new InicialControlador(vistaAdmin));
+    	vistaAdmin.setPanelContenido(vista);
         if (usuario.getRole().getNombre().equalsIgnoreCase("ACADEMICO")) {
             vistaAdmin.setOnlyAcademico();
         } else if (usuario.getRole().getNombre().equalsIgnoreCase("ECONOMIA")) {
@@ -43,14 +45,6 @@ public class AdminControlador implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
        switch(e.getActionCommand()) {
-       /*case "APADRINAR":
-    	   ApadrinarVista vistaApadrinar = new ApadrinarVista();
-    	   Apadrinar modeloApadrinar = new Apadrinar();
-    	   ApadrinarControlador ctr = new ApadrinarControlador(vistaApadrinar, modeloApadrinar, this.usuario);
-    	   vistaApadrinar.controlador(ctr);
-    	   ctr.iniciarVista();
-    	   vistaAdmin.setVisible(false);
-    	   break;*/
     	case "VISTA_SOCIO":
     	    vistaSocio = new SocioVista(usuario);
     	    vistaAdmin.setPanelContenido(vistaSocio);
