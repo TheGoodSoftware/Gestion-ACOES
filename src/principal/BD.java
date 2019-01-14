@@ -666,6 +666,7 @@ public class BD {
 			stmt.close();
 	}
 	
+	
 	public String getPersona(int id) {
 		//TODO para el metodo ApadrinarControlador para pasarle la persona como string
 		// quiero extraer la persona en formato ID +" "+ Nombre completo
