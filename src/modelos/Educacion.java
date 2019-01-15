@@ -9,11 +9,11 @@ public class Educacion {
     private double notaMedia;
     private String curso;
     private Nino nino;
-    private int edad;
+    private String fecha;
     private GestionAcademica gestion;
     
 
-    public Educacion(int id, int edad, double notaMedia, String nombre, String apellidos, Nino nino, GestionAcademica gestion, String curso)
+    public Educacion(int id, String fecha, double notaMedia, String nombre, String apellidos, Nino nino, GestionAcademica gestion, String curso)
     {
         this.id = id;
         this.nombre = nombre;
@@ -22,7 +22,7 @@ public class Educacion {
         this.gestion = gestion;
         this.nino = nino;
         this.curso = curso;
-        this.edad = edad;
+        this.fecha = fecha;
 
     }
 
@@ -50,8 +50,8 @@ public class Educacion {
         return curso;
     }
 
-    public int getEdad(){
-        return edad;
+    public String getFecha(){
+        return fecha;
     }
 
     public int getId() {

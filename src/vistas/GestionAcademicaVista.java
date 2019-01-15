@@ -5,17 +5,6 @@
  */
 package vistas;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.Arrays;
-
-import javax.swing.table.DefaultTableModel;
-import controladores.GestionAcademicaControlador;
-import modelos.*;
-import principal.BD;
-
 /**
  *
  * @author m1ndbl0w
@@ -25,27 +14,8 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
     /**
      * Creates new form GestionAcademicaVista
      */
-
-    private GestionAcademica gestion;
-
-    public GestionAcademicaVista(GestionAcademica gestion) {
-
-        this.gestion = gestion;
+    public GestionAcademicaVista() {
         initComponents();
-    }
-
-    public void addControlador(GestionAcademicaControlador ctr) {
-        atrasBoton.addActionListener(ctr);
-        atrasBoton.setActionCommand("ATRAS");
-        anyadirBoton.addActionListener(ctr);
-        anyadirBoton.setActionCommand("ANYADIR");
-
-    }
-
-    public void updateTable() {
-        DefaultTableModel model = (DefaultTableModel)tablaAcademica.getModel();
-        model.setDataVector(gestion.toObjectArray(), new String [] {
-                "Id","Nombre", "Apellidos", "Edad", "Curso", "NotaMedia"});
     }
 
     /**
@@ -58,18 +28,20 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaAcademica = new javax.swing.JTable();
-        anyadirBoton = new javax.swing.JButton();
-        atrasBoton = new javax.swing.JButton();
-        buscaPorIdLabel = new javax.swing.JLabel();
-        buscadorPorId = new javax.swing.JTextField();
+        jTable1 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         jScrollBar1 = new javax.swing.JScrollBar();
         jScrollBar2 = new javax.swing.JScrollBar();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(852, 480));
 
-        tablaAcademica.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -77,49 +49,52 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nombre", "Apellidos", "Edad", "Curso", "NotaMedia"
+                "Nombre", "Apellidos", "Fecha de Nacimiento", "Curso", "NotaMedia", "Observaciones"
             }
         ) {
             Class[] types = new Class [] {
-                Integer.class, String.class, String.class, Integer.class, String.class, Double.class
+                String.class, String.class, String.class, String.class, Double.class, String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tablaAcademica);
+        jScrollPane1.setViewportView(jTable1);
 
-        anyadirBoton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        anyadirBoton.setText("Añadir Datos");
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jButton1.setText("Añadir Datos");
 
-
-
-        atrasBoton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        atrasBoton.setText("Atrás");
-        atrasBoton.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jButton2.setText("Modificar Datos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atrasBotonActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
-        buscaPorIdLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        buscaPorIdLabel.setText("Buscar por id:");
+        jButton3.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jButton3.setText("Atrás");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        buscadorPorId.setText("Introduce un id");
+        jLabel1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel1.setText("Buscar por ID:");
+
+        jTextField1.setText("Introduce un ID");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jScrollBar2.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
 
-        buscadorPorId.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                DefaultTableModel model = (DefaultTableModel) tablaAcademica.getModel();
-                model.setDataVector(GestionAcademica.EducacionArraytoObjectArray(gestion.getEducacions().stream().filter(educacion -> String.valueOf(educacion.getId()).startsWith(buscadorPorId.getText())).toArray(Educacion[]::new)),
-                        new String [] {
-                                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Autor"
-                        });
-            }
-        });
+        jButton4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jButton4.setText("Imprimir Informe Académico");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,14 +105,17 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(atrasBoton)
+                                .addComponent(jButton3)
                                 .addGap(58, 58, 58)
-                                .addComponent(buscaPorIdLabel)
+                                .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscadorPorId, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
+                                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(anyadirBoton)
-                                .addGap(26, 26, 26)
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(14, 14, 14))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -152,42 +130,81 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(atrasBoton)
-                            .addComponent(buscaPorIdLabel)
-                            .addComponent(buscadorPorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton3)
+                            .addComponent(jLabel1)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE))
                 .addGap(3, 3, 3)
                 .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(anyadirBoton)))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1)
+                    .addComponent(jButton4)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void atrasBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasBotonActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_atrasBotonActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void modificarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBotonActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_modificarBotonActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(GestionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(GestionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(GestionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(GestionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GestionAcademicaVista().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton anyadirBoton;
-    private javax.swing.JButton atrasBoton;
-    private javax.swing.JLabel buscaPorIdLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollBar jScrollBar2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaAcademica;
-    private javax.swing.JTextField buscadorPorId;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

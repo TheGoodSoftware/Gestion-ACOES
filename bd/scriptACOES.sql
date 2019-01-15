@@ -168,6 +168,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`notas` (
   `Calificacion` DOUBLE NOT NULL DEFAULT 5,
   `NotaMedia` DOUBLE NOT NULL DEFAULT 5,
   `Curso` VARCHAR(500) NOT NULL DEFAULT 'Primaria',
+  `Observaciones` VARCHAR(500) NOT NULL DEFAULT 'Insertar observacion',
   `nino_idNen` INT(10) NOT NULL,
   PRIMARY KEY (`idNotasNen`),
   UNIQUE INDEX `idNotasNen_UNIQUE` (`idNotasNen` ASC),

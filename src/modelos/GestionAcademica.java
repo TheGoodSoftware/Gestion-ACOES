@@ -46,7 +46,7 @@ public class GestionAcademica {
             values[0] = Educacion[i].getId();
             values[1] = Educacion[i].getNombre();
             values[2] = Educacion[i].getApellidos();
-            values[3] = Educacion[i].getEdad();
+            values[3] = Educacion[i].getFecha();
             values[4] = Educacion[i].getCurso();
             values[5] = Educacion[i].getNotaMedia();
             valores[i] = values;
