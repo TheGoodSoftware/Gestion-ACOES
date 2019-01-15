@@ -127,6 +127,25 @@ public class BD {
 			throw new Error("ERROR. Trying to delete economia -> " + sqlEx.getMessage());
 		}
 	}
+	
+	public void aceptarEconomia(int id, String tipo) {
+		try {
+			Statement stmt = con.createStatement();
+			String nombreTabla, nombreId;
+			if(tipo.equalsIgnoreCase("GASTO")) {
+				nombreTabla = "gasto";
+				nombreId = "idGasto";
+			} else {
+				nombreTabla = "donacion";
+				nombreId = "idDon";
+			}
+				
+			stmt.execute("UPDATE " + nombreTabla + " SET Aprobado=1 WHERE " + nombreId + " = " + id);
+			stmt.close();
+		} catch (SQLException sqlEx) {
+			throw new Error("ERROR. Trying to modifying economia -> " + sqlEx.getMessage());
+		}
+	}
 
 	/*public void insertEducacion(Educacion e) {
 		try {
@@ -303,12 +322,13 @@ public class BD {
 			ArrayList<Nino> apadrinados = new ArrayList<>();
 			ResultSet result = stmt.executeQuery("SELECT * FROM apadrinar JOIN nino ON apadrinar.nino_idNen = nino.idNen JOIN usuario ON apadrinar.usuario_idUsuario = usuario.idUsuario JOIN persona P on nino.idNen = P.idPersona WHERE Correo = '" + e_mail + "'");
 
-			Map<String, Integer> notas = new TreeMap<>();
-			Random rnd = new Random();
-			notas.put("1Primaria", rnd.nextInt(10) + 1);
-			notas.put("2Primaria", rnd.nextInt(10) + 1);
-
 			while(result.next()) {
+				
+				Map<String, Integer> notas = new TreeMap<>();
+				Random rnd = new Random();
+				notas.put("1Primaria", rnd.nextInt(10) + 1);
+				notas.put("2Primaria", rnd.nextInt(10) + 1);
+				
 				apadrinados.add(new Nino(
 						result.getInt("idNen"),
 						result.getString("Nombre"),
@@ -443,8 +463,6 @@ public class BD {
 		}
 	}
 	
-	
-
 	public void modificarUsuarioBaseDeDatos(Usuario u, String password) {
 		try {
 			Statement stmt = con.createStatement();
@@ -501,7 +519,62 @@ public class BD {
 		}
 	}
 	
+	public GestionEconomica getEconomiaNoAprobada() {
+		try
+		{
+			Statement stmt = con.createStatement();
+			ArrayList<Economia> economia = new ArrayList<>();
+			ResultSet result = stmt.executeQuery("SELECT * FROM donacion JOIN gestionEconomica ON donacion.GESTIONECONOMICA_idBalance = gestionEconomica.idBalance WHERE Aprobado=0");
+			GestionEconomica gestion = null;
+			
+			while(result.next()) {
+				gestion = new GestionEconomica(result.getInt("GESTIONECONOMICA_idBalance"));
+				economia.add(
+						new Economia(
+								result.getInt("idDon"),
+								result.getDouble("Cantidad"),
+								result.getString("Moneda"),
+								result.getString("Descripcion"),
+								gestion,
+								"Ingreso",
+								result.getString("ProcedenciaBeneficiario"),
+								result.getString("Fecha"),
+								result.getBoolean("Aprobado")
+								)
+				);
+			}
+			
+			result = stmt.executeQuery("SELECT * FROM gasto JOIN gestionEconomica ON "
+					+ "gasto.GESTIONECONOMICA_idBalance = gestionEconomica.idBalance WHERE Aprobado=0");
 
+			while(result.next()) {
+				if(gestion == null)
+					gestion = new GestionEconomica(result.getInt("GESTIONECONOMICA_idBalance"));
+				economia.add(
+						new Economia(
+								result.getInt("idGasto"),
+								result.getDouble("Cantidad"),
+								result.getString("Moneda"),
+								result.getString("Descripcion"),
+								gestion,
+								"Gasto",
+								result.getString("ProcedenciaBeneficiario"),
+								result.getString("Fecha"),
+								result.getBoolean("Aprobado")
+								)
+				);
+			}
+			stmt.close();
+
+			gestion.setEconomia(economia);
+			
+			return gestion;
+		}
+		catch (SQLException ex)
+		{
+			throw new Error("ERROR. Trying to get Economia -> " + ex.getMessage());
+		}
+	}
 	
 	public GestionEconomica getEconomia() {
 		try

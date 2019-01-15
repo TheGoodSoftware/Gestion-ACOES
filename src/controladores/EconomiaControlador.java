@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 public class EconomiaControlador implements ActionListener {
 	
 	private GestionEconomicaVista vistaGestion;
@@ -35,6 +38,7 @@ public class EconomiaControlador implements ActionListener {
 			case "IMPRIMIR":
 			try {
 				new EconomiaInforme(new ArrayList<Economia>(Arrays.asList(vistaGestion.getEconomiasActual())), vistaGestion.getFechaActual());
+				JOptionPane.showMessageDialog(null, "Se ha generado el informe correctamente en la carpeta informes", "Informe generado", JOptionPane.INFORMATION_MESSAGE);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

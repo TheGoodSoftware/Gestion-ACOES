@@ -67,7 +67,7 @@ public class AnyadirEducacionVista extends javax.swing.JFrame {
         cursoTexto = new javax.swing.JTextField();
 
         
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         //ninoTexto.setModel(new javax.swing.DefaultComboBoxModel<Object>(
                 //(Object[]) new BD().getAllNinos().stream().map(u -> u.getNombreCompleto()).toArray()
         //));

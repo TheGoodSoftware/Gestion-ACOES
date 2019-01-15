@@ -93,7 +93,7 @@ public class AnyadirEconomiaVista extends javax.swing.JFrame {
         fechaLabel = new javax.swing.JLabel();
         fechaTexto = new javax.swing.JFormattedTextField(new javax.swing.text.MaskFormatter("##/##/####"));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         cantidadLabel.setText("Cantidad");
 
