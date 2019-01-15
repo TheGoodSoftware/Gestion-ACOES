@@ -132,7 +132,6 @@ public class BD {
 		try {
 			Statement stmt = con.createStatement();
 			String nombreTabla = "Expediente";
-
 			stmt.execute("INSERT INTO " + nombreTabla + " VALUES (" + e.getId() + "," + e.getEdad() + ",'" + e.getNotaMedia() + "','" + e.getNombre() + "'," + e.getApellidos() + "," + e.().getID() + "," + e.getGestion().getID() + "," + e.getCurso() + ")");
 			stmt.close();
 		} catch (SQLException sqlEx) {
@@ -568,7 +567,6 @@ public class BD {
 			ArrayList<Educacion> educacion = new ArrayList<>();
 			ResultSet result = stmt.executeQuery("SELECT * FROM nino JOIN persona  ON nino.idNen = persona.idPersona JOIN notas ON nino.idNen = notas.nino_idNen");
 			GestionAcademica gestion = null;
-
 			while(result.next()) {
 				gestion = new GestionAcademica(result.getInt("GESTIONECONOMICA_idBalance"));
 				educacion.add(
@@ -581,18 +579,11 @@ public class BD {
 										null,
 										null,
 										result.getString("Curso"))
-
 						);
-
 			}
-
 			result = stmt.executeQuery("SELECT * FROM nino JOIN persona  ON nino.idNen = persona.idPersona JOIN notas ON nino.idNen = notas.nino_idNen");
-
-
 			stmt.close();
-
 			gestion.setEducacion(educacion);
-
 			return gestion;
 		}
 		catch (SQLException ex)
@@ -685,12 +676,45 @@ public class BD {
 			stmt.close();
 	}
 	
-	
-	public String getPersona(int id) {
-		//TODO para el metodo ApadrinarControlador para pasarle la persona como string
-		// quiero extraer la persona en formato ID +" "+ Nombre completo
-
-		
-		return "";
+	public List<Paquete> getAllPaquetes(){
+		List<Paquete> lista = new ArrayList<Paquete>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM paquete");
+			while(result.next()) {
+				lista.add(new Paquete(
+						result.getInt("NumSeg"),
+						result.getString("FechaEnvio"),
+						getSocio(result.getInt("Padrino")),
+						getNino(result.getInt("Nino")),
+						result.getString("Descripcion")
+						));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("ERROR. Trying to get apadrinamientos");
+		}
+		return lista;
 	}
+	
+	public void insertarPaquete(int numSeg, String fechaEnvio, int padrino, int nino, String des) throws SQLException {
+
+			Statement stmt = con.createStatement();
+			stmt.execute("insert into paquete(NumSeg, FechaEnvio, Padrino, Nino, Descripcion) values("
+					+ numSeg +",'"
+					+ fechaEnvio +"',"
+					+ padrino +","
+					+ nino +",'"
+					+ des +"')");
+
+	}
+	
+	public void confirmarPaquete(int numSeg, String fechaRecepcion) throws SQLException {
+			Statement stmt = con.createStatement();
+			stmt.execute("update paquete set FechaRecepcion ="
+					+ fechaRecepcion + " and Confirmado = 1 where NumSeg ="
+					+ numSeg);
+
+	}
+	
 }

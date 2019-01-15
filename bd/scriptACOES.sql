@@ -236,6 +236,33 @@ DEFAULT CHARACTER SET = utf8;
 
 SHOW WARNINGS;
 
+-- ------------------------------------------------------
+-- Table `mydb`.`paquete`
+-- ------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`paquete` (
+	`NumSeg` INT(10) NOT NULL,
+    `FechaEnvio` VARCHAR(10) NOT NULL,
+    `FechaRecepcion` VARCHAR(10),
+    `Confirmado` tinyint(1),
+	`Padrino` int(10),
+    `Nino` int(10),
+    `Descripcion` varchar(140),
+    PRIMARY KEY(`numSeg`),
+	CONSTRAINT `fk_Padrino_Paquete`
+    FOREIGN KEY (`Padrino`)
+    REFERENCES `mydb`.`usuario` (`idUsuario`),
+	CONSTRAINT `fk_Nino_Paquete`
+    FOREIGN KEY (`Nino`)
+    REFERENCES `mydb`.`Nino` (`idNen`)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+SHOW WARNINGS;
+
+
+
+
 -- -----------------------------------------------------
 -- Table `mydb`.`proyecto`
 -- -----------------------------------------------------
