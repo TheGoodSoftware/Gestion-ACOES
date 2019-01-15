@@ -191,3 +191,5 @@ INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA
 INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (1054, 1700, 'Lempira', 'Gasolina', 114445, '21/01/2019', 'Casa Populorum Montaña');
 
 COMMIT;
+
+insert into mydb.paquete(NumSeg, FechaEnvio, FechaRecepcion, Confirmado, Padrino, Nino, Descripcion) values (123, 'hoy', '', 0, 1000, 473829, '');

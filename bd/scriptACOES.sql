@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`paquete` (
 	`NumSeg` INT(10) NOT NULL,
     `FechaEnvio` VARCHAR(10) NOT NULL,
     `FechaRecepcion` VARCHAR(10),
-    `Confirmado` tinyint(1),
+    `Confirmado` tinyint(1) default 0,
 	`Padrino` int(10),
     `Nino` int(10),
     `Descripcion` varchar(140),
