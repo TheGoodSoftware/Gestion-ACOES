@@ -331,7 +331,13 @@ public class GestionNinosVista extends javax.swing.JPanel {
 	 }
 	public String getPoblacionSeleccionado() {
 		 int tupla = tabla.getSelectedRow();
-		 return tabla.getValueAt(tupla, 6).toString();
+		 if(tabla.getValueAt(tupla, 6)==null) {
+			 return "";
+		 }
+		 else {
+			 return tabla.getValueAt(tupla, 6).toString(); 
+		 }
+		 
 	 }
 	public String getSexoSeleccionado() {
 		 int tupla = tabla.getSelectedRow();
@@ -353,7 +359,12 @@ public class GestionNinosVista extends javax.swing.JPanel {
 	
 	public String getFechaSalidaACOESSeleccionado() {
 		 int tupla = tabla.getSelectedRow();
-		 return tabla.getValueAt(tupla, 11).toString();
+		 if(tabla.getValueAt(tupla, 11)==null) {
+			 return "";
+		 }
+		 else {
+			 return tabla.getValueAt(tupla, 11).toString(); 
+		 }
 	 }
 	public String getAltaProyectoSeleccionado() {
 		 int tupla = tabla.getSelectedRow();
@@ -362,11 +373,23 @@ public class GestionNinosVista extends javax.swing.JPanel {
 	
 	public String getSalidaProyectoSeleccionado() {
 		 int tupla = tabla.getSelectedRow();
-		 return tabla.getValueAt(tupla, 13).toString();
+		 if(tabla.getValueAt(tupla, 13)==null) {
+			 return "";
+		 }
+		 else {
+			 return tabla.getValueAt(tupla, 13).toString(); 
+		 }
+		 
 	 }
 	public String getObservacionSeleccionado() {
 		 int tupla = tabla.getSelectedRow();
-		 return tabla.getValueAt(tupla, 14).toString();
+		 if(tabla.getValueAt(tupla, 14)==null) {
+			 return "";
+		 }
+		 else {
+			 return tabla.getValueAt(tupla, 14).toString(); 
+		 }
+		
 	 }
 
 		
