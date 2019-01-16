@@ -250,10 +250,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`paquete` (
     PRIMARY KEY(`numSeg`),
 	CONSTRAINT `fk_Padrino_Paquete`
     FOREIGN KEY (`Padrino`)
-    REFERENCES `mydb`.`usuario` (`idUsuario`),
-	CONSTRAINT `fk_Nino_Paquete`
-    FOREIGN KEY (`Nino`)
-    REFERENCES `mydb`.`Nino` (`idNen`)
+    REFERENCES `mydb`.`usuario` (`idUsuario`)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
