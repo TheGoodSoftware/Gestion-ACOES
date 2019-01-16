@@ -101,7 +101,7 @@ public class ApadrinarControlador implements ActionListener {
 		} else {
 			BD miBD = new BD();
 			Nino persona = miBD.getNino(vistaApadrinar.getSeleccionado()); // Arreglar esto
-			apadrinarPopUpVista.setLista(modelo.getSocios());
+			apadrinarPopUpVista.setLista(modelo.getSocios(this.usuario.getAsociacion()));
 			apadrinarPopUpVista.setUsuario(persona.getID()+" "+persona.getNombreCompleto(), vistaApadrinar.getBotonSeleccionado().substring(7, vistaApadrinar.getBotonSeleccionado().length()));
 			apadrinarPopUpVista.controlador(apadrinarPopUpControlador);
 			apadrinarPopUpVista.setVisible(true);
