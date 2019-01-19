@@ -667,8 +667,8 @@ public class BD {
 			ArrayList<Educacion> educacion = new ArrayList<>();
 			ResultSet result = stmt.executeQuery("SELECT nino.idNen, notas.NotaMedia, notas.Curso, notas.Observaciones, nino.fechaNacimiento, persona.Nombre, persona.Apellidos FROM notas JOIN nino ON notas.nino_idNen = nino.idNen JOIN persona ON persona.idPersona = nino.idNen ;");
 			GestionAcademica gestion = null;
+			while(result.next()) {
 
-			while (result.next()) {
 				educacion.add(
 						new Educacion(
 								result.getInt("idNen"),
@@ -682,10 +682,8 @@ public class BD {
 				);
 
 			}
-
 			stmt.close();
 			gestion.setEducacion(educacion);
-
 			return gestion;
 		} catch (SQLException ex) {
 			throw new Error("ERROR. Trying to get Educacion -> " + ex.getMessage());
@@ -775,12 +773,45 @@ public class BD {
 			stmt.close();
 	}
 	
-	
-	public String getPersona(int id) {
-		//TODO para el metodo ApadrinarControlador para pasarle la persona como string
-		// quiero extraer la persona en formato ID +" "+ Nombre completo
-
-		
-		return "";
+	public List<Paquete> getAllPaquetes(){
+		List<Paquete> lista = new ArrayList<Paquete>();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet result = stmt.executeQuery("SELECT * FROM paquete");
+			while(result.next()) {
+				lista.add(new Paquete(
+						result.getInt("NumSeg"),
+						result.getString("FechaEnvio"),
+						getSocio(result.getInt("Padrino")),
+						getNino(result.getInt("Nino")),
+						result.getString("Descripcion")
+						));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.err.println("ERROR. Trying to get apadrinamientos");
+		}
+		return lista;
 	}
+	
+	public void insertarPaquete(int numSeg, String fechaEnvio, int padrino, int nino, String des) throws SQLException {
+
+			Statement stmt = con.createStatement();
+			stmt.execute("insert into paquete(NumSeg, FechaEnvio, Padrino, Nino, Descripcion) values("
+					+ numSeg +",'"
+					+ fechaEnvio +"',"
+					+ padrino +","
+					+ nino +",'"
+					+ des +"')");
+
+	}
+	
+	public void confirmarPaquete(int numSeg, String fechaRecepcion) throws SQLException {
+			Statement stmt = con.createStatement();
+			stmt.execute("update paquete set FechaRecepcion ="
+					+ fechaRecepcion + " and Confirmado = 1 where NumSeg ="
+					+ numSeg);
+
+	}
+	
 }

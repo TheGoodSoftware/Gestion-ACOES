@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import modelos.ApadrinarModelo;
 import modelos.LoginModelo;
+import modelos.MensajeriaModelo;
 import modelos.Nino;
 import modelos.Usuario;
 import principal.BD;
@@ -17,6 +18,7 @@ import vistas.ApadrinarPopUpVista;
 import vistas.ApadrinarVista;
 import vistas.CrearSocioVista;
 import vistas.LoginVista;
+import vistas.MensajeriaVista;
 import vistas.MostrarPersonasVista;
 import vistas.MostrarSocioVista;
 
@@ -57,6 +59,8 @@ public class ApadrinarControlador implements ActionListener {
 			break;
 			case "FILTRAR" : filtrar();
 			break;
+			case "MENSAJE" : mensaje();
+			break;
 			default :;
 			break;
 		}
@@ -66,6 +70,14 @@ public class ApadrinarControlador implements ActionListener {
 			}
 	}
 	
+
+	private void mensaje() {
+		MensajeriaVista mensajeria = new MensajeriaVista();
+		MensajeriaModelo modelo = new MensajeriaModelo();
+		MensajeriaControlador controlador = new MensajeriaControlador(mensajeria, modelo, vistaApadrinar);
+		mensajeria.controlador(controlador);
+		mensajeria.setVisible(true);
+	}
 
 	public void mostrarSocios() {
 		vistaApadrinar.actualizarLista(modelo.getSocios(this.usuario.getAsociacion()));
@@ -89,7 +101,7 @@ public class ApadrinarControlador implements ActionListener {
 		} else {
 			BD miBD = new BD();
 			Nino persona = miBD.getNino(vistaApadrinar.getSeleccionado()); // Arreglar esto
-			apadrinarPopUpVista.setLista(modelo.getSocios());
+			apadrinarPopUpVista.setLista(modelo.getSocios(this.usuario.getAsociacion()));
 			apadrinarPopUpVista.setUsuario(persona.getID()+" "+persona.getNombreCompleto(), vistaApadrinar.getBotonSeleccionado().substring(7, vistaApadrinar.getBotonSeleccionado().length()));
 			apadrinarPopUpVista.controlador(apadrinarPopUpControlador);
 			apadrinarPopUpVista.setVisible(true);

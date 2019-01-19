@@ -49,15 +49,6 @@ public class GestionNinosControlador implements ActionListener {
 					vistaGestionNinos.getObservacionSeleccionado());
 			modificarNinoCtr.iniciarVista();
 			break;
-		case "ELIMINAR":
-			try {
-				new BD().eliminarNinoBaseDeDatos(Integer.parseInt(vistaGestionNinos.getIDSeleccionado()));
-				vistaGestionNinos.eliminarNinoSeleccionado();
-			} catch (NumberFormatException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			break;
 		case "GENERAR_INFORME":
 			try {
 				new NinoInforme(new Nino(Integer.parseInt(vistaGestionNinos.getIDSeleccionado()),

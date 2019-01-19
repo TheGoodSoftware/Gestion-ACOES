@@ -45,11 +45,13 @@ public class ApadrinarVista extends  javax.swing.JPanel  {
          textoMensaje = new javax.swing.JLabel();
          campoBusqueda = new javax.swing.JTextField();
          textoBuscar = new javax.swing.JLabel();
+         botonMensaje = new javax.swing.JButton();
          selectorGroup.add(botonNino);
          selectorGroup.add(botonSocio);
          botonSocio.setSelected(true);
          botonNino.setText("Niños");
          botonSocio.setText("Socios");
+         botonMensaje.setText("Mensaje");
 
          listaPersonas.setModel(new javax.swing.AbstractListModel<String>() {
              String[] strings = { "", "", "", "", "" };
@@ -101,7 +103,8 @@ public class ApadrinarVista extends  javax.swing.JPanel  {
                                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                      .addComponent(botonDesapadrinar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                      .addComponent(botonApadrinar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                     .addComponent(botonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                     .addComponent(botonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                     .addComponent(botonMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                          .addContainerGap(103, Short.MAX_VALUE))))
          );
          layout.setVerticalGroup(
@@ -123,6 +126,8 @@ public class ApadrinarVista extends  javax.swing.JPanel  {
                          .addComponent(botonDesapadrinar)
                          .addGap(18, 18, 18)
                          .addComponent(botonMostrar)
+                         .addGap(18, 18, 18)
+                         .addComponent(botonMensaje)
                          .addGap(96, 96, 96)
                          .addComponent(textoMensaje))
                      .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -144,6 +149,8 @@ public class ApadrinarVista extends  javax.swing.JPanel  {
     	botonSocio.setActionCommand("MOSTRARSOCIOS");
     	botonNino.addActionListener(ctr);
     	botonNino.setActionCommand("MOSTRARNINOS");
+    	botonMensaje.addActionListener(ctr);
+    	botonMensaje.setActionCommand("MENSAJE");
     }
     
 
@@ -224,6 +231,7 @@ public class ApadrinarVista extends  javax.swing.JPanel  {
     private javax.swing.JButton botonApadrinar; // botonApadrinar
     private javax.swing.JButton botonDesapadrinar; // botonDesapadrinar
     private javax.swing.JButton botonMostrar; // botonMostrar
+    private javax.swing.JButton botonMensaje; // botonMostrar
     private javax.swing.JLabel textoMensaje;	// etiquetaOperacion
     private javax.swing.JLabel textoBuscar;	// etiquetaBuscar
     private javax.swing.JList<String> listaPersonas; // panelListaPersonas

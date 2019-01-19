@@ -23,14 +23,14 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (1000, 'Francisco', 'Jonasio', 'Calle Cersh N3', 'Calatchka');
-INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (1001, 'Dimitri', 'Vetrov', 'Colegio Vicente Shrot', 'Fritch');
-INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (473829, 'Carlos', 'Carle', 'Calle Cersh N3', 'Calatchka');
-INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644984, 'Pedro', 'Mora', 'Calle Almendro', 'Cuenca');
-INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644985, 'Juan', 'Ruiz', 'Calle Escorial', 'Madrid');
-INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644986, 'Marcos', 'Martin', 'Avenida España', 'Malaga');
-INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644987, 'Cristiano', 'Ronaldo', 'Carril Bici', 'Malaga');
-INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644988, 'Benito', 'Asparagus', 'Calle Peatonal', 'Malaga');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (1000, 'Juan', 'Garcia', 'Calle Cersh N3', 'Calatchka');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (1001, 'Jose Angel', 'Beltran', 'Colegio Vicente Shrot 8', 'Fritch');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (473829, 'Carlos', 'Perez', 'Calle Cersh N3', 'Calatchka');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644984, 'Pedro', 'Mora', 'Calle Almendro 8', 'Cuenca');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644985, 'Juan', 'Ruiz', 'Calle Escorial 7', 'Madrid');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644986, 'Marcos', 'Pedraza', 'Avenida España 7', 'Malaga');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644987, 'Cristian', 'Parra', 'Calle Bergamin 6', 'Malaga');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644988, 'Benito', 'Jimenez', 'Calle Fuentes 8', 'Malaga');
 
 
 COMMIT;
@@ -50,9 +50,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy) VALUES (473829, 9, 101);
-INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy) VALUES (43644984, 10, 101);
-INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy) VALUES (43644985, 10, 101);
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (473829, '02-04-2002', 101, 'V','22-02-2015', '20-06-2016','21-06-2016', 'Chico tranquilo y buen estudiante','67584744P');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (43644984, '12-02-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', 'Chico inquieto, necesita tutorías','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (43644985, '22-12-2003', 101, 'V','22-06-2014', '22-02-2015','01-03-2015', '','45678567B');
 
 
 COMMIT;
@@ -191,3 +191,5 @@ INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA
 INSERT INTO mydb.gasto (idGasto, Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (1054, 1700, 'Lempira', 'Gasolina', 114445, '21/01/2019', 'Casa Populorum Montaña');
 
 COMMIT;
+
+insert into mydb.paquete(NumSeg, FechaEnvio, FechaRecepcion, Confirmado, Padrino, Nino, Descripcion) values (123, 'hoy', '', 0, 1000, 473829, '');
