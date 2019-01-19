@@ -99,16 +99,19 @@ public class BD {
     }
 
     public void insertarEducacion(Educacion ed) {
-        try {
-            Statement stmt = con.createStatement();
+        try(Statement stmt = con.createStatement()) {
+
+
+            stmt.execute("UPDATE persona SET  Nombre='" + ed.getNombre() + "'Apellidos ='" + ed.getApellidos() + "' WHERE idPersona=" + ed.getId());
+
+            stmt.execute("UPDATE nino SET  fechaNacimiento='" + ed.getFechaNacimiento() + "' WHERE idNen =" + ed.getId());
 
             stmt.execute("INSERT INTO notas(Observaciones, Curso, NotaMedia) VALUES ('"
                     + ed.getObservaciones() + "','" + ed.getCurso() + "', " + ed.getNotaMedia() + ")");
-            stmt.execute("INSERT INTO nino(fechaNacimiento) VALUES ('"
-                    + ed.getFechaNacimiento() + "')");
-            stmt.execute("INSERT INTO persona(Nombre, Apellidos) VALUES ('"
-                    + ed.getNombre() + "','" + ed.getApellidos() + "')");
-            stmt.close();
+
+
+
+
         } catch (SQLException ex) {
             throw new Error("ERROR. Trying to insert Educacion into database -> " + ex.getMessage());
         }
@@ -119,14 +122,14 @@ public class BD {
 
 
 	public void modificarEducacion(Educacion ed) {
-		try {
-			Statement stmt = con.createStatement();
+		try(Statement stmt = con.createStatement()) {
 
 
-			stmt.execute("UPDATE notas SET NotaMedia =" + ed.getNotaMedia() + ",Curso ='" + ed.getCurso() + "',Observaciones='" + ed.getObservaciones() + "'WHERE notas_idNotasNen=" + ed.getId());
-			stmt.execute("UPDATE nino SET  fechaNacimiento='" + ed.getFechaNacimiento() + "'WHERE NINO_idNen =" + ed.getId());
-			stmt.execute("UPDATE persona SET  Nombre='" + ed.getNombre() + "'Apellidos ='" + ed.getApellidos() + "'WHERE PERSONA_idPersona=" + ed.getId());
-			stmt.close();
+
+			stmt.execute("UPDATE notas SET NotaMedia =" + ed.getNotaMedia() + ",Curso ='" + ed.getCurso() + "',Observaciones='" + ed.getObservaciones() + "' WHERE nino_idNen=" + ed.getId());
+			stmt.execute("UPDATE nino SET  fechaNacimiento='" + ed.getFechaNacimiento() + "' WHERE idNen =" + ed.getId());
+			stmt.execute("UPDATE persona SET  Nombre='" + ed.getNombre() + "',Apellidos ='" + ed.getApellidos() + "' WHERE idPersona=" + ed.getId());
+
 
 		} catch (SQLException sqlEx) {
 			throw new Error("ERROR. Trying to modify educacion -> " + sqlEx.getMessage());
@@ -134,12 +137,13 @@ public class BD {
 	}
 
 	public void eliminarEducacion(int id) throws SQLException {
-		try {
-			Statement stmt = con.createStatement();
-			stmt.execute("DELETE FROM notas WHERE nino_idNen="+id);
+        try(Statement stmt = con.createStatement()) {
+
+            stmt.execute("DELETE FROM persona WHERE idPersona="+id);
 			stmt.execute("DELETE FROM nino WHERE idNen="+id);
-			stmt.execute("DELETE FROM persona WHERE idPersona="+id);
-			stmt.close();
+            stmt.execute("DELETE FROM notas WHERE nino_idNen="+id);
+
+
 
 		}
 		catch(SQLException ex) {
@@ -662,8 +666,8 @@ public class BD {
 	}
 
 	public GestionAcademica getEducacion() {
-		try {
-			Statement stmt = con.createStatement();
+        try(Statement stmt = con.createStatement()) {
+
 			ArrayList<Educacion> educacion = new ArrayList<>();
 			ResultSet result = stmt.executeQuery("SELECT nino.idNen, notas.NotaMedia, notas.Curso, notas.Observaciones, nino.fechaNacimiento, persona.Nombre, persona.Apellidos FROM notas JOIN nino ON notas.nino_idNen = nino.idNen JOIN persona ON persona.idPersona = nino.idNen ;");
 			GestionAcademica gestion = new GestionAcademica();
@@ -682,7 +686,7 @@ public class BD {
 				);
 
 			}
-			stmt.close();
+
 			gestion.setEducacion(educacion);
 			return gestion;
 		} catch (SQLException ex) {
