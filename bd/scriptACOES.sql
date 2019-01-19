@@ -136,7 +136,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`nino` (
   `idNen` INT(10) NOT NULL,
-  `fechaNacimiento` VARCHAR(10) NOT NULL,
+  `fechaNacimiento` VARCHAR(150) NOT NULL,
   `sexo` VARCHAR(1),
   `fechaAlta` VARCHAR(10),
   `fechaAltaACOES` VARCHAR(10),
@@ -168,6 +168,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`notas` (
   `Calificacion` DOUBLE NOT NULL DEFAULT 5,
   `NotaMedia` DOUBLE NOT NULL DEFAULT 5,
   `Curso` VARCHAR(500) NOT NULL DEFAULT 'Primaria',
+  `Observaciones` VARCHAR(500) NOT NULL DEFAULT 'Insertar observacion',
   `nino_idNen` INT(10) NOT NULL,
   PRIMARY KEY (`idNotasNen`),
   UNIQUE INDEX `idNotasNen_UNIQUE` (`idNotasNen` ASC),

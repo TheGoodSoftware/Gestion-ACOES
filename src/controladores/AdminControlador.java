@@ -73,7 +73,7 @@ public class AdminControlador implements ActionListener {
     		apadrinarControlador.iniciarVista();
     		vistaAdmin.setPanelContenido(apadrinarVista);
     		break;
-    		/*
+
 	   	case "GESTION_ACADEMICA":
 		   	vistaAdmin.setVisible(false);
 			bd = new BD();
@@ -81,14 +81,15 @@ public class AdminControlador implements ActionListener {
 		   	GestionAcademicaVista educacionVista = new GestionAcademicaVista(gestionAcademica);
 		   	educacionVista.addControlador(new GestionAcademicaControlador(educacionVista, vistaAdmin, gestionAcademica));
 		   	educacionVista.setVisible(true);
-		   	break;*/
+		   	break;
+
     	case "GESTION_NINOS":
     		GestionNinosControlador gesNinosCtr = new GestionNinosControlador(this.vistaAdmin);
 		try {
 			vistaAdmin.setPanelContenido(gesNinosCtr.iniciarVista());
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			//e1.printStackTrace();
+			e1.printStackTrace();
 		}
     		break;
     	case "CERRAR":

@@ -5,17 +5,22 @@
  */
 package vistas;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.Arrays;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import controladores.EconomiaControlador;
 import controladores.GestionAcademicaControlador;
+import informes.EconomiaInforme;
 import modelos.*;
 import principal.BD;
-
 /**
  *
  * @author m1ndbl0w
@@ -27,26 +32,46 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
      */
 
     private GestionAcademica gestion;
+    private Educacion[] educacionVistaActual;
+
+
+
 
     public GestionAcademicaVista(GestionAcademica gestion) {
-
         this.gestion = gestion;
         initComponents();
     }
 
+
+
+    public Educacion[] getEducacionsActual() {
+        return educacionVistaActual;
+    }
+
+    public Educacion getEducacionSeleccionada() {
+
+        return educacionVistaActual[tablaEducacion.getSelectedRow()];
+    }
+
     public void addControlador(GestionAcademicaControlador ctr) {
-        atrasBoton.addActionListener(ctr);
-        atrasBoton.setActionCommand("ATRAS");
         anyadirBoton.addActionListener(ctr);
         anyadirBoton.setActionCommand("ANYADIR");
-
+        modificarBoton.addActionListener(ctr);
+        modificarBoton.setActionCommand("MODIFICAR");
+        generarInformeBoton.addActionListener(ctr);
+        generarInformeBoton.setActionCommand("IMPRIMIR");
     }
 
     public void updateTable() {
-        DefaultTableModel model = (DefaultTableModel)tablaAcademica.getModel();
+        DefaultTableModel model = (DefaultTableModel)tablaEducacion.getModel();
         model.setDataVector(gestion.toObjectArray(), new String [] {
-                "Id","Nombre", "Apellidos", "Edad", "Curso", "NotaMedia"});
+                "ID", "Nombre", "Apellidos", "Fecha de Nacimiento", "Curso", "Nota Media", "Observaciones"
+        });
+        educacionVistaActual = gestion.getEducacions().toArray(new Educacion[gestion.getEducacions().size()]);
+
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,137 +82,176 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaAcademica = new javax.swing.JTable();
-        anyadirBoton = new javax.swing.JButton();
-        atrasBoton = new javax.swing.JButton();
-        buscaPorIdLabel = new javax.swing.JLabel();
-        buscadorPorId = new javax.swing.JTextField();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        jScrollBar2 = new javax.swing.JScrollBar();
+        jScrollPane1 = new JScrollPane();
+        tablaEducacion = new JTable();
+        jScrollBar1 = new JScrollBar();
+        jScrollBar2 = new JScrollBar();
+        busquedaLabel = new JLabel();
+        textoBusqueda = new JTextField();
+        anyadirBoton = new JButton();
+        modificarBoton = new JButton();
+        eliminarBoton = new JButton();
+        generarInformeBoton = new JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(852, 480));
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        tablaAcademica.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
+        tablaEducacion.setModel(new DefaultTableModel(
+            gestion.toObjectArray(),
             new String [] {
-                "Id", "Nombre", "Apellidos", "Edad", "Curso", "NotaMedia"
+                "ID", "Nombre", "Apellidos", "Fecha de Nacimiento", "Curso", "Nota Media", "Observaciones"
             }
         ) {
             Class[] types = new Class [] {
-                Integer.class, String.class, String.class, Integer.class, String.class, Double.class
+                Integer.class, String.class, String.class, String.class, String.class, Double.class, String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        jScrollPane1.setViewportView(tablaAcademica);
-
-        anyadirBoton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        anyadirBoton.setText("Añadir Datos");
 
 
-
-        atrasBoton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        atrasBoton.setText("Atrás");
-        atrasBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atrasBotonActionPerformed(evt);
-            }
         });
 
-        buscaPorIdLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        buscaPorIdLabel.setText("Buscar por id:");
-
-        buscadorPorId.setText("Introduce un id");
-
-        jScrollBar2.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
-
-        buscadorPorId.addKeyListener(new KeyAdapter() {
+        textoBusqueda.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                DefaultTableModel model = (DefaultTableModel) tablaAcademica.getModel();
-                model.setDataVector(GestionAcademica.EducacionArraytoObjectArray(gestion.getEducacions().stream().filter(educacion -> String.valueOf(educacion.getId()).startsWith(buscadorPorId.getText())).toArray(Educacion[]::new)),
+                Educacion[] educacions = gestion.getEducacions().stream().filter(educacion -> String.valueOf(educacion.getId()).startsWith(textoBusqueda.getText())).toArray(Educacion[]::new);
+                DefaultTableModel model = (DefaultTableModel) tablaEducacion.getModel();
+                model.setDataVector(GestionAcademica.EducacionArraytoObjectArray(educacions),
                         new String [] {
-                                "Id", "Cantidad", "Moneda", "Tipo", "Concepto", "Autor"
+                                "ID", "Nombre", "Apellidos", "Fecha de Nacimiento", "Curso", "Nota Media", "Observaciones"
                         });
+
             }
         });
+        jScrollPane1.setViewportView(tablaEducacion);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        jScrollBar2.setOrientation(JScrollBar.HORIZONTAL);
+
+        if (tablaEducacion.getColumnModel().getColumnCount() > 0) {
+            tablaEducacion.getColumnModel().getColumn(0).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(1).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(2).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(3).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(4).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(5).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+
+        busquedaLabel.setFont(new Font("Dialog", 0, 12)); // NOI18N
+        busquedaLabel.setText("Buscar por ID:");
+
+        anyadirBoton.setFont(new Font("Dialog", 0, 12)); // NOI18N
+        anyadirBoton.setText("Añadir");
+
+        modificarBoton.setFont(new Font("Dialog", 0, 12)); // NOI18N
+        modificarBoton.setText("Modificar");
+
+        eliminarBoton.setFont(new Font("Dialog", 0, 12)); // NOI18N
+        eliminarBoton.setText("Eliminar");
+        eliminarBoton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(tablaEducacion.getSelectedRow() != -1) {
+                    int result = JOptionPane.showConfirmDialog(null, "¿Estás seguro de querer eliminar la fila seleccionada?", "Eliminación de educación", JOptionPane.YES_NO_OPTION);
+                    if(result == JOptionPane.YES_OPTION) {
+                        BD bd = new BD();
+                        Educacion educacion = gestion.getEducacions().get(tablaEducacion.getSelectedRow());
+                        gestion.getEducacions().remove(tablaEducacion.getSelectedRow());
+                        try {
+                            bd.eliminarEducacion(educacion.getId());
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+                        DefaultTableModel model = (DefaultTableModel) tablaEducacion.getModel();
+                        model.removeRow(tablaEducacion.getSelectedRow());
+
+                    }
+                }
+            }
+
+        });
+
+
+        generarInformeBoton.setFont(new Font("Dialog", 0, 12)); // NOI18N
+        generarInformeBoton.setText("Generar Informe Académico");
+
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(atrasBoton)
-                                .addGap(58, 58, 58)
-                                .addComponent(buscaPorIdLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscadorPorId, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(anyadirBoton)
-                                .addGap(26, 26, 26)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(14, 14, 14))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jScrollBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(busquedaLabel)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textoBusqueda))
+                    .addComponent(jScrollBar2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollBar1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(atrasBoton)
-                            .addComponent(buscaPorIdLabel)
-                            .addComponent(buscadorPorId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
-                .addGap(3, 3, 3)
-                .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(anyadirBoton)))
+                .addComponent(anyadirBoton)
+                .addGap(18, 18, 18)
+                .addComponent(modificarBoton)
+                .addGap(18, 18, 18)
+                .addComponent(eliminarBoton)
+                .addGap(18, 18, 18)
+                .addComponent(generarInformeBoton)
+                .addContainerGap(381, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(busquedaLabel)
+                    .addComponent(textoBusqueda, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollBar1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollBar2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(anyadirBoton)
+                    .addComponent(modificarBoton)
+                    .addComponent(eliminarBoton)
+                    .addComponent(generarInformeBoton))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void atrasBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atrasBotonActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_atrasBotonActionPerformed
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void modificarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBotonActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_modificarBotonActionPerformed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton anyadirBoton;
-    private javax.swing.JButton atrasBoton;
-    private javax.swing.JLabel buscaPorIdLabel;
+    private javax.swing.JButton modificarBoton;
+    private javax.swing.JButton eliminarBoton;
+    private javax.swing.JButton generarInformeBoton;
+    private javax.swing.JLabel busquedaLabel;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollBar jScrollBar2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaAcademica;
-    private javax.swing.JTextField buscadorPorId;
+    private javax.swing.JTable tablaEducacion;
+    private javax.swing.JTextField textoBusqueda;
     // End of variables declaration//GEN-END:variables
 }
