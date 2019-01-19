@@ -136,7 +136,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`nino` (
   `idNen` INT(10) NOT NULL,
-  `fechaNacimiento` VARCHAR(10) NOT NULL,
+  `fechaNacimiento` VARCHAR(150) NOT NULL,
   `sexo` VARCHAR(1),
   `fechaAlta` VARCHAR(10),
   `fechaAltaACOES` VARCHAR(10),

@@ -46,7 +46,8 @@ public class AnyadirEducacionControlador implements ActionListener {
                         (String)values.get(3), (Nino)values.get(4), modelo, (String)values.get(5));
                 modelo.getEducacions().add(educacion);
                 new BD().insertEducacion(educacion);
-            } catch (NumberFormatException e1) {
+            } catch (NumberFormatException e1) {DUREO
+
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             } catch (SQLException e1) {
