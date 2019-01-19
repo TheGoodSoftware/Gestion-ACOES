@@ -13,9 +13,9 @@ import modelos.*;
 
 public class BD {
 
-    private final String CONNECTION_URL = "jdbc:mysql://majorcadevs.com:13306/mydb";
-    private final String CONNECTION_Usuario = "root";
-    private final String CONNECTION_PASSWD = "_M1ndbl0w";
+    private final String CONNECTION_URL = "jdbc:mysql://localhost:3306/mydb";
+    private final String CONNECTION_Usuario = "ACOES";
+    private final String CONNECTION_PASSWD = "GESTIONACOES";
     private static Connection con;
 
     public BD() {
