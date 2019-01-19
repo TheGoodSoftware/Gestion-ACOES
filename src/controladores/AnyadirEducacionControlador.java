@@ -30,22 +30,15 @@ public class AnyadirEducacionControlador implements ActionListener {
         {
             this.vistaEducacionAnyadir.dispose();
         } else if(e.getActionCommand().equals("ANYADIR")) {
-            ArrayList<Object> values = vistaEducacionAnyadir.getData();
+            Educacion data = vistaEducacionAnyadir.getData();
             int educacionID = -1;
 
-            for(int i = 0; i < modelo.getEducacions().size(); i++)
-            {
-                if(modelo.getEducacions().get(i).getId() > educacionID)
-                    educacionID = modelo.getEducacions().get(i).getId();
-            }
 
-            educacionID++;
+            data.setId(educacionID);
 
             try {
-                Educacion educacion = new Educacion(educacionID, (String)values.get(0), Double.parseDouble(values.get(1).toString()), (String)values.get(2),
-                        (String)values.get(3), (String)values.get(4),(String)values.get(5));
-                modelo.getEducacions().add(educacion);
-                new BD().insertarEducacion(educacion);
+                modelo.getEducacions().add(data);
+                new BD().insertarEducacion(data);
             } catch (NumberFormatException e1) {
 
                 // TODO Auto-generated catch block

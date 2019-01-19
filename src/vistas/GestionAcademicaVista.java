@@ -39,6 +39,7 @@ public class GestionAcademicaVista extends javax.swing.JPanel {
 
     public GestionAcademicaVista(GestionAcademica gestion) {
         this.gestion = gestion;
+        educacionVistaActual = gestion.getEducacions().toArray(new Educacion[1]);
         initComponents();
     }
 
@@ -67,7 +68,7 @@ public class GestionAcademicaVista extends javax.swing.JPanel {
         model.setDataVector(gestion.toObjectArray(), new String [] {
                 "ID", "Nombre", "Apellidos", "Fecha de Nacimiento", "Curso", "Nota Media", "Observaciones"
         });
-        educacionVistaActual = gestion.getEducacions().toArray(new Educacion[1]);
+
 
     }
 

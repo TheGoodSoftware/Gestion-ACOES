@@ -8,6 +8,7 @@ package vistas;
 import principal.BD;
 import modelos.*;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -20,6 +21,9 @@ import javax.swing.JTextField;
  * @author m1ndbl0w
  */
 public class AnyadirEducacionVista extends javax.swing.JFrame {
+
+
+    int idEd = 0;
 
     /**
      * Creates new form AnyadirEducacionVista
@@ -38,16 +42,13 @@ public class AnyadirEducacionVista extends javax.swing.JFrame {
         this.observacionesTexto.setText(ed.getObservaciones());
     }
 
-    public ArrayList<Object> getData() {
-        ArrayList<Object> values = new ArrayList<Object>();
-        values.add(nombreTexto.getText());
-        values.add(apellidosTexto.getText());
-        values.add(fechaTexto.getText());
-        values.add(cursoTexto.getText());
-        values.add(notaTexto.getText());
-        values.add(observacionesTexto.getText());
-        return values;
+    public Educacion getData() {
+        return new Educacion(idEd, fechaTexto.getText(), Double.parseDouble(notaTexto.getText()),
+                nombreTexto.getText(), apellidosTexto.getText(), cursoTexto.getText(),
+                observacionesTexto.getText());
     }
+
+
 
     public void addControlador(ActionListener ctr) {
         cancelarBoton.addActionListener(ctr);

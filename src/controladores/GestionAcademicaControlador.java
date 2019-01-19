@@ -28,6 +28,7 @@ public class GestionAcademicaControlador implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "ANYADIR":
+
                 AnyadirEducacionVista anyadirEducacion = new AnyadirEducacionVista();
                 anyadirEducacion.addControlador(new AnyadirEducacionControlador(this.vistaGestion, anyadirEducacion, gestion));
                 break;

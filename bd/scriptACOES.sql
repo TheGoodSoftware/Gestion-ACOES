@@ -154,7 +154,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`nino` (
     REFERENCES `mydb`.`proyecto` (`idProy`),
   CONSTRAINT `idPersNen`
     FOREIGN KEY (`idNen`)
-    REFERENCES `mydb`.`persona` (`idPersona`))
+    REFERENCES `mydb`.`persona` (`idPersona`)
+    ON DELETE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -176,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`notas` (
   CONSTRAINT `fk_notas_nino1`
     FOREIGN KEY (`nino_idNen`)
     REFERENCES `mydb`.`nino` (`idNen`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
