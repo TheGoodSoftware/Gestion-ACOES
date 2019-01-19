@@ -13,9 +13,9 @@ import modelos.*;
 
 public class BD {
 
-    private final String CONNECTION_URL = "jdbc:mysql://localhost:3306/mydb";
-    private final String CONNECTION_Usuario = "ACOES";
-    private final String CONNECTION_PASSWD = "GESTIONACOES";
+    private final String CONNECTION_URL = "jdbc:mysql://majorcadevs.com:13306/mydb";
+    private final String CONNECTION_Usuario = "root";
+    private final String CONNECTION_PASSWD = "_M1ndbl0w";
     private static Connection con;
 
     public BD() {
@@ -136,9 +136,9 @@ public class BD {
 	public void eliminarEducacion(int id) throws SQLException {
 		try {
 			Statement stmt = con.createStatement();
+			stmt.execute("DELETE FROM notas WHERE nino_idNen="+id);
 			stmt.execute("DELETE FROM nino WHERE idNen="+id);
 			stmt.execute("DELETE FROM persona WHERE idPersona="+id);
-			stmt.execute("DELETE FROM notas WHERE nino_idNen="+id);
 			stmt.close();
 
 		}
@@ -666,7 +666,7 @@ public class BD {
 			Statement stmt = con.createStatement();
 			ArrayList<Educacion> educacion = new ArrayList<>();
 			ResultSet result = stmt.executeQuery("SELECT nino.idNen, notas.NotaMedia, notas.Curso, notas.Observaciones, nino.fechaNacimiento, persona.Nombre, persona.Apellidos FROM notas JOIN nino ON notas.nino_idNen = nino.idNen JOIN persona ON persona.idPersona = nino.idNen ;");
-			GestionAcademica gestion = null;
+			GestionAcademica gestion = new GestionAcademica();
 			while(result.next()) {
 
 				educacion.add(

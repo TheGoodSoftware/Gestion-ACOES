@@ -31,6 +31,7 @@ INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUE
 INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644986, 'Marcos', 'Pedraza', 'Avenida España 7', 'Malaga');
 INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644987, 'Cristian', 'Parra', 'Calle Bergamin 6', 'Malaga');
 INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644988, 'Benito', 'Jimenez', 'Calle Fuentes 8', 'Malaga');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644989, 'Manuel', 'Johnson', 'Calle Arsh 8', 'Colombia');
 
 
 COMMIT;
@@ -53,7 +54,7 @@ USE mydb;
 INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (473829, '02-04-2002', 101, 'V','22-02-2015', '20-06-2016','21-06-2016', 'Chico tranquilo y buen estudiante','67584744P');
 INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (43644984, '12-02-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', 'Chico inquieto, necesita tutorías','');
 INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (43644985, '22-12-2003', 101, 'V','22-06-2014', '22-02-2015','01-03-2015', '','45678567B');
-
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (43644989, '22-10-2005', 101, 'V','22-06-2014', '22-02-2015','01-03-2015', 'Va bien','45673567W');
 
 COMMIT;
 
@@ -62,10 +63,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE mydb;
-INSERT INTO mydb.notas (idNotasNen, Calificacion, Curso, nino_idNen) VALUES (1, 9, 'Primero', 473829);
-INSERT INTO mydb.notas (idNotasNen, Calificacion, Curso, nino_idNen) VALUES (2, 7, 'Segundo', 473829);
-INSERT INTO mydb.notas (idNotasNen, Calificacion, Curso, nino_idNen) VALUES (3, 10, 'Segundo', 43644984);
-INSERT INTO mydb.notas (idNotasNen, Calificacion, Curso, nino_idNen) VALUES (4, 4, 'Tercero', 43644984);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (1, 9, 6, 'Primero', 'A', 473829);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (2, 7, 7, 'Segundo', 'A', 473829);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (3, 10, 8, 'Segundo', 'A',  43644984);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (4, 4, 9, 'Tercero', 'A', 43644984);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (5, 4, 9, 'Cuarto', 'A', 43644989);
 
 
 COMMIT;

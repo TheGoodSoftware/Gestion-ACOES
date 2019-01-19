@@ -25,7 +25,7 @@ import principal.BD;
  *
  * @author m1ndbl0w
  */
-public class GestionAcademicaVista extends javax.swing.JFrame {
+public class GestionAcademicaVista extends javax.swing.JPanel {
 
     /**
      * Creates new form GestionAcademicaVista
@@ -67,7 +67,7 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
         model.setDataVector(gestion.toObjectArray(), new String [] {
                 "ID", "Nombre", "Apellidos", "Fecha de Nacimiento", "Curso", "Nota Media", "Observaciones"
         });
-        educacionVistaActual = gestion.getEducacions().toArray(new Educacion[gestion.getEducacions().size()]);
+        educacionVistaActual = gestion.getEducacions().toArray(new Educacion[1]);
 
     }
 
@@ -93,7 +93,7 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
         eliminarBoton = new JButton();
         generarInformeBoton = new JButton();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1000, 500));
 
         tablaEducacion.setModel(new DefaultTableModel(
             gestion.toObjectArray(),
@@ -178,8 +178,8 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
         generarInformeBoton.setFont(new Font("Dialog", 0, 12)); // NOI18N
         generarInformeBoton.setText("Generar Informe Académico");
 
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        GroupLayout layout = new GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -226,7 +226,7 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
                 .addGap(20, 20, 20))
         );
 
-        pack();
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

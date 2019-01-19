@@ -68,7 +68,7 @@ public class EducacionInforme {
             tableRow.add(new Cell(f2, educacions.get(i).getApellidos()));
             tableRow.add(new Cell(f2, educacions.get(i).getFechaNacimiento()));
             tableRow.add(new Cell(f2, educacions.get(i).getCurso()));
-            tableRow.add(new Cell(f2, educacions.get(i).getNotaMedia()));
+            tableRow.add(new Cell(f2, educacions.get(i).getNotaMedia().toString()));
             tableRow.add(new Cell(f2, educacions.get(i).getObservaciones()));
 
             tableData.add(tableRow);

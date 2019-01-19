@@ -34,7 +34,7 @@ public class AnyadirEducacionVista extends javax.swing.JFrame {
         this.nombreTexto.setText(ed.getNombre());
         this.apellidosTexto.setText(ed.getApellidos());
         this.cursoTexto.setText(ed.getCurso());
-        this.notaTexto.setText(ed.getNotaMedia());
+        this.notaTexto.setText(ed.getNotaMedia().toString());
         this.observacionesTexto.setText(ed.getObservaciones());
     }
 

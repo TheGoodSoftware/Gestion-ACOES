@@ -58,7 +58,7 @@ public class AdministradorVista extends javax.swing.JFrame {
     	gestionEconomiaBoton.setActionCommand("GESTION_ECONOMICA");
     	gestionNinosBoton.addActionListener(ctr);
     	gestionAcademicaBoton.addActionListener(ctr);
-    	gestionAcademicaBoton.setActionCommand("GESTION ACADEMICA");
+    	gestionAcademicaBoton.setActionCommand("GESTION_ACADEMICA");
     	gestionNinosBoton.setActionCommand("GESTION_NINOS");
     	vistaSocioBoton.addActionListener(ctr);
     	vistaSocioBoton.setActionCommand("VISTA_SOCIO");
