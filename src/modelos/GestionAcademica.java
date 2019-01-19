@@ -3,12 +3,10 @@ package modelos;
 import java.util.ArrayList;
 
 public class GestionAcademica {
-    private int id;
     private double notaMedia;
     private ArrayList<Educacion> academica;
 
-    public GestionAcademica(int id) {
-        this.id = id;
+    public GestionAcademica() {
         academica = new ArrayList<Educacion>();
     }
 
@@ -20,13 +18,9 @@ public class GestionAcademica {
         return this.academica;
     }
 
-    public int getID() {
-        return this.id;
-    }
-
     public Object[][] toObjectArray() {
         Object[][] valores = new Object[this.getEducacions().size()][7];
-        for(int i = 0; i < this.getEducacions().size(); i++) {
+        for (int i = 0; i < this.getEducacions().size(); i++) {
             Object[] values = new Object[7];
             values[0] = this.getEducacions().get(i).getId();
             values[1] = this.getEducacions().get(i).getNombre();
@@ -42,7 +36,7 @@ public class GestionAcademica {
 
     public static Object[][] EducacionArraytoObjectArray(Educacion[] Educacion) {
         Object[][] valores = new Object[Educacion.length][7];
-        for(int i = 0; i < Educacion.length; i++) {
+        for (int i = 0; i < Educacion.length; i++) {
             Object[] values = new Object[7];
             values[0] = Educacion[i].getId();
             values[1] = Educacion[i].getNombre();
@@ -56,18 +50,4 @@ public class GestionAcademica {
         return valores;
     }
 
-    public String[] getAllFechas() {
-        ArrayList<String> fechas = new ArrayList<>();
-        fechas.add("-");
-
-        for(int i = 0; i < academica.size(); i++)
-        {
-            String[] dateValues = academica.get(i).getFechaNacimiento().split("/");
-            String fechaTemp = dateValues[1] + "/" + dateValues[2];
-            if(!fechas.contains(fechaTemp))
-                fechas.add(fechaTemp);
-        }
-
-        return fechas.toArray(new String[fechas.size()]);
-    }
 }

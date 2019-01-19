@@ -17,116 +17,106 @@ public class BD {
     private final String CONNECTION_Usuario = "ACOES";
     private final String CONNECTION_PASSWD = "GESTIONACOES";
     private static Connection con;
-	
-	public BD()
-	{
-		 try {
-	            con = DriverManager.getConnection(CONNECTION_URL, CONNECTION_Usuario, CONNECTION_PASSWD);
-	        } catch (SQLException e) {
-	            System.err.println("ERROR. Trying to create database connection" + e.getMessage());
-	        }
-	}
 
-	public List<Object[]> Select(String sel)
-	{
-		ResultSet rset;
-		List<Object[]> lista = new ArrayList<Object[]>();
-		try
-		{
-			Statement stmt = con.createStatement();
-			rset = stmt.executeQuery(sel);
-			ResultSetMetaData meta = rset.getMetaData();
-			int numCol = meta.getColumnCount();
-			while (rset.next())
-			{
-				Object[] tupla = new Object[numCol];
-				for(int i=0; i<numCol;++i)
-				{
-					tupla[i] = rset.getObject(i+1);
-				}
-				lista.add(tupla);
-			}
-			rset.close();
-			stmt.close();
-		}
-		catch (SQLException ex)
-		{
-			throw new Error("Error en el SELECT: " + sel+ ". " + ex.getMessage());
-		}
-
-		return lista;
-	}
-
-	
-	protected void finalize () 
-	{
-		try
-		{
-			if (con!=null)  con.close();
-		}
-		catch (SQLException ex)
-		{
-			throw new Error("Error al Cerrar la Conexión." + ex.getMessage());
-		}
+    public BD() {
+        try {
+            con = DriverManager.getConnection(CONNECTION_URL, CONNECTION_Usuario, CONNECTION_PASSWD);
+        } catch (SQLException e) {
+            System.err.println("ERROR. Trying to create database connection" + e.getMessage());
+        }
     }
-	
-	public void insertEconomia(Economia e) {
-		try {
-			Statement stmt = con.createStatement();
-			String nombreTabla, nombreId;
-			if(e.getTipo().equalsIgnoreCase("GASTO")) {
-				nombreTabla = "gasto";
-				nombreId = "idGasto";
-			} else {
-				nombreTabla = "donacion";
-				nombreId = "idDon";
-			}
-			
-			System.out.println(e.getGestion().getID());
-			stmt.execute("INSERT INTO "+ nombreTabla  + "(" + nombreId + ", Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (" + e.getId() + "," + e.getCantidad() + ",'" + e.getMoneda() + "','" + e.getDescripcion() + "'," + e.getGestion().getID() + ",'" + e.getFecha() + "','" + e.getBeneficiarioProcedencia() + "')");
-			stmt.close();
-		} catch (SQLException sqlEx) {
-			throw new Error("ERROR. Trying to insert economia -> " + sqlEx.getMessage());
-		}
-	}
-	
-	public void modificarEconomia(Economia e) {
-		try {
-			Statement stmt = con.createStatement();
-			String nombreTabla, nombreId;
-			if(e.getTipo().equalsIgnoreCase("GASTO")) {
-				nombreTabla = "gasto";
-				nombreId = "idGasto";
-			} else {
-				nombreTabla = "donacion";
-				nombreId = "idDon";
-			}
-			stmt.execute("UPDATE "+ nombreTabla  + " SET " + "Cantidad=" + e.getCantidad() + ",Moneda='" + e.getMoneda()
-			+ "',Descripcion='" + e.getDescripcion() + "',Fecha='"+ e.getFecha() + "',ProcedenciaBeneficiario='" + e.getBeneficiarioProcedencia() + "' WHERE " + nombreId + "=" + e.getId());
-			stmt.close();
-		} catch (SQLException sqlEx) {
-			throw new Error("ERROR. Trying to modify economia -> " + sqlEx.getMessage());
-		}
-	}
 
-	public void insertarEducacion(Educacion ed){
-			try {
-				Statement stmt = con.createStatement();
+    public List<Object[]> Select(String sel) {
+        ResultSet rset;
+        List<Object[]> lista = new ArrayList<Object[]>();
+        try {
+            Statement stmt = con.createStatement();
+            rset = stmt.executeQuery(sel);
+            ResultSetMetaData meta = rset.getMetaData();
+            int numCol = meta.getColumnCount();
+            while (rset.next()) {
+                Object[] tupla = new Object[numCol];
+                for (int i = 0; i < numCol; ++i) {
+                    tupla[i] = rset.getObject(i + 1);
+                }
+                lista.add(tupla);
+            }
+            rset.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            throw new Error("Error en el SELECT: " + sel + ". " + ex.getMessage());
+        }
 
-				stmt.execute("INSERT INTO notas(Observaciones, Curso, NotaMedia) VALUES ('"
-						+ ed.getObservaciones() + "','" + ed.getCurso() + "', "+ ed.getNotaMedia() +")");
-				stmt.execute("INSERT INTO nino(fechaNacimiento) VALUES ('"
-						+ ed.getFechaNacimiento() + "')");
-				stmt.execute("INSERT INTO persona(Nombre, Apellidos) VALUES ('"
-						+ ed.getNombre() + "','" + ed.getApellidos() + "')");
-				stmt.close();
-			} catch (SQLException ex) {
-				throw new Error("ERROR. Trying to insert Educacion into database -> " + ex.getMessage());
-			}
+        return lista;
+    }
 
-		}
 
-	}
+    protected void finalize() {
+        try {
+            if (con != null) con.close();
+        } catch (SQLException ex) {
+            throw new Error("Error al Cerrar la Conexión." + ex.getMessage());
+        }
+    }
+
+    public void insertEconomia(Economia e) {
+        try {
+            Statement stmt = con.createStatement();
+            String nombreTabla, nombreId;
+            if (e.getTipo().equalsIgnoreCase("GASTO")) {
+                nombreTabla = "gasto";
+                nombreId = "idGasto";
+            } else {
+                nombreTabla = "donacion";
+                nombreId = "idDon";
+            }
+
+            System.out.println(e.getGestion().getID());
+            stmt.execute("INSERT INTO " + nombreTabla + "(" + nombreId + ", Cantidad, Moneda, Descripcion, GESTIONECONOMICA_idBalance, Fecha, ProcedenciaBeneficiario) VALUES (" + e.getId() + "," + e.getCantidad() + ",'" + e.getMoneda() + "','" + e.getDescripcion() + "'," + e.getGestion().getID() + ",'" + e.getFecha() + "','" + e.getBeneficiarioProcedencia() + "')");
+            stmt.close();
+        } catch (SQLException sqlEx) {
+            throw new Error("ERROR. Trying to insert economia -> " + sqlEx.getMessage());
+        }
+    }
+
+    public void modificarEconomia(Economia e) {
+        try {
+            Statement stmt = con.createStatement();
+            String nombreTabla, nombreId;
+            if (e.getTipo().equalsIgnoreCase("GASTO")) {
+                nombreTabla = "gasto";
+                nombreId = "idGasto";
+            } else {
+                nombreTabla = "donacion";
+                nombreId = "idDon";
+            }
+            stmt.execute("UPDATE " + nombreTabla + " SET " + "Cantidad=" + e.getCantidad() + ",Moneda='" + e.getMoneda()
+                    + "',Descripcion='" + e.getDescripcion() + "',Fecha='" + e.getFecha() + "',ProcedenciaBeneficiario='" + e.getBeneficiarioProcedencia() + "' WHERE " + nombreId + "=" + e.getId());
+            stmt.close();
+        } catch (SQLException sqlEx) {
+            throw new Error("ERROR. Trying to modify economia -> " + sqlEx.getMessage());
+        }
+    }
+
+    public void insertarEducacion(Educacion ed) {
+        try {
+            Statement stmt = con.createStatement();
+
+            stmt.execute("INSERT INTO notas(Observaciones, Curso, NotaMedia) VALUES ('"
+                    + ed.getObservaciones() + "','" + ed.getCurso() + "', " + ed.getNotaMedia() + ")");
+            stmt.execute("INSERT INTO nino(fechaNacimiento) VALUES ('"
+                    + ed.getFechaNacimiento() + "')");
+            stmt.execute("INSERT INTO persona(Nombre, Apellidos) VALUES ('"
+                    + ed.getNombre() + "','" + ed.getApellidos() + "')");
+            stmt.close();
+        } catch (SQLException ex) {
+            throw new Error("ERROR. Trying to insert Educacion into database -> " + ex.getMessage());
+        }
+
+    }
+
+
+
 
 	public void modificarEducacion(Educacion ed) {
 		try {
@@ -143,7 +133,7 @@ public class BD {
 		}
 	}
 
-	public void eliminarEducacion(Integer id) throws SQLException {
+	public void eliminarEducacion(int id) throws SQLException {
 		try {
 			Statement stmt = con.createStatement();
 			stmt.execute("DELETE FROM nino WHERE idNen="+id);

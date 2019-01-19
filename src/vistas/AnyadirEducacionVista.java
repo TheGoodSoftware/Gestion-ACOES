@@ -5,6 +5,16 @@
  */
 package vistas;
 
+import principal.BD;
+import modelos.*;
+
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.swing.JTextField;
+
 /**
  *
  * @author m1ndbl0w
@@ -14,8 +24,36 @@ public class AnyadirEducacionVista extends javax.swing.JFrame {
     /**
      * Creates new form AnyadirEducacionVista
      */
-    public AnyadirEducacionVista() {
+    public AnyadirEducacionVista(){
         initComponents();
+    }
+
+    public AnyadirEducacionVista(Educacion ed){
+        initComponents();
+        this.fechaTexto.setText(ed.getFechaNacimiento().replaceAll("/", ""));
+        this.nombreTexto.setText(ed.getNombre());
+        this.apellidosTexto.setText(ed.getApellidos());
+        this.cursoTexto.setText(ed.getCurso());
+        this.notaTexto.setText(ed.getNotaMedia());
+        this.observacionesTexto.setText(ed.getObservaciones());
+    }
+
+    public ArrayList<Object> getData() {
+        ArrayList<Object> values = new ArrayList<Object>();
+        values.add(nombreTexto.getText());
+        values.add(apellidosTexto.getText());
+        values.add(fechaTexto.getText());
+        values.add(cursoTexto.getText());
+        values.add(notaTexto.getText());
+        values.add(observacionesTexto.getText());
+        return values;
+    }
+
+    public void addControlador(ActionListener ctr) {
+        cancelarBoton.addActionListener(ctr);
+        cancelarBoton.setActionCommand("CANCELAR");
+        confirmarBoton.addActionListener(ctr);
+        confirmarBoton.setActionCommand("CONFIRMAR");
     }
 
     /**
@@ -156,37 +194,6 @@ public class AnyadirEducacionVista extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AnyadirEducacionVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AnyadirEducacionVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AnyadirEducacionVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AnyadirEducacionVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AnyadirEducacionVista().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confirmarBoton;

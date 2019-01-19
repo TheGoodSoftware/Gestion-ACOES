@@ -5,6 +5,22 @@
  */
 package vistas;
 
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.Arrays;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import controladores.EconomiaControlador;
+import controladores.GestionAcademicaControlador;
+import informes.EconomiaInforme;
+import modelos.*;
+import principal.BD;
 /**
  *
  * @author m1ndbl0w
@@ -14,9 +30,48 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
     /**
      * Creates new form GestionAcademicaVista
      */
-    public GestionAcademicaVista() {
+
+    private GestionAcademica gestion;
+    private Educacion[] educacionVistaActual;
+
+
+
+
+    public GestionAcademicaVista(GestionAcademica gestion) {
+        this.gestion = gestion;
         initComponents();
     }
+
+
+
+    public Educacion[] getEducacionsActual() {
+        return educacionVistaActual;
+    }
+
+    public Educacion getEducacionSeleccionada() {
+
+        return educacionVistaActual[tablaEducacion.getSelectedRow()];
+    }
+
+    public void addControlador(GestionAcademicaControlador ctr) {
+        anyadirBoton.addActionListener(ctr);
+        anyadirBoton.setActionCommand("ANYADIR");
+        modificarBoton.addActionListener(ctr);
+        modificarBoton.setActionCommand("MODIFICAR");
+        generarInformeBoton.addActionListener(ctr);
+        generarInformeBoton.setActionCommand("IMPRIMIR");
+    }
+
+    public void updateTable() {
+        DefaultTableModel model = (DefaultTableModel)tablaEducacion.getModel();
+        model.setDataVector(gestion.toObjectArray(), new String [] {
+                "ID", "Nombre", "Apellidos", "Fecha de Nacimiento", "Curso", "Nota Media", "Observaciones"
+        });
+        educacionVistaActual = gestion.getEducacions().toArray(new Educacion[gestion.getEducacions().size()]);
+
+    }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,26 +82,21 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaEducacion = new javax.swing.JTable();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        jScrollBar2 = new javax.swing.JScrollBar();
-        busquedaLabel = new javax.swing.JLabel();
-        textoBusqueda = new javax.swing.JTextField();
-        anyadirBoton = new javax.swing.JButton();
-        modificarBoton = new javax.swing.JButton();
-        eliminarBoton = new javax.swing.JButton();
-        generarInformeBoton = new javax.swing.JButton();
+        jScrollPane1 = new JScrollPane();
+        tablaEducacion = new JTable();
+        jScrollBar1 = new JScrollBar();
+        jScrollBar2 = new JScrollBar();
+        busquedaLabel = new JLabel();
+        textoBusqueda = new JTextField();
+        anyadirBoton = new JButton();
+        modificarBoton = new JButton();
+        eliminarBoton = new JButton();
+        generarInformeBoton = new JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        tablaEducacion.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
+        tablaEducacion.setModel(new DefaultTableModel(
+            gestion.toObjectArray(),
             new String [] {
                 "ID", "Nombre", "Apellidos", "Fecha de Nacimiento", "Curso", "Nota Media", "Observaciones"
             }
@@ -58,51 +108,91 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+
+        });
+
+        textoBusqueda.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                Educacion[] educacions = gestion.getEducacions().stream().filter(educacion -> String.valueOf(educacion.getId()).startsWith(textoBusqueda.getText())).toArray(Educacion[]::new);
+                DefaultTableModel model = (DefaultTableModel) tablaEducacion.getModel();
+                model.setDataVector(GestionAcademica.EducacionArraytoObjectArray(educacions),
+                        new String [] {
+                                "ID", "Nombre", "Apellidos", "Fecha de Nacimiento", "Curso", "Nota Media", "Observaciones"
+                        });
+
+            }
         });
         jScrollPane1.setViewportView(tablaEducacion);
 
-        jScrollBar2.setOrientation(javax.swing.JScrollBar.HORIZONTAL);
+        jScrollBar2.setOrientation(JScrollBar.HORIZONTAL);
 
-        busquedaLabel.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        if (tablaEducacion.getColumnModel().getColumnCount() > 0) {
+            tablaEducacion.getColumnModel().getColumn(0).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(1).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(2).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(3).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(4).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(5).setResizable(false);
+            tablaEducacion.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+
+        busquedaLabel.setFont(new Font("Dialog", 0, 12)); // NOI18N
         busquedaLabel.setText("Buscar por ID:");
 
-        anyadirBoton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        anyadirBoton.setFont(new Font("Dialog", 0, 12)); // NOI18N
         anyadirBoton.setText("Añadir");
 
-        modificarBoton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        modificarBoton.setFont(new Font("Dialog", 0, 12)); // NOI18N
         modificarBoton.setText("Modificar");
 
-        eliminarBoton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        eliminarBoton.setFont(new Font("Dialog", 0, 12)); // NOI18N
         eliminarBoton.setText("Eliminar");
-        eliminarBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+        eliminarBoton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(tablaEducacion.getSelectedRow() != -1) {
+                    int result = JOptionPane.showConfirmDialog(null, "¿Estás seguro de querer eliminar la fila seleccionada?", "Eliminación de educación", JOptionPane.YES_NO_OPTION);
+                    if(result == JOptionPane.YES_OPTION) {
+                        BD bd = new BD();
+                        Educacion educacion = gestion.getEducacions().get(tablaEducacion.getSelectedRow());
+                        gestion.getEducacions().remove(tablaEducacion.getSelectedRow());
+                        try {
+                            bd.eliminarEducacion(educacion.getId());
+                        } catch (SQLException e1) {
+                            e1.printStackTrace();
+                        }
+                        DefaultTableModel model = (DefaultTableModel) tablaEducacion.getModel();
+                        model.removeRow(tablaEducacion.getSelectedRow());
+
+                    }
+                }
             }
+
         });
 
-        generarInformeBoton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+
+        generarInformeBoton.setFont(new Font("Dialog", 0, 12)); // NOI18N
         generarInformeBoton.setText("Generar Informe Académico");
-        generarInformeBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(busquedaLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textoBusqueda))
-                    .addComponent(jScrollBar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollBar2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollBar1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(anyadirBoton)
@@ -115,20 +205,20 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
                 .addContainerGap(381, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(busquedaLabel)
-                    .addComponent(textoBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textoBusqueda, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollBar1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollBar2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(anyadirBoton)
                     .addComponent(modificarBoton)
                     .addComponent(eliminarBoton)
@@ -150,37 +240,7 @@ public class GestionAcademicaVista extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GestionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GestionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GestionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GestionAcademicaVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GestionAcademicaVista().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton anyadirBoton;

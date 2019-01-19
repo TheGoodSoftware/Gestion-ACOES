@@ -8,9 +8,9 @@ import com.pdfjet.*;
 
 public class EducacionInforme {
 
-    public EducacionInforme(ArrayList<Educacion> educacions, String fecha) throws Exception {
+    public EducacionInforme(ArrayList<Educacion> educacions) throws Exception {
 
-        FileOutputStream fos = new FileOutputStream("impresos/" + fecha.replace("/", "-") + "_INFORMEACADEMICOACOES.pdf");
+        FileOutputStream fos = new FileOutputStream("impresos/" + "_INFORMEACADEMICOACOES.pdf");
 
         PDF pdf = new PDF(fos);
         Page page = new Page(pdf, Letter.PORTRAIT);
