@@ -4,6 +4,7 @@ import principal.BD;
 
 public class Educacion {
     private int id;
+    private int idNota;
     private String nombre;
     private String apellidos;
     private double notaMedia;
@@ -11,11 +12,13 @@ public class Educacion {
     private String fecha;
     private String observaciones;
 
-    
 
-    public Educacion(int id, String fecha, double notaMedia, String nombre, String apellidos, String curso, String observaciones)
+
+
+    public Educacion(int id, int idNota, String fecha, double notaMedia, String nombre, String apellidos, String curso, String observaciones)
     {
         this.id = id;
+        this.idNota = idNota;
         this.nombre = nombre;
         this.notaMedia = notaMedia;
         this.apellidos = apellidos;
@@ -31,6 +34,10 @@ public class Educacion {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public void setIdNota(int idNota) {
+        this.idNota = idNota;
     }
 
     public void setApellidos(String apellidos) {
@@ -64,6 +71,8 @@ public class Educacion {
     public String getNombre() {
         return nombre;
     }
+
+    public int getIdNota() { return idNota; }
 
     public String getCurso() {
         return curso;

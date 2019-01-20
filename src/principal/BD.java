@@ -101,15 +101,20 @@ public class BD {
     public void insertarEducacion(Educacion ed) {
         try(Statement stmt = con.createStatement()) {
 
-
-            stmt.execute("UPDATE persona SET  Nombre='" + ed.getNombre() + "'Apellidos ='" + ed.getApellidos() + "' WHERE idPersona=" + ed.getId());
-
-            stmt.execute("UPDATE nino SET  fechaNacimiento='" + ed.getFechaNacimiento() + "' WHERE idNen =" + ed.getId());
-
-            stmt.execute("INSERT INTO notas(Observaciones, Curso, NotaMedia) VALUES ('"
-                    + ed.getObservaciones() + "','" + ed.getCurso() + "', " + ed.getNotaMedia() + ")");
-
-
+            ResultSet sos = stmt.executeQuery("SELECT MAX(idNotasNen) as idNotasNen FROM notas");
+            sos.next();
+            int id = sos.getInt("idNotasNen") + 1;
+            sos.close();
+            sos = stmt.executeQuery("SELECT n.idNen as idNen " +
+                    "FROM nino n INNER JOIN persona p ON n.idNen = p.idPersona " +
+                    "WHERE n.fechaNacimiento='"+ed.getFechaNacimiento()+"' AND p.Nombre LIKE '"+ed.getNombre()+"' AND p.Apellidos LIKE '"+ed.getApellidos()+"'");
+            sos.next();
+            int idNen = sos.getInt("idNen");
+            sos.close();
+            stmt.execute("INSERT INTO notas(idNotasNen, Observaciones, Curso, NotaMedia, nino_idNen) VALUES (" +
+                    id + ", '" + ed.getObservaciones() + "','" + ed.getCurso() + "', " + ed.getNotaMedia() + "," + idNen + ")");
+            ed.setIdNota(id);
+            ed.setId(idNen);
 
 
         } catch (SQLException ex) {
@@ -126,9 +131,8 @@ public class BD {
 
 
 
-			stmt.execute("UPDATE notas SET NotaMedia =" + ed.getNotaMedia() + ",Curso ='" + ed.getCurso() + "',Observaciones='" + ed.getObservaciones() + "' WHERE nino_idNen=" + ed.getId());
-			stmt.execute("UPDATE nino SET  fechaNacimiento='" + ed.getFechaNacimiento() + "' WHERE idNen =" + ed.getId());
-			stmt.execute("UPDATE persona SET  Nombre='" + ed.getNombre() + "',Apellidos ='" + ed.getApellidos() + "' WHERE idPersona=" + ed.getId());
+			stmt.execute("UPDATE notas SET NotaMedia =" + ed.getNotaMedia() + ",Curso ='" + ed.getCurso() + "',Observaciones='" + ed.getObservaciones() + "' WHERE idNotasNen=" + ed.getIdNota());
+
 
 
 		} catch (SQLException sqlEx) {
@@ -669,13 +673,14 @@ public class BD {
         try(Statement stmt = con.createStatement()) {
 
 			ArrayList<Educacion> educacion = new ArrayList<>();
-			ResultSet result = stmt.executeQuery("SELECT nino.idNen, notas.NotaMedia, notas.Curso, notas.Observaciones, nino.fechaNacimiento, persona.Nombre, persona.Apellidos FROM notas JOIN nino ON notas.nino_idNen = nino.idNen JOIN persona ON persona.idPersona = nino.idNen ;");
+			ResultSet result = stmt.executeQuery("SELECT nino.idNen, notas.idNotasNen, notas.NotaMedia, notas.Curso, notas.Observaciones, nino.fechaNacimiento, persona.Nombre, persona.Apellidos FROM notas JOIN nino ON notas.nino_idNen = nino.idNen JOIN persona ON persona.idPersona = nino.idNen ;");
 			GestionAcademica gestion = new GestionAcademica();
 			while(result.next()) {
 
 				educacion.add(
 						new Educacion(
 								result.getInt("idNen"),
+                                result.getInt("idNotasNen"),
 								result.getString("fechaNacimiento"),
 								result.getDouble("NotaMedia"),
 								result.getString("Nombre"),

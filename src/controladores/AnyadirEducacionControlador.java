@@ -29,7 +29,7 @@ public class AnyadirEducacionControlador implements ActionListener {
         if(e.getActionCommand().equals("CANCELAR"))
         {
             this.vistaEducacionAnyadir.dispose();
-        } else if(e.getActionCommand().equals("ANYADIR")) {
+        } else if(e.getActionCommand().equals("CONFIRMAR")) {
             Educacion data = vistaEducacionAnyadir.getData();
             int educacionID = -1;
 

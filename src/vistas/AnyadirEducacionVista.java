@@ -23,7 +23,6 @@ import javax.swing.JTextField;
 public class AnyadirEducacionVista extends javax.swing.JFrame {
 
 
-    int idEd = 0;
 
     /**
      * Creates new form AnyadirEducacionVista
@@ -43,8 +42,8 @@ public class AnyadirEducacionVista extends javax.swing.JFrame {
     }
 
     public Educacion getData() {
-        return new Educacion(idEd, fechaTexto.getText(), Double.parseDouble(notaTexto.getText()),
-                nombreTexto.getText(), apellidosTexto.getText(), cursoTexto.getText(),
+        return new Educacion(9, 0, fechaTexto.getText(), Double.parseDouble(notaTexto.getText()),
+                apellidosTexto.getText(), nombreTexto.getText(), cursoTexto.getText(),
                 observacionesTexto.getText());
     }
 
@@ -192,6 +191,11 @@ public class AnyadirEducacionVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public void ocultarInecesario() {
+        this.nombreTexto.setEditable(false);
+        this.apellidosTexto.setEditable(false);
+        this.fechaTexto.setEditable(false);
+    }
     /**
      * @param args the command line arguments
      */

@@ -23,6 +23,7 @@ public class ModificarEducacionControlador implements ActionListener {
         this.vistaEducacionModificar = vistaEducacion;
         this.modelo = modelo;
         this.vistaEducacionModificar.setVisible(true);
+        this.vistaEducacionModificar.ocultarInecesario();
     }
 
     @Override
@@ -32,8 +33,10 @@ public class ModificarEducacionControlador implements ActionListener {
             this.vistaEducacionModificar.dispose();
         } else if(e.getActionCommand().equals("CONFIRMAR")) {
             int idEd = modelo.getId();
+            int idNota = modelo.getIdNota();
             modelo = vistaEducacionModificar.getData();
             modelo.setId(idEd);
+            modelo.setIdNota(idNota);
             new BD().modificarEducacion(modelo);
             vistaGestionAcademica.updateTable();
             this.vistaEducacionModificar.dispose();
