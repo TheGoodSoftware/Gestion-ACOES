@@ -32,6 +32,17 @@ INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUE
 INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644987, 'Cristian', 'Parra', 'Calle Bergamin 6', 'Malaga');
 INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644988, 'Benito', 'Jimenez', 'Calle Fuentes 8', 'Malaga');
 INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (43644989, 'Manuel', 'Johnson', 'Calle Arsh 8', 'Colombia');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5000, 'Antonio', 'Parsh', 'Avenida España 7', 'Malaga');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5001, 'Alberto', 'Dieguez', 'Avenida Greo 7', 'Hocrao');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5002, 'Victor', 'Del Bosque', 'Paseo del Topacio 9', 'Bermuda');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5003, 'Vicente', 'Johnson', 'Paseo del Burgo', 'Anikse');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5004, 'Jeremias', 'Jacobo', 'Plaza Augusta', 'Huesca');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5005, 'Escrondo', 'Gonzalez', 'Avenida Caucaso', 'Pancrsh');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5006, 'Diego', 'Flight', 'Calle Poncio', 'Kerecho');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5007, 'Pablo', 'Portesh', 'Calle Escondida', 'Peritxo');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5008, 'Garlo', 'Bosch', 'Calle A Veces', 'Saplukt');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5009, 'Vladislavio', 'Gutierrez', 'Calle Vida', 'Leory');
+INSERT INTO mydb.persona (idPersona, Nombre, Apellidos, Direccion, Pueblo) VALUES (5010, 'Volash', 'Raymond', 'Avenida Krearsh', 'Vilch');
 
 
 COMMIT;
@@ -55,6 +66,17 @@ INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta,
 INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (43644984, '12-02-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', 'Chico inquieto, necesita tutorías','');
 INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (43644985, '22-12-2003', 101, 'V','22-06-2014', '22-02-2015','01-03-2015', '','45678567B');
 INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (43644989, '22-10-2005', 101, 'V','22-06-2014', '22-02-2015','01-03-2015', 'Va bien','45673567W');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5000, '11-03-2003', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', 'Chico inquieto','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5001, '12-02-2014', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', 'Bebé','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5002, '12-02-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', '','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5003, '18-02-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', '','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5004, '11-02-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', '','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5005, '13-02-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', '','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5006, '15-02-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', '','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5007, '12-05-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', '','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5008, '12-07-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', '','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5009, '12-09-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', '','');
+INSERT INTO mydb.nino (idNen, fechaNacimiento, PROYECTO_idProy, sexo, fechaAlta, fechaAltaACOES, fechaAltaProyecto, observaciones, NIF) VALUES (5010, '12-11-2004', 101, 'V','24-02-2015', '20-06-2016','21-06-2016', '','');
 
 COMMIT;
 
@@ -68,6 +90,13 @@ INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observacione
 INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (3, 10, 8, 'Segundo', 'A',  43644984);
 INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (4, 4, 9, 'Tercero', 'A', 43644984);
 INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (5, 4, 9, 'Cuarto', 'A', 43644989);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (6, 4, 8, 'Cuarto', 'A', 5000);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (7, 4, 6, 'Tercero', 'A', 5001);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (8, 3, 5, 'Quinto', 'A', 5002);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (9, 4, 7, 'Cuarto', 'A', 5003);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (10, 4, 9, 'Octavo', 'A', 5004);
+INSERT INTO mydb.notas (idNotasNen, Calificacion, NotaMedia, Curso, Observaciones, nino_idNen) VALUES (11, 4, 9, 'Cuarto', 'A', 5005);
+
 
 
 COMMIT;
@@ -143,6 +172,9 @@ START TRANSACTION;
 USE mydb;
 INSERT INTO mydb.apadrinar (NINO_idNen, USUARIO_idUsuario) VALUES (473829, 1000);
 INSERT INTO mydb.apadrinar (NINO_idNen, USUARIO_idUsuario) VALUES (43644985, 1000);
+INSERT INTO mydb.apadrinar (NINO_idNen, USUARIO_idUsuario) VALUES (5000, 1001);
+INSERT INTO mydb.apadrinar (NINO_idNen, USUARIO_idUsuario) VALUES (5005, 1001);
+
 
 COMMIT;
 
